@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://cirl1p8b5jqaw"]
+
+[ext_resource type="Texture2D" uid="uid://dw2v74fb15t12" path="res://Assets/EnemyPlaceholder.png" id="1_mfq86"]
+[ext_resource type="Script" path="res://World/Characters/Enemies/enemy-1.gd" id="1_ru507"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5oknk"]
+radius = 13.0
+
+[sub_resource type="Animation" id="Animation_20kh3"]
+resource_name = "move"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_dj0gu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_38cao"]
+_data = {
+"RESET": SubResource("Animation_dj0gu"),
+"move": SubResource("Animation_20kh3")
+}
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_ru507")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mfq86")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5oknk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_38cao")
+}

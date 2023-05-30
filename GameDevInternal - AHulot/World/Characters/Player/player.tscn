@@ -1,0 +1,132 @@
+[gd_scene load_steps=12 format=3 uid="uid://b5ngyyo8wgv28"]
+
+[ext_resource type="Script" path="res://World/Characters/Player/player.gd" id="1_xqufv"]
+[ext_resource type="Texture2D" uid="uid://bdml6l6m3til5" path="res://Assets/PlayerPlaceholder-New.png" id="2_jylae"]
+[ext_resource type="Script" path="res://World/Characters/Player/bullet_spawn.gd" id="3_63doj"]
+[ext_resource type="PackedScene" uid="uid://dxdjw4yg1pp1t" path="res://World/Characters/Player/bullet.tscn" id="4_qexcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdjf"]
+size = Vector2(12, 29)
+
+[sub_resource type="Animation" id="Animation_k20cu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i12cp"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kfy2m"]
+resource_name = "jump"
+length = 0.1
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_jyg14"]
+resource_name = "shoot"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_io5cm"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lw5na"]
+_data = {
+"RESET": SubResource("Animation_k20cu"),
+"idle": SubResource("Animation_i12cp"),
+"jump": SubResource("Animation_kfy2m"),
+"shoot": SubResource("Animation_jyg14"),
+"walk": SubResource("Animation_io5cm")
+}
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_xqufv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jylae")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_4sdjf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lw5na")
+}
+
+[node name="BulletSpawn" type="Node2D" parent="."]
+script = ExtResource("3_63doj")
+bullet_scene = ExtResource("4_qexcd")
+
+[node name="CanShoot" type="Timer" parent="BulletSpawn"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+position_smoothing_enabled = true
+
+[connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]

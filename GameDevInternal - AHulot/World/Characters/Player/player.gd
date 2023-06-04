@@ -8,15 +8,16 @@ extends CharacterBody2D
 @export var GRAVITY: int = 10
 @export var ADD_FALL_GRAVITY: int = 50
 
-
-enum { WANDER }
+enum { WANDER, SHOOT }
 
 var state = WANDER
 var fast_fall = false
+var is_shooting = false
+var bulletspawn_pos
 
 
 func _ready():
-	set_meta("Player", 1)
+	pass
 
 
 func _physics_process(_delta):	
@@ -27,13 +28,19 @@ func _physics_process(_delta):
 	
 	match state:
 		WANDER: wander_state(input)
+		SHOOT: shoot_state()
+	
+	bulletspawn_pos = $Sprite2D.position.x - $BulletSpawn.position.x
+		
+	if bulletspawn_pos < 0:
+		$BulletSpawn.position.x += bulletspawn_pos
 	
 
 func wander_state(input):
 	apply_gravity()
 	
 	if input.x == 0:
-		if is_on_floor():
+		if is_on_floor() and not is_shooting:
 			$AnimationPlayer.play("idle")	
 		apply_friction()
 		
@@ -45,7 +52,8 @@ func wander_state(input):
 			$Sprite2D.flip_h = true
 			
 		if is_on_floor():
-			$AnimationPlayer.play("walk")	
+			if $AnimationPlayer.current_animation != "walk":
+				$AnimationPlayer.play("walk")
 		apply_acceleration(input.x)
 	
 	# Only jump if player is on the ground:
@@ -64,26 +72,37 @@ func wander_state(input):
 			velocity.y += ADD_FALL_GRAVITY
 			fast_fall = true
 	
-	if Input.is_action_pressed("ui_left_click"):
-		var mouse = get_global_mouse_position()
-		var player = get_node("/root/World/Player").position
-
-		if mouse.x > player.x:
-			$Sprite2D.flip_h = false
-		elif mouse.x < player.x:
-			$Sprite2D.flip_h = true
-		
-		$AnimationPlayer.stop()
-		$AnimationPlayer.play("shoot")
+	if Input.is_action_just_pressed("ui_left_click"):
+		is_shooting = true
+		state = SHOOT
+		print(position)
 	
 	move_and_slide()
 
+func shoot_state():
+	apply_gravity()
+	move_and_slide()
+	
+	var mouse = get_global_mouse_position()
+
+	if mouse.x > position.x:
+		$Sprite2D.flip_h = false
+	elif mouse.x < position.x:
+		$Sprite2D.flip_h = true
+		
+	$AnimationPlayer.play("shoot")
+	
+	if Input.is_action_just_released("ui_left_click"):
+		is_shooting = false
+	
+		state = WANDER
+	
+
 func apply_gravity():
-	velocity.y += GRAVITY
+	velocity.y += GRAVITY	
 
 func apply_friction():
 	velocity.x = move_toward(velocity.x, 0, FRICTION)
 	
 func apply_acceleration(amount):
 	velocity.x = move_toward(velocity.x, SPEED * amount, ACCELERATION)
-

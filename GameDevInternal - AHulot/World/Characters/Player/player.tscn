@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5ngyyo8wgv28"]
+[gd_scene load_steps=15 format=3 uid="uid://b5ngyyo8wgv28"]
 
 [ext_resource type="Script" path="res://World/Characters/Player/player.gd" id="1_xqufv"]
-[ext_resource type="Texture2D" uid="uid://bdml6l6m3til5" path="res://Assets/PlayerPlaceholder-New.png" id="2_jylae"]
+[ext_resource type="Texture2D" uid="uid://dgms7bcq1smm2" path="res://Assets/PlayerPlacholder-New2.png" id="2_pxlb1"]
 [ext_resource type="Script" path="res://World/Characters/Player/bullet_spawn.gd" id="3_63doj"]
 [ext_resource type="PackedScene" uid="uid://dxdjw4yg1pp1t" path="res://World/Characters/Player/bullet.tscn" id="4_qexcd"]
+[ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="5_16twl"]
+[ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="6_3xwnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdjf"]
 size = Vector2(12, 29)
@@ -59,8 +61,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_jyg14"]
 resource_name = "shoot"
-loop_mode = 1
-step = 0.25
+length = 0.2
+loop_mode = 2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,10 +71,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1]
+"values": [0, 1, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_io5cm"]
@@ -89,7 +92,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 0]
+"values": [1, 0, 2, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lw5na"]
@@ -101,15 +104,19 @@ _data = {
 "walk": SubResource("Animation_io5cm")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3w3x4"]
+radius = 5.85886
+height = 28.2223
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xqufv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jylae")
-hframes = 2
-vframes = 2
+texture = ExtResource("2_pxlb1")
+hframes = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SolidCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_4sdjf")
 
@@ -119,14 +126,23 @@ libraries = {
 }
 
 [node name="BulletSpawn" type="Node2D" parent="."]
+position = Vector2(7.34991, 0)
 script = ExtResource("3_63doj")
 bullet_scene = ExtResource("4_qexcd")
 
 [node name="CanShoot" type="Timer" parent="BulletSpawn"]
+wait_time = 0.4
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_16twl")]
+MAX_HEALTH = 50
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_3xwnc")]
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+shape = SubResource("CapsuleShape2D_3w3x4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
-process_callback = 0
-position_smoothing_enabled = true
 
 [connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]

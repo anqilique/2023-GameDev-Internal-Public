@@ -10,13 +10,15 @@ height = 29.453
 [node name="Bullet" type="Area2D"]
 z_index = -1
 scale = Vector2(0.40523, 0.395828)
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_urua1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.872047, 0.211692)
 texture = ExtResource("2_yv3jd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="SolidCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.0245951, 0.0149212)
 rotation = -1.5708
 scale = Vector2(0.999996, 0.973347)
@@ -27,5 +29,6 @@ visible = false
 position = Vector2(15.8679, 0.149031)
 scale = Vector2(1.38458, 0.248005)
 
+[connection signal="area_entered" from="." to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

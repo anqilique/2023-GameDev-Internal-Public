@@ -1,10 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bcnutkhdta7nr"]
 
-[ext_resource type="Texture2D" uid="uid://efgul7t4fd47" path="res://Assets/TilesPlaceholder.png" id="1_pai2o"]
+[ext_resource type="Texture2D" uid="uid://blipbg0eedco0" path="res://Assets/TilesPlaceholder-New.png" id="2_u6pmm"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63cdr"]
-resource_name = "Blocks"
-texture = ExtResource("1_pai2o")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1fm8t"]
+texture = ExtResource("2_u6pmm")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -27,4 +26,4 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 uv_clipping = true
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_63cdr")
+sources/1 = SubResource("TileSetAtlasSource_1fm8t")

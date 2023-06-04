@@ -24,7 +24,9 @@ func _process(_delta):
 
 func _shoot():
 	var bullet = bullet_scene.instantiate()
+	var spawn = get_node("/root/World/Player/BulletSpawn")
 	
+	bullet.position = spawn.position
 	bullet.rotation = rotation
 	
 	add_sibling(bullet)

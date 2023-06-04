@@ -1,25 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://7aipndtibhct"]
+[gd_scene load_steps=7 format=3 uid="uid://7aipndtibhct"]
 
+[ext_resource type="Script" path="res://World/world.gd" id="1_fvc02"]
 [ext_resource type="TileSet" uid="uid://bcnutkhdta7nr" path="res://Assets/world.tres" id="1_rkcvw"]
 [ext_resource type="PackedScene" uid="uid://b5ngyyo8wgv28" path="res://World/Characters/Player/player.tscn" id="2_yj7yh"]
 [ext_resource type="PackedScene" uid="uid://cirl1p8b5jqaw" path="res://World/Characters/Enemies/enemy-1.tscn" id="3_2xrdr"]
 [ext_resource type="PackedScene" uid="uid://bkm0pqf7nlipo" path="res://UI/countdown.tscn" id="3_u2mvl"]
+[ext_resource type="PackedScene" uid="uid://dfwqe346by81p" path="res://World/Characters/Enemies/enemy-2.tscn" id="4_v5flh"]
 
 [node name="World" type="Node2D"]
-
-[node name="TileMap" type="TileMap" parent="."]
-position = Vector2(320, 229)
-tile_set = ExtResource("1_rkcvw")
-format = 2
-layer_0/name = "foreground"
-layer_0/tile_data = PackedInt32Array(-65545, 0, 0, -65544, 0, 0, -65543, 0, 0, -65542, 0, 0, -65541, 0, 0, -65540, 0, 0, -65539, 0, 0, -65538, 0, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -65532, 0, 0, -65530, 0, 0, -65528, 0, 0, -65526, 0, 0, 65546, 0, 0, 131081, 0, 0, 196616, 0, 0, 262150, 0, 0, 262149, 0, 0, 262148, 0, 0, 262147, 0, 0, 262146, 0, 0, 327678, 0, 0, 327677, 0, 0, 327676, 0, 0, 327675, 0, 0, 262136, 0, 0, 196599, 0, 0, 131062, 0, 0, 131072, 0, 0, 262143, 0, 0, 196609, 0, 0, -262148, 0, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327683, 0, 0, -327681, 0, 0, -327679, 0, 0, -327678, 0, 0, -262142, 0, 0, -262141, 0, 0, -196603, 0, 0, 65547, 0, 0)
+script = ExtResource("1_fvc02")
 
 [node name="Player" parent="." instance=ExtResource("2_yj7yh")]
-position = Vector2(83, 132)
+position = Vector2(149, 143)
 
-[node name="Enemy" parent="." instance=ExtResource("3_2xrdr")]
-position = Vector2(163, 127)
+[node name="Enemy1" parent="." instance=ExtResource("3_2xrdr")]
+position = Vector2(93, 98)
+collision_layer = 7
+collision_mask = 11
+
+[node name="Enemy2" parent="." instance=ExtResource("4_v5flh")]
+position = Vector2(226, 92)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Countdown" parent="CanvasLayer" instance=ExtResource("3_u2mvl")]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(211, 194)
+scale = Vector2(0.5, 0.5)
+tile_set = ExtResource("1_rkcvw")
+format = 2
+layer_0/name = "foreground"
+layer_0/tile_data = PackedInt32Array(-65545, 1, 0, -65544, 65537, 0, -65543, 65537, 0, -65542, 65537, 0, -65541, 65537, 0, -65540, 65537, 0, -65539, 65537, 0, -65538, 65537, 0, -65537, 65537, 0, -131072, 65537, 0, -131071, 65537, 0, -262153, 1, 0, -262152, 65537, 0, -131070, 131073, 0, -262151, 65537, 0, -262150, 131073, 0, -393211, 65537, 0, -393210, 65537, 0, -393209, 65537, 0, -393208, 65537, 0, -393207, 65537, 0, -655361, 65537, 0, -720896, 65537, 0, -720895, 65537, 0, -720894, 65537, 0, -720893, 65537, 0, -720892, 65537, 0, -720891, 131073, 0, -393206, 131073, 0, -655362, 1, 0, -393212, 1, 0, -589814, 196609, 0, -589815, 196609, 0, -196607, 196609, 0, -393216, 131073, 0, -327681, 1, 0)

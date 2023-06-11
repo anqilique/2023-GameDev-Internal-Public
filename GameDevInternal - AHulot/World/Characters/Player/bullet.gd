@@ -24,11 +24,15 @@ func _on_body_entered(body):
 
 
 func _on_hitbox_area_entered(area):
+	var parent = area.get_parent()
+	
 	# Call damage function if it exists
-	if area is HitboxComponent:
+	if area is HitboxComponent and parent != player:
 		var hitbox : HitboxComponent = area
 		var attack = Attack.new()
 		
-		attack.attack_damage = 2
+		attack.attack_damage = 10
 
 		hitbox.damage(attack)
+		queue_free()
+	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5ngyyo8wgv28"]
+[gd_scene load_steps=16 format=3 uid="uid://b5ngyyo8wgv28"]
 
 [ext_resource type="Script" path="res://World/Characters/Player/player.gd" id="1_xqufv"]
 [ext_resource type="Texture2D" uid="uid://dgms7bcq1smm2" path="res://Assets/PlayerPlacholder-New2.png" id="2_pxlb1"]
 [ext_resource type="Script" path="res://World/Characters/Player/bullet_spawn.gd" id="3_63doj"]
+[ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_fkq4n"]
 [ext_resource type="PackedScene" uid="uid://dxdjw4yg1pp1t" path="res://World/Characters/Player/bullet.tscn" id="4_qexcd"]
 [ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="5_16twl"]
 [ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="6_3xwnc"]
@@ -109,11 +110,18 @@ radius = 5.85886
 height = 28.2223
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_xqufv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_pxlb1")
 hframes = 5
+
+[node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_fkq4n")]
+offset_left = -5.89088
+offset_top = -19.6032
+offset_right = 98.1091
+offset_bottom = 7.39673
 
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -134,13 +142,18 @@ bullet_scene = ExtResource("4_qexcd")
 wait_time = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_16twl")]
-MAX_HEALTH = 50
+MAX_HEALTH = 100
+health = 100
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_3xwnc")]
+visible = false
+collision_layer = 2
+collision_mask = 4
 health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
+position = Vector2(-0.75, -2)
+scale = Vector2(0.816, 0.883721)
 shape = SubResource("CapsuleShape2D_3w3x4")
 
 [node name="Camera2D" type="Camera2D" parent="."]

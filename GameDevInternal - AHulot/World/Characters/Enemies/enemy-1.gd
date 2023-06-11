@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 @export var GRAVITY: int = 10
-@export var SPEED: int = 80
+@export var SPEED: int = 50
 @export var MAX_HEALTH: int = 10
 
 @onready var player = get_node("/root/World/Player")
 
 var health
 var moving_right = true
+var can_hit = false
 
 enum { WANDER, CHASE, HIT }
 
@@ -18,13 +19,16 @@ func _ready():
 	health = MAX_HEALTH
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		WANDER : wander_state()
-		CHASE : chase_state()
 		HIT : hit_state()
+		CHASE : chase_state()
 	
 	apply_gravity()
+	
+	var health_comp = $HealthComponent
+	health_comp.update_battlehealth()
 	
 	
 func wander_state():
@@ -38,33 +42,30 @@ func wander_state():
 
 	detect_should_turn()
 	move_and_slide()
+	
+	
+func attack_player():
+	if can_hit:
+		var hitbox = get_node("/root/World/Player/HitboxComponent")
+		var attack = Attack.new()
+		
+		attack.attack_damage = 20
+		hitbox.damage(attack)
+		
+		can_hit = false
 
+		$AttackCooldown.start()
 
 func chase_state():
-	apply_gravity()
-	move_and_slide()
-	
-	state = WANDER
-	
-#	$AnimationPlayer.play("move")
-#
-#	var direction = Vector2.ZERO
-#	var locate = sign(player.global_position.x - global_position.x)
-#
-#	if locate > 5:
-#		direction = Vector2.RIGHT
-#		moving_right = true
-#	elif locate < 5:
-#		direction = Vector2.LEFT
-#		moving_right = false
-#	else:
-#		direction = Vector2.ZERO
-#
-#	if direction:
-#		velocity.x = direction.x * SPEED
-#		detect_should_turn()
-#		move_and_slide()
-
+	if player.is_visible():
+		apply_gravity()
+		$AnimationPlayer.play("move")
+		
+		if can_hit:
+			if player in $DetectRange.get_overlapping_bodies():
+				attack_player()
+	else:
+		state = WANDER
 
 func hit_state():
 	
@@ -76,27 +77,34 @@ func hit_state():
 
 	
 func apply_gravity():
-	velocity.y += GRAVITY	
-
-
-func _on_detect_range_body_entered(body):
-	if body == player:
-		state = CHASE
-
-
-func _on_detect_range_body_exited(body):
-	if body == player:
-		state = WANDER
-
+	velocity.y += GRAVITY
+	
 
 func _on_hit_recovery_timeout():
 	state = WANDER
 
 
 func detect_should_turn():
-	if not ($Ray_V.is_colliding() or $Ray_H.is_colliding()) and is_on_floor():
+	if not $Ray_V.is_colliding() or $Ray_H.is_colliding() and is_on_floor():
 		moving_right = !moving_right
 		scale.x = -scale.x
 		
 		if state != WANDER:
 			state = WANDER
+
+
+func _on_detect_range_area_entered(_area):
+	if !can_hit:
+		can_hit = true
+	if state != CHASE:
+		state = CHASE
+
+
+func _on_attack_cooldown_timeout():
+	can_hit = true
+
+
+func _on_detect_range_area_exited(_area):
+	if can_hit:
+		can_hit = false
+	state = WANDER

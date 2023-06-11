@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://cirl1p8b5jqaw"]
+[gd_scene load_steps=12 format=3 uid="uid://cirl1p8b5jqaw"]
 
 [ext_resource type="Script" path="res://World/Characters/Enemies/enemy-1.gd" id="1_ru507"]
 [ext_resource type="Texture2D" uid="uid://0yv5gimcqnj5" path="res://Assets/Enemy1Placeholder.png" id="2_m25pk"]
 [ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="3_l5elk"]
+[ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_m54r4"]
 [ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="4_0fp8c"]
 
 [sub_resource type="Animation" id="Animation_dj0gu"]
@@ -47,20 +48,27 @@ _data = {
 radius = 13.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2w8gn"]
-radius = 13.0
+radius = 17.8943
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2gtx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dghjm"]
+size = Vector2(47.0741, 30.709)
 
 [node name="Enemy" type="CharacterBody2D"]
 position = Vector2(1.78814e-07, -13)
 scale = Vector2(0.870967, 0.846658)
-collision_layer = 5
+collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_ru507")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_m25pk")
 hframes = 2
+
+[node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_m54r4")]
+offset_left = -4.5926
+offset_top = -18.8978
+offset_right = 99.4074
+offset_bottom = 8.10215
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -72,39 +80,47 @@ visible = false
 shape = SubResource("CircleShape2D_5oknk")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l5elk")]
-MAX_HEALTH = 10
+visible = false
+MAX_HEALTH = 50
+health = 50
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_0fp8c")]
 visible = false
 health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
-visible = false
-position = Vector2(1, -1)
+position = Vector2(1.14815, 1.18111)
 scale = Vector2(0.928571, 0.868083)
 shape = SubResource("CircleShape2D_2w8gn")
-
-[node name="DetectRange" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
-visible = false
-position = Vector2(0, -15)
-scale = Vector2(19.1059, -3.35287)
-shape = SubResource("RectangleShape2D_u2gtx")
 
 [node name="HitRecovery" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
 
 [node name="Ray_V" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(16, 0)
 scale = Vector2(1.28732, 0.641729)
 
 [node name="Ray_H" type="RayCast2D" parent="."]
-position = Vector2(16, 0)
+visible = false
 scale = Vector2(1.28732, 0.641729)
-target_position = Vector2(10.8753, 0)
+target_position = Vector2(13.3784, 0)
 
-[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
-[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
+[node name="DetectRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+position = Vector2(12.0556, 1.18111)
+shape = SubResource("RectangleShape2D_dghjm")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
+[connection signal="area_entered" from="DetectRange" to="." method="_on_detect_range_area_entered"]
+[connection signal="area_exited" from="DetectRange" to="." method="_on_detect_range_area_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

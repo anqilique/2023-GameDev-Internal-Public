@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfwqe346by81p"]
+[gd_scene load_steps=14 format=3 uid="uid://dfwqe346by81p"]
 
 [ext_resource type="Texture2D" uid="uid://br8ebpoqow0os" path="res://Assets/Enemy2Placeholder.png" id="1_7t2nm"]
 [ext_resource type="Script" path="res://World/Characters/Enemies/enemy-2.gd" id="1_y35bj"]
 [ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="2_pitb2"]
 [ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="3_lkhfq"]
+[ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_xrugj"]
 
 [sub_resource type="Animation" id="Animation_vnte5"]
 length = 0.001
@@ -62,61 +63,97 @@ _data = {
 "move": SubResource("Animation_isiqp")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_farvc"]
+radius = 17.0294
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_mstv7"]
 radius = 30.1963
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo1qk"]
-size = Vector2(20, 6.3661)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_n5vqv"]
-radius = 43.2897
+radius = 15.8408
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo1qk"]
+size = Vector2(20, 8.83681)
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 0
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_y35bj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7t2nm")
 hframes = 3
 
+[node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_xrugj")]
+offset_left = -5.0
+offset_top = -13.0
+offset_right = 99.0
+offset_bottom = 14.0
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_lbbvl")
 }
 
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_farvc")
+
 [node name="BodyArea" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.09586, 0.475494)
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 scale = Vector2(0.241632, 0.420536)
 shape = SubResource("CircleShape2D_mstv7")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_pitb2")]
-MAX_HEALTH = 4
-
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_lkhfq")]
-visible = false
-health_component = NodePath("../HealthComponent")
-
-[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 2.10822)
-scale = Vector2(1.62332, 1.91898)
-shape = SubResource("RectangleShape2D_oo1qk")
-
 [node name="DetectRange" type="Area2D" parent="."]
 visible = false
-scale = Vector2(3.85633, 2.01658)
+scale = Vector2(5.71384, 4.94068)
+collision_layer = 4
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
 shape = SubResource("CircleShape2D_n5vqv")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_pitb2")]
+visible = false
+MAX_HEALTH = 25
+health = 25
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_lkhfq")]
+visible = false
+position = Vector2(0, 2)
+scale = Vector2(0.970988, -1.47426)
+collision_layer = 4
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 2.37407)
+scale = Vector2(1.62332, 1.91898)
+shape = SubResource("RectangleShape2D_oo1qk")
 
 [node name="HitRecovery" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Ray_V" type="RayCast2D" parent="."]
+target_position = Vector2(0, -4)
 
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
 [connection signal="body_exited" from="BodyArea" to="." method="_on_body_area_body_exited"]
 [connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
 [connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

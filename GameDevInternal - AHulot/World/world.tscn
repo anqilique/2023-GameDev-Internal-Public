@@ -1,29 +1,39 @@
-[gd_scene load_steps=7 format=3 uid="uid://7aipndtibhct"]
+[gd_scene load_steps=8 format=3 uid="uid://7aipndtibhct"]
 
-[ext_resource type="Script" path="res://World/world.gd" id="1_fvc02"]
 [ext_resource type="TileSet" uid="uid://bcnutkhdta7nr" path="res://Assets/world.tres" id="1_rkcvw"]
 [ext_resource type="PackedScene" uid="uid://b5ngyyo8wgv28" path="res://World/Characters/Player/player.tscn" id="2_yj7yh"]
 [ext_resource type="PackedScene" uid="uid://cirl1p8b5jqaw" path="res://World/Characters/Enemies/enemy-1.tscn" id="3_2xrdr"]
 [ext_resource type="PackedScene" uid="uid://bkm0pqf7nlipo" path="res://UI/countdown.tscn" id="3_u2mvl"]
 [ext_resource type="PackedScene" uid="uid://dfwqe346by81p" path="res://World/Characters/Enemies/enemy-2.tscn" id="4_v5flh"]
+[ext_resource type="PackedScene" uid="uid://dnyp3od2byjj8" path="res://UI/stats.tscn" id="5_eo5d2"]
+[ext_resource type="PackedScene" uid="uid://dgdnn0122b1md" path="res://World/camp.tscn" id="7_bowkj"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_fvc02")
+
+[node name="Camp" parent="." instance=ExtResource("7_bowkj")]
+position = Vector2(252, 175)
 
 [node name="Player" parent="." instance=ExtResource("2_yj7yh")]
-position = Vector2(149, 143)
+position = Vector2(332, 61)
+ACCELERATION = 20
 
 [node name="Enemy1" parent="." instance=ExtResource("3_2xrdr")]
-position = Vector2(93, 98)
-collision_layer = 7
-collision_mask = 11
+position = Vector2(445, 145)
+collision_mask = 1
 
 [node name="Enemy2" parent="." instance=ExtResource("4_v5flh")]
 position = Vector2(226, 92)
+collision_mask = 5
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Countdown" parent="CanvasLayer" instance=ExtResource("3_u2mvl")]
+[node name="Countdown" parent="UI" instance=ExtResource("3_u2mvl")]
+offset_left = 3.0
+offset_top = 271.0
+offset_right = 43.0
+offset_bottom = 311.0
+
+[node name="Stats" parent="UI" instance=ExtResource("5_eo5d2")]
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(211, 194)
@@ -31,4 +41,4 @@ scale = Vector2(0.5, 0.5)
 tile_set = ExtResource("1_rkcvw")
 format = 2
 layer_0/name = "foreground"
-layer_0/tile_data = PackedInt32Array(-65545, 1, 0, -65544, 65537, 0, -65543, 65537, 0, -65542, 65537, 0, -65541, 65537, 0, -65540, 65537, 0, -65539, 65537, 0, -65538, 65537, 0, -65537, 65537, 0, -131072, 65537, 0, -131071, 65537, 0, -262153, 1, 0, -262152, 65537, 0, -131070, 131073, 0, -262151, 65537, 0, -262150, 131073, 0, -393211, 65537, 0, -393210, 65537, 0, -393209, 65537, 0, -393208, 65537, 0, -393207, 65537, 0, -655361, 65537, 0, -720896, 65537, 0, -720895, 65537, 0, -720894, 65537, 0, -720893, 65537, 0, -720892, 65537, 0, -720891, 131073, 0, -393206, 131073, 0, -655362, 1, 0, -393212, 1, 0, -589814, 196609, 0, -589815, 196609, 0, -196607, 196609, 0, -393216, 131073, 0, -327681, 1, 0)
+layer_0/tile_data = PackedInt32Array(262135, 65537, 0, 262136, 65537, 0, 262137, 65537, 0, 262138, 65537, 0, 262139, 65537, 0, 262140, 65537, 0, 262141, 65537, 0, 196605, 65537, 0, 196606, 65537, 0, 196607, 65537, 0, 131072, 65537, 0, 131073, 65537, 0, 131074, 65537, 0, 131075, 65537, 0, 131076, 65537, 0, 131077, 65537, 0, 131078, 65537, 0, -131063, 65537, 0, -131062, 65537, 0, -131061, 65537, 0, -131060, 65537, 0, -131059, 65537, 0, -131058, 65537, 0, -131057, 65537, 0, -131056, 65537, 0, -131055, 65537, 0, -131054, 65537, 0, -131053, 65537, 0, -131052, 65537, 0, -131051, 65537, 0, -131050, 65537, 0, -655362, 65537, 0, -655361, 65537, 0, -720896, 65537, 0, -720895, 65537, 0, -720894, 65537, 0, -720893, 65537, 0, -720892, 65537, 0, -720891, 65537, 0, -720890, 65537, 0, -720889, 65537, 0, -458745, 65537, 0, -458744, 65537, 0, -458743, 65537, 0, -458742, 65537, 0, -458741, 65537, 0, -458740, 65537, 0, -262155, 65537, 0, -262154, 65537, 0, -262153, 65537, 0, -262152, 65537, 0, -65551, 65537, 0, -65550, 65537, 0, -65549, 65537, 0, -65548, 65537, 0, 196592, 65537, 0, 196593, 65537, 0, 196594, 65537, 0, 131053, 65537, 0, 131052, 65537, 0, 131054, 131073, 0, 196595, 131073, 0, -65547, 131073, 0, -262151, 131073, 0, -720888, 131073, 0, -458739, 131073, 0, -131049, 131073, 0, 131079, 131073, 0, 262134, 1, 0, -131064, 1, 0, -458746, 1, 0, -655363, 1, 0, -262156, 1, 0, -65552, 1, 0, 196591, 1, 0, 131051, 1, 0, 196604, 1, 0, 262142, 131073, 0, -65533, 131073, 0, -65535, 1, 0, -65534, 65537, 0)

@@ -1,48 +1,88 @@
 extends CharacterBody2D
 
 @export var GRAVITY: int = 10
-@export var speed_div: int = 40
+@export var SPEED: int = 75
+@export var speed_div: int = 60
 @export var MAX_HEALTH: int = 10
 
 @onready var player = get_node("/root/World/Player")
+@onready var blocks = get_node("/root/World/TileMap")
 
 var health
 var player_chase = false
+var can_hit = true
+
 
 enum { WANDER, CHASE, HIT }
 
-var state = WANDER
+var state
 
 
 func _ready():
 	health = MAX_HEALTH
+	state = WANDER
 	$AnimationPlayer.play("move")
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match state:
 		WANDER : wander_state()
 		CHASE : chase_state()
 		HIT : hit_state()
+	
+	if player.is_visible():
+		if player in $BodyArea.get_overlapping_bodies():
+			attack_player()
+		elif player in $DetectRange.get_overlapping_bodies():
+			state = CHASE
+	else:
+		state = WANDER
+	
+	var health_comp = $HealthComponent
+	health_comp.update_battlehealth()
+	
+	
 
 func wander_state():
-	# state = CHASE
-	pass
+	$AnimationPlayer.play("move")
+	
+	if $Ray_V.is_colliding():
+		$Sprite2D.flip_v = true
+		$AnimationPlayer.play("RESET")
+	else:
+		if blocks in $DetectRange.get_overlapping_bodies():
+			if blocks.position.y > position.y and position.distance_to(blocks.position) < 250:
+				position.y += (position.y - blocks.position.y) / speed_div
+				
+		$Sprite2D.flip_v = false
+		$AnimationPlayer.play("move")
+			
 
 func chase_state():
+	$Sprite2D.flip_v = false
 	$AnimationPlayer.play("move")
 	position += (player.position - position) / speed_div
 
 
 func hit_state():
-	
 	if state != HIT:
 		state = HIT
-		$HitRecovery.start()
-	
+		
+	$HitRecovery.start()
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
-	print(player.position)
-	
+
+func attack_player():
+	if can_hit:
+		var hitbox = get_node("/root/World/Player/HitboxComponent")
+		var attack = Attack.new()
+		
+		attack.attack_damage = 10
+		hitbox.damage(attack)
+		
+		can_hit = false
+
+		$AttackCooldown.start()
 
 func _on_detect_range_body_entered(body):
 	if body == player:
@@ -53,7 +93,12 @@ func _on_detect_range_body_exited(body):
 		state = WANDER
 
 func _on_hit_recovery_timeout():
-	state = WANDER
+	if player in $BodyArea.get_overlapping_bodies():
+		attack_player()
+	elif player in $DetectRange.get_overlapping_bodies():
+		state = CHASE
+	else:
+		state = WANDER
 
 func _on_body_area_body_entered(body):
 	if body != player:
@@ -62,4 +107,9 @@ func _on_body_area_body_entered(body):
 func _on_body_area_body_exited(body):
 	if body != player:
 		speed_div -= 100
-		
+
+func _on_attack_cooldown_timeout():
+	can_hit = true
+
+func _on_wander_timer_timeout():
+	pass

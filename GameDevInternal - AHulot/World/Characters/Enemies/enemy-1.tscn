@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cirl1p8b5jqaw"]
+[gd_scene load_steps=12 format=3 uid="uid://cfurtom6e1g63"]
 
-[ext_resource type="Script" path="res://World/Characters/Enemies/enemy-1.gd" id="1_ru507"]
+[ext_resource type="Script" path="res://World/Characters/Enemies/grounded-enemy.gd" id="1_fel0p"]
 [ext_resource type="Texture2D" uid="uid://0yv5gimcqnj5" path="res://Assets/Enemy1Placeholder.png" id="2_m25pk"]
 [ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="3_l5elk"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_m54r4"]
@@ -58,7 +58,7 @@ position = Vector2(1.78814e-07, -13)
 scale = Vector2(0.870967, 0.846658)
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("1_ru507")
+script = ExtResource("1_fel0p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_m25pk")
@@ -101,6 +101,7 @@ one_shot = true
 visible = false
 position = Vector2(16, 0)
 scale = Vector2(1.28732, 0.641729)
+target_position = Vector2(0.0575523, 42.3319)
 
 [node name="Ray_H" type="RayCast2D" parent="."]
 visible = false
@@ -117,7 +118,7 @@ position = Vector2(12.0556, 1.18111)
 shape = SubResource("RectangleShape2D_dghjm")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]

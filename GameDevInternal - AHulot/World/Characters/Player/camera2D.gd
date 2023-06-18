@@ -1,8 +1,21 @@
 extends Camera2D
 
-@onready var player = get_node("/root/World/Player")
+@export var random_strength : float = 5.0
+@export var shake_fade : float = 5.0
+
+var random = RandomNumberGenerator.new()
+var shake_strength : float = 0.0
 
 func _physics_process(delta):
-	if player.motion.x > 15 or player.motion.y > 15 or -player.motion.x > -15 or -player.motion.y > -15:
-		global_position = player.global_position.round()
-		force_update_scroll()
+	if shake_strength > 0:
+		shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
+		offset = random_offset()
+
+func apply_shake():
+	shake_strength = random_strength
+
+func random_offset():
+	var offset_x = random.randf_range(-shake_strength, shake_strength)
+	var offset_y = random.randf_range(-shake_strength, shake_strength)
+	
+	return Vector2(offset_x, offset_y)

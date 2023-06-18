@@ -29,8 +29,13 @@ func _on_hour_timer_timeout():
 		current_day += 1
 		days_left -= 1
 		
-		if days_left == 0:
-			pass		
+		# Collision kills player.
+		if days_left <= 0:
+			var player = get_node("/root/World/Player")
+			player.dead_state()
+			
+			$HourTimer.stop()
+			
 	else:
 		hours_left -= 1
 		current_hour += 1

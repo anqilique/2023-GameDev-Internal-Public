@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://q6h3jsb3hcte"]
+
+[ext_resource type="Script" path="res://World/parts.gd" id="1_vt1b5"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://Assets/Parts.png" id="2_pg28x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvq51"]
+radius = 4.1727
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjqwb"]
+
+[node name="Part" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_vt1b5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pg28x")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wvq51")
+
+[node name="CollectRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectRange"]
+shape = SubResource("CircleShape2D_yjqwb")
+
+[node name="HoverText" type="Label" parent="."]
+offset_left = -3.47243
+offset_top = -13.7905
+offset_right = 36.5276
+offset_bottom = 12.2095
+scale = Vector2(0.35, 0.35)
+text = "[E]"
+
+[connection signal="body_entered" from="CollectRange" to="." method="_on_collect_range_body_entered"]
+[connection signal="body_exited" from="CollectRange" to="." method="_on_collect_range_body_exited"]

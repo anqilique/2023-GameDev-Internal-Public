@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var bullet_scene: PackedScene
+@export var bullet_scene : PackedScene
 
 var can_shoot = true
 
@@ -17,6 +17,7 @@ func _process(_delta):
 	
 	var player = get_node("/root/World/Player")
 	
+	# If the player is not dead and has enough energy: Shoot.
 	if player.is_alive:
 		if player.energy >= player.shoot_energy:
 			if Input.is_action_pressed("ui_left_click") and can_shoot:
@@ -30,10 +31,13 @@ func _shoot():
 	var spawn = get_node("/root/World/Player/BulletSpawn")
 	var player = get_node("/root/World/Player")
 	
+	# Spawn bullet from the player.
 	bullet.position = spawn.position
 	bullet.rotation = rotation
 	
 	add_sibling(bullet)
+	
+	# Shooting ueses energy.
 	player.energy -= player.shoot_energy
 
 

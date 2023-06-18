@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5ngyyo8wgv28"]
+[gd_scene load_steps=16 format=3 uid="uid://d34mranfcecch"]
 
 [ext_resource type="Script" path="res://World/Characters/Player/player.gd" id="1_xqufv"]
 [ext_resource type="Texture2D" uid="uid://dgms7bcq1smm2" path="res://Assets/PlayerPlacholder-New2.png" id="2_pxlb1"]
@@ -125,7 +125,7 @@ offset_bottom = 7.39673
 
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 0.5)
+position = Vector2(-1.12246, 0.219391)
 shape = SubResource("RectangleShape2D_4sdjf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -156,6 +156,12 @@ position = Vector2(-0.75, -2)
 scale = Vector2(0.816, 0.883721)
 shape = SubResource("CapsuleShape2D_3w3x4")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="CanJump" type="Timer" parent="."]
+one_shot = true
+
+[node name="IdleRegen" type="Timer" parent="."]
+wait_time = 2.5
 
 [connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]
+[connection signal="timeout" from="CanJump" to="." method="_on_can_jump_timeout"]
+[connection signal="timeout" from="IdleRegen" to="." method="_on_idle_regen_timeout"]

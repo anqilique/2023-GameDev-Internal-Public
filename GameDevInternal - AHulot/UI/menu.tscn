@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://8m1t1t0bfwsg"]
+
+[ext_resource type="Script" path="res://UI/menu.gd" id="1_re26d"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_re26d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 503.0
+offset_bottom = 301.0
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 137.166
+offset_top = 90.9899
+offset_right = 362.166
+offset_bottom = 191.99
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Controls" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Exit" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

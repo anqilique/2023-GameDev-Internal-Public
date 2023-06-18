@@ -26,7 +26,7 @@ func _on_body_entered(body):
 func _on_hitbox_area_entered(area):
 	var parent = area.get_parent()
 	
-	# Call damage function if it exists
+	# If bullet enters something with a Hitbox, deal damage.
 	if area is HitboxComponent and parent != player:
 		var hitbox : HitboxComponent = area
 		var attack = Attack.new()
@@ -35,4 +35,5 @@ func _on_hitbox_area_entered(area):
 
 		hitbox.damage(attack)
 		queue_free()
+	
 	

@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfwqe346by81p"]
+[gd_scene load_steps=14 format=3 uid="uid://jijvf6cckryv"]
 
+[ext_resource type="Script" path="res://World/Characters/Enemies/flying-enemy.gd" id="1_4fqci"]
 [ext_resource type="Texture2D" uid="uid://br8ebpoqow0os" path="res://Assets/Enemy2Placeholder.png" id="1_7t2nm"]
-[ext_resource type="Script" path="res://World/Characters/Enemies/enemy-2.gd" id="1_y35bj"]
 [ext_resource type="PackedScene" uid="uid://cxy1o2wwh7pua" path="res://World/health_component.tscn" id="2_pitb2"]
 [ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="3_lkhfq"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_xrugj"]
@@ -78,7 +78,7 @@ size = Vector2(20, 8.83681)
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource("1_y35bj")
+script = ExtResource("1_4fqci")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7t2nm")
@@ -141,14 +141,13 @@ shape = SubResource("RectangleShape2D_oo1qk")
 one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 2.0
 
 [node name="WanderTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
 [node name="Ray_V" type="RayCast2D" parent="."]
-target_position = Vector2(0, -4)
+target_position = Vector2(0, -6)
 
 [connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
 [connection signal="body_exited" from="BodyArea" to="." method="_on_body_area_body_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdml6l6m3til5"
-path="res://.godot/imported/PlayerPlaceholder-New.png-a17bbded193d207288a0edfe86204950.ctex"
+uid="uid://csph45d56urgh"
+path="res://.godot/imported/BasicTilemap.png-095f816b55acb4a2bd67b79dfaaac917.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PlayerPlaceholder-New.png"
-dest_files=["res://.godot/imported/PlayerPlaceholder-New.png-a17bbded193d207288a0edfe86204950.ctex"]
+source_file="res://Assets/BasicTilemap.png"
+dest_files=["res://.godot/imported/BasicTilemap.png-095f816b55acb4a2bd67b79dfaaac917.ctex"]
 
 [params]
 

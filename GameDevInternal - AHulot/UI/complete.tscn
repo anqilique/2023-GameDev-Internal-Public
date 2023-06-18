@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c8usugt8cfw7y"]
+
+[node name="Complete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 503.0
+offset_bottom = 301.0
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 179.605
+offset_top = 97.5808
+offset_right = 339.605
+offset_bottom = 123.581
+text = "Prototype Complete!"

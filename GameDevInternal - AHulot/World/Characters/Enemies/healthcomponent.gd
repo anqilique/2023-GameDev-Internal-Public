@@ -61,7 +61,7 @@ func update_battlehealth():
 Player Exclusive Functions Below
 """
 
-func regen_health(nearest_camp):
+func regen_health(nearest_camp):  # Regenerate player's health near campfire.
 	var player_healthcomp = get_node("/root/World/Player/HealthComponent")
 	
 	if nearest_camp.flame_state > 0:
@@ -73,7 +73,7 @@ func regen_health(nearest_camp):
 			else:
 				player_healthcomp.health += add_health
 
-func health_orb():
+func health_orb():  # When picking up health orb, add player health.
 	var player_healthcomp = get_node("/root/World/Player/HealthComponent")
 	var orb_health = get_node("/root/World/Orbs").orb_health
 	
@@ -82,7 +82,7 @@ func health_orb():
 	if player_healthcomp.health > player_healthcomp.MAX_HEALTH:
 			player_healthcomp.health = player_healthcomp.MAX_HEALTH
 
-func respawn():
+func respawn():  # Send player back to last checkpoint. Reset health.
 	var player = get_node("/root/World/Player")
 	var health = get_node("/root/World/Player/HealthComponent")
 	

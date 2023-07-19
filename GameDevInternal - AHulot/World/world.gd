@@ -50,9 +50,11 @@ func _ready():
 	
 	RenderingServer.set_default_clear_color(Color.DIM_GRAY)
 	
+	# Spawn enemies
 	for spawnpoint in enemy_spawnpoints:
 		type = randi_range(1, 2)
 
+		# Randomise type of enemy
 		if type == 1:
 			new_enemy = grounded_scene.instantiate()
 		else:
@@ -63,11 +65,13 @@ func _ready():
 		add_sibling(new_enemy)
 		new_enemy.add_to_group("Enemies")
 
+	# Spawn items
 	for spawnpoint in item_spawnpoints:
 		new_item = item_scene.instantiate()
 		new_item.position = spawnpoint
 		add_sibling(new_item)
 	
+	# Spawn ship parts
 	for spawnpoint in part_spawnpoints:
 		new_part = part_scene.instantiate()
 		new_part.position = spawnpoint
@@ -75,6 +79,7 @@ func _ready():
 		add_sibling(new_part)
 		new_part.add_to_group("Parts")
 
+	# Spawn campfires
 	for spawnpoint in camp_spawnpoints:
 		new_camp = camp_scene.instantiate()
 		new_camp.position = spawnpoint

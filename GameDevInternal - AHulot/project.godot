@@ -22,6 +22,7 @@ window/size/viewport_height=300
 window/size/mode=2
 window/size/window_width_override=1152
 window/size/window_height_override=648
+mouse_cursor/custom_image="res://Assets/cursor.png"
 window/stretch/mode="canvas_items"
 
 [input]
@@ -73,10 +74,11 @@ ui_inventory={
 
 [layer_names]
 
-2d_physics/layer_1="World"
+2d_physics/layer_1="World-Solid"
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Resources"
+2d_physics/layer_5="World-Ladders"
 
 [rendering]
 

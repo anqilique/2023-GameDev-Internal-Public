@@ -12,7 +12,7 @@ extends CharacterBody2D
 @export var jump_energy : int = 1
 @export var jump_max : int = 1
 
-enum { WANDER, SHOOT, DEAD }
+enum { WANDER, CLIMB, SHOOT, DEAD }
 
 var collected_parts = {
 	0 : 0,
@@ -29,6 +29,7 @@ var is_shooting = false
 var can_jump = true
 var bulletspawn_pos
 var energy
+var on_ladder = false
 
 
 func _ready():
@@ -38,6 +39,8 @@ func _ready():
 	energybar.max_value = MAX_ENERGY
 	
 	spawn_point = global_position
+	
+	$Alert.hide()
 
 
 func _physics_process(_delta):	
@@ -48,6 +51,7 @@ func _physics_process(_delta):
 	
 	match state:
 		WANDER: wander_state(input)
+		CLIMB: climb_state(input)
 		SHOOT: shoot_state()
 		DEAD: dead_state()
 	
@@ -68,10 +72,18 @@ func _physics_process(_delta):
 		jump_count = 0
 	elif jump_count == 0:
 		jump_count += 1
+	
+	if on_ladder and not is_on_floor():
+		state = CLIMB
+	
+	if $Alert.is_visible():
+		if $AlertTimer.is_stopped():
+			$AlertTimer.start()
 		
 	$HealthComponent.update_battlehealth()
 	update_stats("health")
 	update_stats("energy")
+
 
 func wander_state(input):
 	apply_gravity()
@@ -140,6 +152,43 @@ func wander_state(input):
 	
 	move_and_slide()
 
+
+func climb_state(input):
+	var dir
+	
+	if not on_ladder:
+		state = WANDER
+	
+	else:
+		if (
+			Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down")
+			or Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")
+		):
+			$AnimationPlayer.play("walk")  # "climb" when animation is made.
+		else:
+			$AnimationPlayer.play("idle")
+		
+		if Input.is_action_pressed("ui_up") or Input.is_action_pressed("ui_down"):
+			if Input.is_action_pressed("ui_up"):
+				dir = -1
+			elif Input.is_action_pressed("ui_down"):
+				dir = 1
+			else:
+				dir = 0
+			
+			velocity.y = move_toward(velocity.y, SPEED/2 * dir, ACCELERATION)
+			
+		else:
+			velocity.y = move_toward(velocity.y, 0, FRICTION)
+			
+		if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+			apply_acceleration(input.x)
+
+
+	move_and_slide()
+	apply_friction()
+
+
 func shoot_state():
 	apply_gravity()
 	move_and_slide()
@@ -159,6 +208,7 @@ func shoot_state():
 	if Input.is_action_just_released("ui_left_click"):
 		is_shooting = false
 		state = WANDER
+
 
 func update_stats(stat):
 	if stat == "health":
@@ -184,6 +234,7 @@ func update_stats(stat):
 		if energy > MAX_ENERGY:
 			energy = MAX_ENERGY
 
+
 func regenerate(nearest_camp):
 	if nearest_camp.flame_state > 0:
 		if energy < MAX_ENERGY:
@@ -192,6 +243,7 @@ func regenerate(nearest_camp):
 				energy = MAX_ENERGY
 			else:
 				energy += add_energy
+
 
 func find_nearest_camp():
 	var camps = get_tree().get_nodes_in_group("Camps")
@@ -216,6 +268,7 @@ func collect_orb(type):
 	elif type == "Energy":
 		energy += orbs.orb_energy
 
+
 func dead_state():
 	energy = 0
 		
@@ -231,6 +284,7 @@ func dead_state():
 	
 		self.show()
 
+
 func hit_state():
 	var force
 	if is_on_floor():
@@ -241,18 +295,23 @@ func hit_state():
 	velocity.y -= (GRAVITY + force)
 	move_and_slide()
 
+
 func apply_gravity():
-	velocity.y += GRAVITY	
+	velocity.y += GRAVITY
+
 
 func apply_friction():
 	velocity.x = move_toward(velocity.x, 0, FRICTION)
 	
+	
 func apply_acceleration(amount):
 	velocity.x = move_toward(velocity.x, SPEED * amount, ACCELERATION)
+
 
 func _on_can_jump_timeout():
 	if energy >= jump_energy:
 		can_jump = true
+
 
 func _on_idle_regen_timeout():
 	if energy < MAX_ENERGY:
@@ -261,3 +320,17 @@ func _on_idle_regen_timeout():
 				energy = MAX_ENERGY
 			else:
 				energy += add_energy
+
+
+func _on_alert_timer_timeout():
+	$Alert.hide()
+
+
+func _on_ladder_checker_body_entered(body):
+	on_ladder = true
+	print(on_ladder)
+
+
+func _on_ladder_checker_body_exited(body):
+	on_ladder = false
+	print(on_ladder)

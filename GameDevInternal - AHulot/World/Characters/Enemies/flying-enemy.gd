@@ -46,10 +46,10 @@ func _physics_process(_delta):
 func wander_state():
 	$AnimationPlayer.play("move")
 	
-	if $Ray_V.is_colliding():
+	if $Ray_V.is_colliding():  # "Rest" upside down. 
 		$Sprite2D.flip_v = true
 		$AnimationPlayer.play("RESET")
-	else:
+	else:  # Go to nearby ceiling if in range.
 		if blocks in $DetectRange.get_overlapping_bodies():
 			if blocks.position.y > position.y and position.distance_to(blocks.position) < 250:
 				position.y += (position.y - blocks.position.y) / speed_div
@@ -67,8 +67,10 @@ func chase_state():
 func hit_state():
 	if state != HIT:
 		state = HIT
-		
-	$HitRecovery.start()
+	
+	if $HitRecovery.is_stopped():
+		$HitRecovery.start()
+	
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 
@@ -93,12 +95,13 @@ func _on_detect_range_body_exited(body):
 		state = WANDER
 
 func _on_hit_recovery_timeout():
+	$Sprite2D.flip_v = false
+	$AnimationPlayer.play("move")
+	
 	if player in $BodyArea.get_overlapping_bodies():
 		attack_player()
-	elif player in $DetectRange.get_overlapping_bodies():
-		state = CHASE
 	else:
-		state = WANDER
+		state = CHASE
 
 func _on_body_area_body_entered(body):
 	if body != player:

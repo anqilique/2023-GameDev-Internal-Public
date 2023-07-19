@@ -10,7 +10,6 @@ var required_parts = {
 
 var parts_progress
 var fully_repaired = false
-var completed = 0
 var required_spawn = []
 
 
@@ -45,12 +44,10 @@ func _physics_process(delta):
 		parts_progress = ""
 		for type in required_parts.keys():
 			parts_progress += str(player.collected_parts[type]) + " / " + str(required_parts[type]) + "\n"
-			
-			if player.collected_parts[type] >= required_parts[type]:
-				completed += 1
 
-	if completed == len(required_parts.keys()):
+	if $ProgressBar.value >= $ProgressBar.max_value:
 		fully_repaired = true
+		print(">> Fully repaired!")
 	
 	if fully_repaired:
 		get_tree().paused = true

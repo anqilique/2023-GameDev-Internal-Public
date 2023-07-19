@@ -15,12 +15,12 @@ func _process(delta):
 	
 	
 func _on_visible_on_screen_notifier_2d_screen_exited():
-	queue_free()
+	queue_free()  # Destroy when off-screen
 
 
 func _on_body_entered(body):
 	if body != player:
-		queue_free()
+		queue_free()  # Destroy on hitting target
 
 
 func _on_hitbox_area_entered(area):

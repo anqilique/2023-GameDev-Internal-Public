@@ -14,6 +14,7 @@ func _physics_process(delta):
 		if player.jump_max < 2:
 			player.jump_max = 2
 			print(">> Player has unlocked Double Jump")
+			player.get_node("Alert").show()
 		
 		print(">> Player picked up Item")
 

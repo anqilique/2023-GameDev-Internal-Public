@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://c8usugt8cfw7y"]
+[gd_scene load_steps=2 format=3 uid="uid://c8usugt8cfw7y"]
+
+[ext_resource type="Script" path="res://UI/menu.gd" id="1_103ex"]
 
 [node name="Complete" type="Control"]
 layout_mode = 3
@@ -21,3 +23,14 @@ offset_top = 97.5808
 offset_right = 339.605
 offset_bottom = 123.581
 text = "Prototype Complete!"
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_left = 214.961
+offset_top = 141.422
+offset_right = 328.961
+offset_bottom = 172.422
+scale = Vector2(0.753917, 0.753917)
+text = "Back to Menu"
+script = ExtResource("1_103ex")
+
+[connection signal="pressed" from="CanvasLayer/Back" to="CanvasLayer/Back" method="_on_pressed"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://d34mranfcecch"]
 
 [ext_resource type="Script" path="res://World/Characters/Player/player.gd" id="1_xqufv"]
-[ext_resource type="Texture2D" uid="uid://dgms7bcq1smm2" path="res://Assets/PlayerPlacholder-New2.png" id="2_pxlb1"]
+[ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://Assets/player.png" id="2_kmgt5"]
 [ext_resource type="Script" path="res://World/Characters/Player/bullet_spawn.gd" id="3_63doj"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://World/battle_health_bar.tscn" id="3_fkq4n"]
 [ext_resource type="PackedScene" uid="uid://dxdjw4yg1pp1t" path="res://World/Characters/Player/bullet.tscn" id="4_qexcd"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://gfl3m0ofwj8o" path="res://World/hitbox_component.tscn" id="6_3xwnc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdjf"]
-size = Vector2(12, 29)
+size = Vector2(6, 7)
 
 [sub_resource type="Animation" id="Animation_k20cu"]
 length = 0.001
@@ -106,19 +106,19 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3w3x4"]
-radius = 5.85886
-height = 28.2223
+radius = 3.67647
+height = 9.80392
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awkmx"]
-size = Vector2(5, 21)
+size = Vector2(5.5, 10.5)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_xqufv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_pxlb1")
-hframes = 5
+texture = ExtResource("2_kmgt5")
+hframes = 4
 
 [node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_fkq4n")]
 visible = false
@@ -128,8 +128,7 @@ offset_right = 98.1091
 offset_bottom = 7.39673
 
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1.12246, 0.219391)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_4sdjf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -138,7 +137,8 @@ libraries = {
 }
 
 [node name="BulletSpawn" type="Node2D" parent="."]
-position = Vector2(7.34991, 0)
+visible = false
+position = Vector2(4, 0)
 script = ExtResource("3_63doj")
 bullet_scene = ExtResource("4_qexcd")
 
@@ -150,13 +150,13 @@ MAX_HEALTH = 100
 health = 100
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_3xwnc")]
-visible = false
 collision_layer = 2
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-0.75, -2)
+visible = false
+position = Vector2(1.78814e-07, 0)
 scale = Vector2(0.816, 0.883721)
 shape = SubResource("CapsuleShape2D_3w3x4")
 
@@ -165,7 +165,8 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
-position = Vector2(-1, 5.5)
+visible = false
+position = Vector2(0, 0.75)
 shape = SubResource("RectangleShape2D_awkmx")
 
 [node name="CanJump" type="Timer" parent="."]
@@ -173,6 +174,10 @@ one_shot = true
 
 [node name="IdleRegen" type="Timer" parent="."]
 wait_time = 2.5
+
+[node name="AlertTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
 [node name="Alert" type="Label" parent="."]
 visible = false
@@ -182,10 +187,6 @@ offset_right = 154.0
 offset_bottom = -3.0
 scale = Vector2(0.324808, 0.363113)
 text = "Double Jump Unlocked!"
-
-[node name="AlertTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
 
 [connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]
 [connection signal="body_entered" from="LadderChecker" to="." method="_on_ladder_checker_body_entered"]

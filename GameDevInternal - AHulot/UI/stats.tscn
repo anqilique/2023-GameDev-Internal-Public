@@ -16,7 +16,7 @@ offset_left = 3.0
 offset_top = 2.5
 offset_right = 209.0
 offset_bottom = 29.5
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.245719, 0.245719)
 show_percentage = false
 
 [node name="HealthText" type="Label" parent="HealthBar"]
@@ -43,10 +43,10 @@ modulate = Color(0.0784314, 0.627451, 1, 1)
 top_level = true
 layout_mode = 0
 offset_left = 3.25
-offset_top = 17.5
+offset_top = 10.7652
 offset_right = 209.25
-offset_bottom = 44.5
-scale = Vector2(0.4, 0.4)
+offset_bottom = 37.7652
+scale = Vector2(0.247061, 0.259897)
 show_percentage = false
 
 [node name="EnergyText" type="Label" parent="EnergyBar"]

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var SPEED : int = 100
-@export var JUMP_PRESSED : int = -280
+@export var SPEED : int = 80
+@export var JUMP_PRESSED : int = -180
 @export var JUMP_RELEASED : int = -70
 @export var ACCELERATION : int = 15
 @export var FRICTION : int = 15

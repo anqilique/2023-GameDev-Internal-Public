@@ -16,13 +16,15 @@ script = ExtResource("1_re26d")
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 503.0
 offset_bottom = 301.0
+scale = Vector2(0.512467, 0.512467)
 color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-offset_left = 137.166
-offset_top = 90.9899
-offset_right = 362.166
-offset_bottom = 191.99
+offset_left = 56.5557
+offset_top = 43.6136
+offset_right = 281.556
+offset_bottom = 144.614
+scale = Vector2(0.603417, 0.603417)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2

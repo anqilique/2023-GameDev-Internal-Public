@@ -48,7 +48,7 @@ func _ready():
 		Vector2(787, 782)
 	]
 	
-	RenderingServer.set_default_clear_color(Color.DIM_GRAY)
+	RenderingServer.set_default_clear_color(Color.html("#2a2a3a"))
 	
 	# Spawn enemies
 	for spawnpoint in enemy_spawnpoints:

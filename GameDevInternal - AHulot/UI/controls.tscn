@@ -16,6 +16,7 @@ script = ExtResource("1_5q1n3")
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 503.0
 offset_bottom = 301.0
+scale = Vector2(0.516935, 0.516935)
 color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
@@ -23,6 +24,7 @@ offset_left = 15.0
 offset_top = 9.0
 offset_right = 484.0
 offset_bottom = 246.0
+scale = Vector2(0.471538, 0.471538)
 color = Color(0.129412, 0.129412, 0.129412, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ColorRect2"]
@@ -43,9 +45,10 @@ Lit fires regenerate Health and Energy. Use [E]"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_left = 15.4848
-offset_top = 260.99
+offset_top = 126.892
 offset_right = 153.485
-offset_bottom = 291.99
+offset_bottom = 157.892
+scale = Vector2(0.449403, 0.449403)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2

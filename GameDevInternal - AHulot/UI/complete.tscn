@@ -15,20 +15,21 @@ grow_vertical = 2
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_right = 503.0
 offset_bottom = 301.0
+scale = Vector2(0.520201, 0.520201)
 color = Color(0.298039, 0.298039, 0.298039, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 179.605
-offset_top = 97.5808
-offset_right = 339.605
-offset_bottom = 123.581
+offset_left = 45.9614
+offset_top = 39.5979
+offset_right = 205.961
+offset_bottom = 65.5981
 text = "Prototype Complete!"
 
 [node name="Back" type="Button" parent="CanvasLayer"]
-offset_left = 214.961
-offset_top = 141.422
-offset_right = 328.961
-offset_bottom = 172.422
+offset_left = 81.3174
+offset_top = 83.4391
+offset_right = 195.317
+offset_bottom = 114.439
 scale = Vector2(0.753917, 0.753917)
 text = "Back to Menu"
 script = ExtResource("1_103ex")

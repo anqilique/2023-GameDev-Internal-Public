@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yo10kwq7r4fd"
-path="res://.godot/imported/Fire.png-3eee30a486a5b3dfbb78abad0137b80d.ctex"
+uid="uid://clh8ay726g6d7"
+path="res://.godot/imported/enemy-grounded.png-e647546a545254e32ee64ca5e18fd7ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fire.png"
-dest_files=["res://.godot/imported/Fire.png-3eee30a486a5b3dfbb78abad0137b80d.ctex"]
+source_file="res://Assets/enemy-grounded.png"
+dest_files=["res://.godot/imported/enemy-grounded.png-e647546a545254e32ee64ca5e18fd7ee.ctex"]
 
 [params]
 

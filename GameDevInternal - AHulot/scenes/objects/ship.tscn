@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://ifne2wvwvdes"]
+
+[ext_resource type="Texture2D" uid="uid://ba78hmxvq2pqk" path="res://assets/icon.svg" id="1_hvqwp"]
+[ext_resource type="Script" path="res://scripts/objects/ship.gd" id="1_mpbij"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/Parts.png" id="3_1wk7y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6emf2"]
+size = Vector2(229.699, 220.985)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k2m65"]
+radius = 78.8013
+height = 240.227
+
+[node name="Ship" type="CharacterBody2D"]
+scale = Vector2(0.551272, 0.551272)
+collision_mask = 2
+script = ExtResource("1_mpbij")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.1268, 1.3931)
+scale = Vector2(0.278731, 0.278731)
+texture = ExtResource("1_hvqwp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(2.24826, 12.7173)
+shape = SubResource("RectangleShape2D_6emf2")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -106.424
+offset_top = -148.088
+offset_right = 114.576
+offset_bottom = -134.088
+show_percentage = false
+
+[node name="Icon 0" type="Sprite2D" parent="."]
+position = Vector2(-201.314, -75.4327)
+scale = Vector2(2.50521, 2.5052)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+
+[node name="Icon 1" type="Sprite2D" parent="."]
+position = Vector2(-202.755, -49.9682)
+scale = Vector2(2.50521, 2.5052)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+frame = 1
+
+[node name="Icon 2" type="Sprite2D" parent="."]
+position = Vector2(-201.794, -22.1013)
+scale = Vector2(2.50521, 2.5052)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+frame = 2
+
+[node name="Resources" type="Label" parent="."]
+offset_left = -183.362
+offset_top = -82.1994
+offset_right = -143.362
+offset_bottom = -4.19937
+scale = Vector2(1.5, 1.5)
+text = "0 / 0
+0 / 0
+0 / 0"
+
+[node name="Label" type="Label" parent="."]
+offset_left = -211.576
+offset_top = -1.96095
+offset_right = -106.576
+offset_bottom = 24.0396
+scale = Vector2(1.2, 1.2)
+text = "[E] to Interact"
+
+[node name="Range" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.14879, 0.881229)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+rotation = -1.57078
+scale = Vector2(1.90655, 1.5749)
+shape = SubResource("CapsuleShape2D_k2m65")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

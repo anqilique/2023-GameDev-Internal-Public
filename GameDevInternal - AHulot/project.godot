@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="GameDevInternal - AHulot"
-run/main_scene="res://UI/menu.tscn"
+run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/icon.svg"
 
 [display]
 
@@ -22,8 +22,12 @@ window/size/viewport_height=150
 window/size/mode=2
 window/size/window_width_override=1152
 window/size/window_height_override=648
-mouse_cursor/custom_image="res://Assets/cursor.png"
+mouse_cursor/custom_image="res://assets/cursor.png"
 window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom_font="res://assets/BitPotionExt.ttf"
 
 [input]
 

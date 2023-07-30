@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clh8ay726g6d7"
-path="res://.godot/imported/enemy-grounded.png-e647546a545254e32ee64ca5e18fd7ee.ctex"
+path="res://.godot/imported/enemy-grounded.png-6a900a530696f458dd5f650eefb98758.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/enemy-grounded.png"
-dest_files=["res://.godot/imported/enemy-grounded.png-e647546a545254e32ee64ca5e18fd7ee.ctex"]
+source_file="res://assets/enemy-grounded.png"
+dest_files=["res://.godot/imported/enemy-grounded.png-6a900a530696f458dd5f650eefb98758.ctex"]
 
 [params]
 

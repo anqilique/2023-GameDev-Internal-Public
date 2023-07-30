@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjgb7qwp7jcia"]
-
-[ext_resource type="TileSet" uid="uid://bcnutkhdta7nr" path="res://Assets/world.tres" id="1_nokjx"]
-
-[node name="TileMap" type="TileMap"]
-tile_set = ExtResource("1_nokjx")
-format = 2
-layer_0/name = "foreground"

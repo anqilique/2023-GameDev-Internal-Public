@@ -1,0 +1,213 @@
+[gd_scene load_steps=19 format=3 uid="uid://cp7bgpmhe3im"]
+
+[ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_xqufv"]
+[ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://assets/player.png" id="2_kmgt5"]
+[ext_resource type="Script" path="res://scripts/misc/bullet_spawn.gd" id="3_63doj"]
+[ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://scenes/ui/battle_health_bar.tscn" id="3_fkq4n"]
+[ext_resource type="PackedScene" path="res://scenes/objects/bullet.tscn" id="4_qexcd"]
+[ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="5_16twl"]
+[ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="6_3xwnc"]
+
+[sub_resource type="Gradient" id="Gradient_tmrp0"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_42el8"]
+gradient = SubResource("Gradient_tmrp0")
+fill = 1
+fill_from = Vector2(0.482906, 0.487179)
+fill_to = Vector2(0.790598, 0.24359)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdjf"]
+size = Vector2(3.73441, 6.07712)
+
+[sub_resource type="Animation" id="Animation_k20cu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_i12cp"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_kfy2m"]
+resource_name = "jump"
+length = 0.1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_jyg14"]
+resource_name = "shoot"
+length = 0.2
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 3]
+}
+
+[sub_resource type="Animation" id="Animation_io5cm"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lw5na"]
+_data = {
+"RESET": SubResource("Animation_k20cu"),
+"idle": SubResource("Animation_i12cp"),
+"jump": SubResource("Animation_kfy2m"),
+"shoot": SubResource("Animation_jyg14"),
+"walk": SubResource("Animation_io5cm")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3w3x4"]
+radius = 3.67647
+height = 9.80392
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awkmx"]
+size = Vector2(6.91663, 3.53691)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_xqufv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kmgt5")
+hframes = 4
+
+[node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_fkq4n")]
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 100.0
+offset_bottom = 16.9999
+scale = Vector2(0.087745, 0.087745)
+
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
+position = Vector2(-0.0109924, 0.0109929)
+scale = Vector2(0.0940582, 0.101844)
+texture = SubResource("GradientTexture2D_42el8")
+
+[node name="SolidCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0.129667, 0.0630418)
+shape = SubResource("RectangleShape2D_4sdjf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lw5na")
+}
+
+[node name="BulletSpawn" type="Node2D" parent="."]
+visible = false
+position = Vector2(4, 0)
+script = ExtResource("3_63doj")
+bullet_scene = ExtResource("4_qexcd")
+
+[node name="CanShoot" type="Timer" parent="BulletSpawn"]
+wait_time = 0.4
+
+[node name="HealthComponent" parent="." instance=ExtResource("5_16twl")]
+MAX_HEALTH = 100
+health = 100
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_3xwnc")]
+collision_layer = 2
+collision_mask = 4
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
+position = Vector2(1.78814e-07, 0)
+scale = Vector2(0.816, 0.883721)
+shape = SubResource("CapsuleShape2D_3w3x4")
+
+[node name="LadderChecker" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
+position = Vector2(0.00812006, 3.10117)
+scale = Vector2(0.562281, 0.562281)
+shape = SubResource("RectangleShape2D_awkmx")
+
+[node name="CanJump" type="Timer" parent="."]
+one_shot = true
+
+[node name="IdleRegen" type="Timer" parent="."]
+wait_time = 2.5
+
+[node name="AlertTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Alert" type="Label" parent="."]
+visible = false
+offset_left = -27.0
+offset_top = -29.0
+offset_right = 154.0
+offset_bottom = -3.0
+scale = Vector2(0.324808, 0.363113)
+text = "Double Jump Unlocked!"
+
+[connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]
+[connection signal="body_entered" from="LadderChecker" to="." method="_on_ladder_checker_body_entered"]
+[connection signal="body_exited" from="LadderChecker" to="." method="_on_ladder_checker_body_exited"]
+[connection signal="timeout" from="CanJump" to="." method="_on_can_jump_timeout"]
+[connection signal="timeout" from="IdleRegen" to="." method="_on_idle_regen_timeout"]
+[connection signal="timeout" from="AlertTimer" to="." method="_on_alert_timer_timeout"]

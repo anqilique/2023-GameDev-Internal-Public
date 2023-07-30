@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://w21knbrcklr6"]
+
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/Parts.png" id="1_2ihjn"]
+[ext_resource type="Script" path="res://scripts/ui/inventory.gd" id="1_r8575"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8575")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -0.610992
+offset_top = 0.089798
+offset_right = 39.389
+offset_bottom = 40.09
+scale = Vector2(5.17066, 3.06712)
+color = Color(0.168627, 0.168627, 0.168627, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.3145
+offset_top = 2.52835
+offset_right = 99.3145
+offset_bottom = 28.5285
+scale = Vector2(2, 2)
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="Resources" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.4581
+offset_top = 38.0171
+offset_right = 131.458
+offset_bottom = 116.017
+scale = Vector2(1.5, 1.5)
+text = "0 / 0
+0 / 0
+0 / 0"
+
+[node name="Icon 0" type="Sprite2D" parent="."]
+modulate = Color(0.12549, 0.105882, 0.0156863, 1)
+position = Vector2(75.4273, 46.2676)
+scale = Vector2(2.23711, 2.5052)
+texture = ExtResource("1_2ihjn")
+hframes = 3
+
+[node name="Icon 2" type="Sprite2D" parent="."]
+modulate = Color(0.12549, 0.105882, 0.0156863, 1)
+position = Vector2(74.9982, 99.599)
+scale = Vector2(2.23711, 2.5052)
+texture = ExtResource("1_2ihjn")
+hframes = 3
+frame = 2
+
+[node name="Icon 1" type="Sprite2D" parent="."]
+modulate = Color(0.12549, 0.105882, 0.0156863, 1)
+position = Vector2(74.1401, 71.7321)
+scale = Vector2(2.23711, 2.5052)
+texture = ExtResource("1_2ihjn")
+hframes = 3
+frame = 1

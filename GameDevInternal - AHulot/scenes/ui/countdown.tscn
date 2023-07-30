@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://daotjsq48bt2u"]
+
+[ext_resource type="Script" path="res://scripts/ui/countdown.gd" id="1_e4dvu"]
+
+[node name="Countdown" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 0.466167
+offset_top = 0.289024
+offset_right = 77.4662
+offset_bottom = 16.289
+script = ExtResource("1_e4dvu")
+
+[node name="TimeText" type="Label" parent="."]
+layout_mode = 0
+offset_right = 76.0
+offset_bottom = 17.0
+text = "Day 01 : Hour 00"
+
+[node name="HourTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="HourTimer" to="." method="_on_hour_timer_timeout"]

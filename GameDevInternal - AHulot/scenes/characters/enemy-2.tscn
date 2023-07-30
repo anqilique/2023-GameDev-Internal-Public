@@ -1,0 +1,161 @@
+[gd_scene load_steps=14 format=3 uid="uid://ctphwtvylth0w"]
+
+[ext_resource type="Script" path="res://scripts/characters/flying-enemy.gd" id="1_4fqci"]
+[ext_resource type="Texture2D" uid="uid://fmphc6mdqykc" path="res://assets/enemy-flying.png" id="2_754yh"]
+[ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="2_pitb2"]
+[ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="3_lkhfq"]
+[ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://scenes/ui/battle_health_bar.tscn" id="3_xrugj"]
+
+[sub_resource type="Animation" id="Animation_vnte5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ofi3j"]
+resource_name = "hit"
+length = 0.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_isiqp"]
+resource_name = "move"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbbvl"]
+_data = {
+"RESET": SubResource("Animation_vnte5"),
+"hit": SubResource("Animation_ofi3j"),
+"move": SubResource("Animation_isiqp")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_farvc"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mstv7"]
+radius = 15.106
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5vqv"]
+radius = 11.6174
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo1qk"]
+size = Vector2(5.70985, 3.18125)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_4fqci")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_754yh")
+hframes = 5
+
+[node name="BattleHealthBar" parent="Sprite2D" instance=ExtResource("3_xrugj")]
+offset_left = -5.0
+offset_top = -9.0
+offset_right = 99.0
+offset_bottom = 18.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lbbvl")
+}
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_farvc")
+
+[node name="BodyArea" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.09586, 0.475494)
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
+position = Vector2(0, 2.10308)
+scale = Vector2(0.241632, 0.420536)
+shape = SubResource("CircleShape2D_mstv7")
+
+[node name="DetectRange" type="Area2D" parent="."]
+visible = false
+scale = Vector2(5.71384, 4.94068)
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectRange"]
+shape = SubResource("CircleShape2D_n5vqv")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_pitb2")]
+visible = false
+MAX_HEALTH = 25
+health = 25
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_lkhfq")]
+visible = false
+position = Vector2(0, 2)
+scale = Vector2(0.970988, -1.47426)
+collision_layer = 4
+collision_mask = 2
+health_component = NodePath("../HealthComponent")
+
+[node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1.01746)
+scale = Vector2(1.62332, 1.91898)
+shape = SubResource("RectangleShape2D_oo1qk")
+
+[node name="HitRecovery" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+
+[node name="WanderTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Ray_V" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(0, -4)
+
+[connection signal="body_entered" from="BodyArea" to="." method="_on_body_area_body_entered"]
+[connection signal="body_exited" from="BodyArea" to="." method="_on_body_area_body_exited"]
+[connection signal="body_entered" from="DetectRange" to="." method="_on_detect_range_body_entered"]
+[connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
+[connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

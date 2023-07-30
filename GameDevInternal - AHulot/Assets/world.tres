@@ -1,6 +1,6 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bcnutkhdta7nr"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bi7cc6fq4eeth"]
 
-[ext_resource type="Texture2D" uid="uid://dc5h50q5mn67i" path="res://Assets/tilemap.png" id="1_e4sl6"]
+[ext_resource type="Texture2D" uid="uid://dc5h50q5mn67i" path="res://assets/tilemap.png" id="1_e4sl6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ey3fg"]
 resource_name = "Solids"

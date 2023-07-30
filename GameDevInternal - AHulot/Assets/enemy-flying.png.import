@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fmphc6mdqykc"
-path="res://.godot/imported/enemy-flying.png-e80e11a175858376776bfaf9d9e15fd6.ctex"
+path="res://.godot/imported/enemy-flying.png-d02503cc29839e479b0e78f41cd42537.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/enemy-flying.png"
-dest_files=["res://.godot/imported/enemy-flying.png-e80e11a175858376776bfaf9d9e15fd6.ctex"]
+source_file="res://assets/enemy-flying.png"
+dest_files=["res://.godot/imported/enemy-flying.png-d02503cc29839e479b0e78f41cd42537.ctex"]
 
 [params]
 

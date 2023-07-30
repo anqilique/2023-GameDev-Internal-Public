@@ -1,0 +1,60 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddaini3nj53wa"]
+
+[ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_g0wvt"]
+
+[node name="Controls and Instructions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g0wvt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 503.0
+offset_bottom = 301.0
+scale = Vector2(0.516935, 0.516935)
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+offset_left = 15.0
+offset_top = 9.0
+offset_right = 484.0
+offset_bottom = 246.0
+scale = Vector2(0.471538, 0.471538)
+color = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 26.9834
+offset_top = 11.0647
+offset_right = 434.983
+offset_bottom = 223.064
+scale = Vector2(0.8, 0.8)
+text = "~ Controls and Instructions ~
+
+- WASD / Arrow Keys --> Movement
+- Left Mouse Button --> Shoot
+- E Key --> Interact / Pick Up
+- I Key --> Open/Close Inventory
+- S Key --> When idle, slowly regenerates Energy
+
+Lit fires regenerate Health and Energy. Use [E]"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+offset_left = 15.4848
+offset_top = 126.892
+offset_right = 153.485
+offset_bottom = 157.892
+scale = Vector2(0.449403, 0.449403)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "BACK"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

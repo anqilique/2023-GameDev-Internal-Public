@@ -18,6 +18,7 @@ var state = WANDER
 func _ready():
 	health = MAX_HEALTH
 	set_meta("Enemy", 1)
+	set_meta("Grounded", 2)
 
 
 func _physics_process(_delta):
@@ -58,7 +59,7 @@ func attack_player():
 		$AttackCooldown.start()
 
 func chase_state():
-	if player.is_visible():
+	if is_instance_valid(player) and player.is_alive:
 		apply_gravity()
 		$AnimationPlayer.play("move")
 		
@@ -74,7 +75,7 @@ func hit_state():
 		state = HIT
 		$HitRecovery.start()
 	
-	$AnimationPlayer.stop()
+	$AnimationPlayer.play("hit")
 
 	
 func apply_gravity():

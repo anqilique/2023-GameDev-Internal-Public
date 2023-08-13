@@ -18,11 +18,14 @@ func _ready():
 	
 
 func damage(attack: Attack):
-	health -= attack.attack_damage
+	if parent == player:
+		health = player_vars.health - attack.attack_damage
+		player_vars.health = health
+	else:
+		health -= attack.attack_damage
 	
 	if health <= 0:
 		if parent != player:
-			
 			if parent.has_meta("Enemy"):
 				var orbs = get_node("/root/World/Orbs")
 				orbs.wait_spawn(parent.global_position)
@@ -46,47 +49,18 @@ func damage(attack: Attack):
 
 func update_battlehealth():
 	health = parent.get_node("HealthComponent").health
-	MAX_HEALTH = parent.get_node("HealthComponent").MAX_HEALTH
+	
+	if parent == player:
+		MAX_HEALTH = player_vars.max_health
+		health = player_vars.health
+	else:
+		MAX_HEALTH = parent.get_node("HealthComponent").MAX_HEALTH
 	
 	var battle_healthbar = parent.get_node("Sprite2D/BattleHealthBar")
+	
 	battle_healthbar.value = health
 	
 	if health >= MAX_HEALTH:
 		battle_healthbar.hide()
 	else:
 		battle_healthbar.show()
-
-
-"""
-Player Exclusive Functions Below
-"""
-
-func regen_health(nearest_camp):  # Regenerate player's health near campfire.
-	var player_healthcomp = get_node("/root/World/Player/HealthComponent")
-	
-	if nearest_camp.flame_state > 0:
-		if player_healthcomp.health < player_healthcomp.MAX_HEALTH:
-			var add_health = nearest_camp.flame_state
-			
-			if (player_healthcomp.health + add_health) > player_healthcomp.MAX_HEALTH:
-				player_healthcomp.health = player_healthcomp.MAX_HEALTH
-			else:
-				player_healthcomp.health += add_health
-
-func health_orb():  # When picking up health orb, add player health.
-	var player_healthcomp = get_node("/root/World/Player/HealthComponent")
-	var orb_health = get_node("/root/World/Orbs").orb_health
-	
-	player_healthcomp.health += orb_health
-	
-	if player_healthcomp.health > player_healthcomp.MAX_HEALTH:
-			player_healthcomp.health = player_healthcomp.MAX_HEALTH
-
-func respawn():  # Send player back to last checkpoint. Reset health.
-	var player = get_node("/root/World/Player")
-	var health = get_node("/root/World/Player/HealthComponent")
-	
-	health.health = 0.2 * health.MAX_HEALTH
-	
-	player.position = player.spawn_point
-	player.position.y -= 10

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://882gsf2ii4i2"]
+[gd_scene load_steps=13 format=3 uid="uid://882gsf2ii4i2"]
 
 [ext_resource type="Script" path="res://scripts/characters/grounded-enemy.gd" id="1_fel0p"]
 [ext_resource type="Texture2D" uid="uid://clh8ay726g6d7" path="res://assets/enemy-grounded.png" id="2_abyun"]
@@ -38,9 +38,27 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_lco0w"]
+resource_name = "hit"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_38cao"]
 _data = {
 "RESET": SubResource("Animation_dj0gu"),
+"hit": SubResource("Animation_lco0w"),
 "move": SubResource("Animation_20kh3")
 }
 

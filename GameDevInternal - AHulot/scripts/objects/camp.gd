@@ -8,15 +8,17 @@ var flame_state
 func _ready():
 	$Flame.hide()
 	$HoverText.hide()
+	
 	flame_state = 0
 	light_cost = 0
 	can_regen = false
+	
+	set_meta("Camp", 1)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	var player = get_node("/root/World/Player")
-	var player_health = get_node("/root/World/Player/HealthComponent")
 	light_cost = flame_state * 2
 	
 	# Play correct animation if flame is lit.
@@ -33,9 +35,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
 		$HoverText.hide()
 		
-		if player.energy > light_cost:
+		if player_vars.energy > light_cost:
 			if flame_state < 8:
-				player.energy -= light_cost
+				player_vars.energy -= light_cost
 				
 				if $Flame.is_visible():
 					flame_state += 1
@@ -52,8 +54,6 @@ func _process(delta):
 			var nearest = player.find_nearest_camp()
 			
 			player.regenerate(nearest)
-			player_health.regen_health(nearest)
-			
 			can_regen = false
 			$Regen.start()
 
@@ -81,3 +81,10 @@ func _on_range_body_exited(body):
 	
 	if body == player:
 		$HoverText.hide()
+	
+
+
+func _on_safe_zone_body_entered(body):
+	if body.has_meta("Enemy"):
+		# body.player_chase = false
+		print(">> !")

@@ -23,44 +23,43 @@ color = Color(0.168627, 0.168627, 0.168627, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.3145
-offset_top = 2.52835
-offset_right = 99.3145
-offset_bottom = 28.5285
-scale = Vector2(2, 2)
+offset_left = 56.1275
+offset_top = 2.84333
+offset_right = 142.128
+offset_bottom = 28.8435
 text = "Inventory"
 horizontal_alignment = 1
 
 [node name="Resources" type="Label" parent="."]
 layout_mode = 0
-offset_left = 91.4581
-offset_top = 38.0171
-offset_right = 131.458
-offset_bottom = 116.017
-scale = Vector2(1.5, 1.5)
+offset_left = 89.2532
+offset_top = 37.7021
+offset_right = 129.253
+offset_bottom = 115.702
+scale = Vector2(1.1, 1.1)
 text = "0 / 0
 0 / 0
 0 / 0"
 
 [node name="Icon 0" type="Sprite2D" parent="."]
 modulate = Color(0.12549, 0.105882, 0.0156863, 1)
-position = Vector2(75.4273, 46.2676)
+position = Vector2(76.3722, 43.7478)
 scale = Vector2(2.23711, 2.5052)
 texture = ExtResource("1_2ihjn")
 hframes = 3
-
-[node name="Icon 2" type="Sprite2D" parent="."]
-modulate = Color(0.12549, 0.105882, 0.0156863, 1)
-position = Vector2(74.9982, 99.599)
-scale = Vector2(2.23711, 2.5052)
-texture = ExtResource("1_2ihjn")
-hframes = 3
-frame = 2
 
 [node name="Icon 1" type="Sprite2D" parent="."]
 modulate = Color(0.12549, 0.105882, 0.0156863, 1)
-position = Vector2(74.1401, 71.7321)
+position = Vector2(75.085, 64.4876)
 scale = Vector2(2.23711, 2.5052)
 texture = ExtResource("1_2ihjn")
 hframes = 3
 frame = 1
+
+[node name="Icon 2" type="Sprite2D" parent="."]
+modulate = Color(0.12549, 0.105882, 0.0156863, 1)
+position = Vector2(75.9431, 87.9448)
+scale = Vector2(2.23711, 2.5052)
+texture = ExtResource("1_2ihjn")
+hframes = 3
+frame = 2

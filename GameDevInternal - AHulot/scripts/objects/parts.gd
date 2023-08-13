@@ -10,7 +10,7 @@ func _ready():
 		$Sprite2D.frame = required_spawn[randi() % required_spawn.size()]
 		required_spawn.erase($Sprite2D.frame)
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	var player = get_node("/root/World/Player")
 	
 	if Input.is_action_just_pressed("ui_interact") and player in $CollectRange.get_overlapping_bodies():

@@ -2,7 +2,7 @@ extends Control
 
 
 func _on_play_pressed():  # Play game
-	get_tree().change_scene_to_file("res://scenes/environment/world.tscn")
+	get_tree().change_scene_to_file("res://scenes/environment/tutorial_01.tscn")
 
 
 func _on_controls_pressed():  # Controls

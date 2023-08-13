@@ -7,7 +7,6 @@ extends CharacterBody2D
 @export var FRICTION : int = 15
 @export var GRAVITY : int = 10
 @export var ADD_FALL_GRAVITY : int = 50
-@export var MAX_ENERGY : int = 100
 @export var shoot_energy : int = 2
 @export var jump_energy : int = 1
 @export var jump_max : int = 1
@@ -20,7 +19,7 @@ var collected_parts = {
 	2 : 0
 }
 
-var spawn_point = Vector2.ZERO
+var spawn_point
 var state = WANDER
 var jump_count = 0
 var is_alive = true
@@ -34,10 +33,12 @@ var on_ladder = false
 
 func _ready():
 	var energybar = get_node("/root/World/UI/Stats/EnergyBar")
+	energybar.max_value = player_vars.max_energy
 	
-	energy = MAX_ENERGY
-	energybar.max_value = MAX_ENERGY
+	var healthbar = get_node("/root/World/UI/Stats/HealthBar")
+	healthbar.max_value = player_vars.max_health
 	
+	global_position = global.positions[global.current_scene]
 	spawn_point = global_position
 	
 	$Alert.hide()
@@ -63,7 +64,7 @@ func _physics_process(_delta):
 	if !is_alive:
 		state = DEAD
 	
-	if energy < jump_energy:
+	if player_vars.energy < jump_energy:
 		can_jump = false
 	else:
 		can_jump = true
@@ -79,8 +80,7 @@ func _physics_process(_delta):
 	if $Alert.is_visible():
 		if $AlertTimer.is_stopped():
 			$AlertTimer.start()
-		
-	$HealthComponent.update_battlehealth()
+			
 	update_stats("health")
 	update_stats("energy")
 
@@ -92,7 +92,7 @@ func wander_state(input):
 		if is_on_floor() and not is_shooting:
 			$AnimationPlayer.play("idle")
 		
-		if $IdleRegen.is_stopped() and Input.is_action_pressed("ui_down"):
+		if $IdleRegen.is_stopped():
 			$IdleRegen.start()
 
 		apply_friction()
@@ -126,14 +126,14 @@ func wander_state(input):
 					velocity.y = JUMP_PRESSED
 				else:  # Double jump
 					velocity.y = JUMP_PRESSED + 40
-					energy -= jump_energy
+					player_vars.energy -= jump_energy
 				
 				if is_on_wall_only():  # Wall jump
 					var wall_norm = get_wall_normal()
 					velocity.x = wall_norm.x * JUMP_PRESSED
 					
 					
-				energy -= jump_energy
+				player_vars.energy -= jump_energy
 
 	else:
 		# Allows player jump height to change:
@@ -146,7 +146,7 @@ func wander_state(input):
 			fast_fall = true
 	
 	if Input.is_action_just_pressed("ui_left_click"):
-		if energy >= shoot_energy:
+		if player_vars.energy >= shoot_energy:
 			is_shooting = true
 			state = SHOOT
 	
@@ -212,37 +212,46 @@ func shoot_state():
 
 func update_stats(stat):
 	if stat == "health":
-		var health = get_node("HealthComponent").health
-		var MAX_HEALTH = get_node("HealthComponent").MAX_HEALTH
+	
 		var healthbar = get_node("/root/World/UI/Stats/HealthBar")
 		var healthtext = get_node("/root/World/UI/Stats/HealthBar/HealthText")
 		
 		if state != DEAD:
-			healthbar.value = health
-			healthtext.text = str(health) + " / " + str(MAX_HEALTH)
+			healthbar.value = player_vars.health
+			healthtext.text = str(player_vars.health) + " / " + str(player_vars.max_health)
 		else:
 			healthbar.value = 0
-			healthtext.text = str(health) + " / " + str(MAX_HEALTH)
+			healthtext.text = str(player_vars.health) + " / " + str(player_vars.max_health)
+		
+		$HealthComponent.update_battlehealth()
 
 	if stat == "energy":
 		var energybar = get_node("/root/World/UI/Stats/EnergyBar")
 		var energytext = get_node("/root/World/UI/Stats/EnergyBar/EnergyText")
 		
-		energybar.value = energy
-		energytext.text = str(energy) + " / " + str(MAX_ENERGY)
+		energybar.value = player_vars.energy
+		energytext.text = str(player_vars.energy) + " / " + str(player_vars.max_energy)
 		
-		if energy > MAX_ENERGY:
-			energy = MAX_ENERGY
+		if player_vars.energy > player_vars.max_energy:
+			player_vars.energy = player_vars.max_energy
 
 
 func regenerate(nearest_camp):
 	if nearest_camp.flame_state > 0:
-		if energy < MAX_ENERGY:
-			var add_energy = nearest_camp.flame_state
-			if (energy + add_energy) > MAX_ENERGY:
-				energy = MAX_ENERGY
+		if player_vars.energy < player_vars.max_energy:
+			var add_energy = nearest_camp.flame_state * 2
+			if (player_vars.energy + add_energy) > player_vars.max_energy:
+				player_vars.energy = player_vars.max_energy
 			else:
-				energy += add_energy
+				player_vars.energy += add_energy
+
+		if player_vars.health < player_vars.max_health:
+			var add_health = nearest_camp.flame_state * 2
+			
+			if (player_vars.health + add_health) > player_vars.max_health:
+				player_vars.health = player_vars.max_health
+			else:
+				player_vars.health += add_health
 
 
 func find_nearest_camp():
@@ -264,25 +273,37 @@ func find_nearest_camp():
 func collect_orb(type):
 	var orbs = get_node("/root/World/Orbs")
 	if type == "Health":
-		$HealthComponent.health_orb()
+		player_vars.health += orbs.orb_health
+		
+		if player_vars.health > player_vars.max_health:
+			player_vars.health = player_vars.max_health
+		
 	elif type == "Energy":
-		energy += orbs.orb_energy
+		player_vars.energy += orbs.orb_energy
+		
+		if player_vars.energy > player_vars.max_energy:
+			player_vars.energy = player_vars.max_energy
 
 
 func dead_state():
-	energy = 0
+	player_vars.energy = 0
+	player_vars.health = 0
 		
 	self.hide()
 	
 	if Input.is_action_just_pressed("ui_interact"):
-		energy = 0.1 * MAX_ENERGY
+		player_vars.energy = 0.1 * player_vars.max_energy
+		player_vars.health = 0.25 * player_vars.max_health
+	
+		position = spawn_point
+		print(spawn_point)
+		print(position)
+		
 		state = WANDER
-		
-		$HealthComponent.respawn()
-		
 		is_alive = true
 	
 		self.show()
+
 
 
 func hit_state():
@@ -309,28 +330,36 @@ func apply_acceleration(amount):
 
 
 func _on_can_jump_timeout():
-	if energy >= jump_energy:
+	if player_vars.energy >= jump_energy:
 		can_jump = true
 
 
 func _on_idle_regen_timeout():
-	if energy < MAX_ENERGY:
+	if player_vars.energy < player_vars.max_energy:
 			var add_energy = 1
-			if (energy + add_energy) > MAX_ENERGY:
-				energy = MAX_ENERGY
+			if (player_vars.energy + add_energy) > player_vars.max_energy:
+				player_vars.energy = player_vars.max_energy
 			else:
-				energy += add_energy
+				player_vars.energy += add_energy
 
 
 func _on_alert_timer_timeout():
 	$Alert.hide()
 
 
-func _on_ladder_checker_body_entered(body):
+func _on_ladder_checker_area_entered(area):
 	on_ladder = true
 	print(on_ladder)
 
 
-func _on_ladder_checker_body_exited(body):
+func _on_ladder_checker_area_exited(area):
 	on_ladder = false
 	print(on_ladder)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	var cam = get_node("/root/World/Player/Camera2D")
+	
+	if position.y > cam.limit_bottom:
+		cam.apply_shake()
+		state = DEAD

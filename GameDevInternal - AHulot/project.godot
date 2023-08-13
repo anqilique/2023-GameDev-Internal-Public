@@ -15,6 +15,11 @@ run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+global="*res://scripts/misc/global.gd"
+player_vars="*res://scripts/misc/player_vars.gd"
+
 [display]
 
 window/size/viewport_width=250
@@ -27,7 +32,7 @@ window/stretch/mode="canvas_items"
 
 [gui]
 
-theme/custom_font="res://assets/BitPotionExt.ttf"
+theme/custom_font="res://assets/quaver.ttf"
 
 [input]
 
@@ -83,6 +88,7 @@ ui_inventory={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Resources"
 2d_physics/layer_5="World-Ladders"
+2d_physics/layer_6="NoEnemies"
 
 [rendering]
 

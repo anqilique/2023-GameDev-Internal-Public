@@ -4,7 +4,7 @@ extends CharacterBody2D
 func _ready():
 	$HoverText.hide()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var player = get_node("/root/World/Player")
 	
 	if Input.is_action_just_pressed("ui_interact") and player in $CollectRange.get_overlapping_bodies():

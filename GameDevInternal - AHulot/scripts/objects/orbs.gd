@@ -11,7 +11,7 @@ func _ready():
 	self.hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if is_visible():
 		if !is_on_floor():
 			apply_gravity()
@@ -54,7 +54,7 @@ func apply_friction():
 	velocity.x = move_toward(velocity.x, 0, 10)
 
 
-func _on_collect_range_body_entered(body):
+func _on_collect_range_body_entered(_body):
 	var player = get_node("/root/World/Player")
 	
 	if $Orb.frame == 0:

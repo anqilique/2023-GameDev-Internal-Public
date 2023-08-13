@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cp7bgpmhe3im"]
+[gd_scene load_steps=17 format=3 uid="uid://cp7bgpmhe3im"]
 
 [ext_resource type="Script" path="res://scripts/characters/player.gd" id="1_xqufv"]
 [ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://assets/player.png" id="2_kmgt5"]
@@ -7,16 +7,6 @@
 [ext_resource type="PackedScene" path="res://scenes/objects/bullet.tscn" id="4_qexcd"]
 [ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="5_16twl"]
 [ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="6_3xwnc"]
-
-[sub_resource type="Gradient" id="Gradient_tmrp0"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.5, 0.5, 0.5, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_42el8"]
-gradient = SubResource("Gradient_tmrp0")
-fill = 1
-fill_from = Vector2(0.482906, 0.487179)
-fill_to = Vector2(0.790598, 0.24359)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4sdjf"]
 size = Vector2(3.73441, 6.07712)
@@ -121,7 +111,7 @@ radius = 3.67647
 height = 9.80392
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awkmx"]
-size = Vector2(6.91663, 3.53691)
+size = Vector2(6.3675, 10.2005)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -138,12 +128,8 @@ offset_right = 100.0
 offset_bottom = 16.9999
 scale = Vector2(0.087745, 0.087745)
 
-[node name="PointLight2D" type="PointLight2D" parent="Sprite2D"]
-position = Vector2(-0.0109924, 0.0109929)
-scale = Vector2(0.0940582, 0.101844)
-texture = SubResource("GradientTexture2D_42el8")
-
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.129667, 0.0630418)
 shape = SubResource("RectangleShape2D_4sdjf")
 
@@ -177,12 +163,11 @@ scale = Vector2(0.816, 0.883721)
 shape = SubResource("CapsuleShape2D_3w3x4")
 
 [node name="LadderChecker" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
-position = Vector2(0.00812006, 3.10117)
+position = Vector2(0.0112264, 1.14903)
 scale = Vector2(0.562281, 0.562281)
 shape = SubResource("RectangleShape2D_awkmx")
 
@@ -190,7 +175,6 @@ shape = SubResource("RectangleShape2D_awkmx")
 one_shot = true
 
 [node name="IdleRegen" type="Timer" parent="."]
-wait_time = 2.5
 
 [node name="AlertTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -205,9 +189,12 @@ offset_bottom = -3.0
 scale = Vector2(0.324808, 0.363113)
 text = "Double Jump Unlocked!"
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]
-[connection signal="body_entered" from="LadderChecker" to="." method="_on_ladder_checker_body_entered"]
-[connection signal="body_exited" from="LadderChecker" to="." method="_on_ladder_checker_body_exited"]
+[connection signal="area_entered" from="LadderChecker" to="." method="_on_ladder_checker_area_entered"]
+[connection signal="area_exited" from="LadderChecker" to="." method="_on_ladder_checker_area_exited"]
 [connection signal="timeout" from="CanJump" to="." method="_on_can_jump_timeout"]
 [connection signal="timeout" from="IdleRegen" to="." method="_on_idle_regen_timeout"]
 [connection signal="timeout" from="AlertTimer" to="." method="_on_alert_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -19,7 +19,7 @@ func _process(_delta):
 	
 	# If the player is not dead and has enough energy: Shoot.
 	if player.is_alive:
-		if player.energy >= player.shoot_energy:
+		if player_vars.energy >= player.shoot_energy:
 			if Input.is_action_pressed("ui_left_click") and can_shoot:
 				can_shoot = false
 				_shoot()
@@ -38,7 +38,7 @@ func _shoot():
 	add_sibling(bullet)
 	
 	# Shooting ueses energy.
-	player.energy -= player.shoot_energy
+	player_vars.energy -= player.shoot_energy
 
 
 func _on_can_shoot_timeout():

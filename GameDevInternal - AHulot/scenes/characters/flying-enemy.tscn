@@ -77,7 +77,7 @@ size = Vector2(5.70985, 3.18125)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 32
 script = ExtResource("1_4fqci")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -104,7 +104,7 @@ shape = SubResource("CircleShape2D_farvc")
 visible = false
 scale = Vector2(1.09586, 0.475494)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 35
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BodyArea"]
 position = Vector2(0, 2.10308)
@@ -112,7 +112,6 @@ scale = Vector2(0.241632, 0.420536)
 shape = SubResource("CircleShape2D_mstv7")
 
 [node name="DetectRange" type="Area2D" parent="."]
-visible = false
 scale = Vector2(5.71384, 4.94068)
 collision_layer = 4
 collision_mask = 3
@@ -144,10 +143,6 @@ one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 
-[node name="WanderTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [node name="Ray_V" type="RayCast2D" parent="."]
 visible = false
 target_position = Vector2(0, -4)
@@ -158,4 +153,3 @@ target_position = Vector2(0, -4)
 [connection signal="body_exited" from="DetectRange" to="." method="_on_detect_range_body_exited"]
 [connection signal="timeout" from="HitRecovery" to="." method="_on_hit_recovery_timeout"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="timeout" from="WanderTimer" to="." method="_on_wander_timer_timeout"]

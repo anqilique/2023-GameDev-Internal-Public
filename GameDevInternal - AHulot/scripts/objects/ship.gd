@@ -30,7 +30,7 @@ func _ready():
 	$Resources.hide()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	$Resources.text = parts_progress
 	
 	if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
@@ -51,7 +51,7 @@ func _physics_process(delta):
 	
 	if fully_repaired:
 		get_tree().paused = true
-		get_tree().change_scene_to_file("res://UI/complete.tscn")
+		get_tree().change_scene_to_file("res://scenes/menu/complete.tscn")
 
 
 func _on_range_body_entered(body):

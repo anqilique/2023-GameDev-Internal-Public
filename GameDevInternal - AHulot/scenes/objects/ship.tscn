@@ -34,41 +34,41 @@ offset_bottom = -134.088
 show_percentage = false
 
 [node name="Icon 0" type="Sprite2D" parent="."]
-position = Vector2(-201.314, -75.4327)
+position = Vector2(-230.829, -68.9538)
 scale = Vector2(2.50521, 2.5052)
 texture = ExtResource("3_1wk7y")
 hframes = 3
 
 [node name="Icon 1" type="Sprite2D" parent="."]
-position = Vector2(-202.755, -49.9682)
+position = Vector2(-232.27, -43.4893)
 scale = Vector2(2.50521, 2.5052)
 texture = ExtResource("3_1wk7y")
 hframes = 3
 frame = 1
 
 [node name="Icon 2" type="Sprite2D" parent="."]
-position = Vector2(-201.794, -22.1013)
+position = Vector2(-231.309, -15.6224)
 scale = Vector2(2.50521, 2.5052)
 texture = ExtResource("3_1wk7y")
 hframes = 3
 frame = 2
 
 [node name="Resources" type="Label" parent="."]
-offset_left = -183.362
-offset_top = -82.1994
-offset_right = -143.362
-offset_bottom = -4.19937
-scale = Vector2(1.5, 1.5)
+offset_left = -207.838
+offset_top = -93.7175
+offset_right = -167.838
+offset_bottom = -15.7175
+scale = Vector2(2, 2)
 text = "0 / 0
 0 / 0
 0 / 0"
 
 [node name="Label" type="Label" parent="."]
-offset_left = -211.576
-offset_top = -1.96095
-offset_right = -106.576
-offset_bottom = 24.0396
-scale = Vector2(1.2, 1.2)
+offset_left = -255.435
+offset_top = 11.5896
+offset_right = -162.435
+offset_bottom = 37.5896
+scale = Vector2(2, 2)
 text = "[E] to Interact"
 
 [node name="Range" type="Area2D" parent="."]

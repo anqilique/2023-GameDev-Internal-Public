@@ -21,8 +21,11 @@ var state
 func _ready():
 	health = MAX_HEALTH
 	state = WANDER
+	
 	$AnimationPlayer.play("move")
+	
 	set_meta("Enemy", 1)
+	set_meta("Flying", 2)
 
 func _physics_process(_delta):
 	match state:
@@ -30,7 +33,7 @@ func _physics_process(_delta):
 		CHASE : chase_state()
 		HIT : hit_state()
 	
-	if player.is_visible():
+	if is_instance_valid(player) and player.is_alive:
 		if player in $BodyArea.get_overlapping_bodies():
 			attack_player()
 		elif player in $DetectRange.get_overlapping_bodies():
@@ -50,18 +53,24 @@ func wander_state():
 		$Sprite2D.flip_v = true
 		$AnimationPlayer.play("RESET")
 	else:  # Go to nearby ceiling if in range.
-		if blocks in $DetectRange.get_overlapping_bodies():
+		if is_instance_valid(blocks) and blocks in $DetectRange.get_overlapping_bodies():
 			if blocks.position.y > position.y and position.distance_to(blocks.position) < 250:
 				position.y += (position.y - blocks.position.y) / speed_div
 				
 		$Sprite2D.flip_v = false
 		$AnimationPlayer.play("move")
-			
+	
 
 func chase_state():
-	$Sprite2D.flip_v = false
-	$AnimationPlayer.play("move")
-	position += (player.position - position) / speed_div
+	
+	if player_chase:
+		$Sprite2D.flip_v = false
+		$AnimationPlayer.play("move")
+		
+		position += (player.position - position) / speed_div
+	
+	else:
+		state = WANDER
 
 
 func hit_state():
@@ -89,10 +98,13 @@ func attack_player():
 func _on_detect_range_body_entered(body):
 	if body == player:
 		state = CHASE
+		
+		player_chase = true
 
 func _on_detect_range_body_exited(body):
 	if body == player:
 		state = WANDER
+		player_chase = false
 
 func _on_hit_recovery_timeout():
 	$Sprite2D.flip_v = false
@@ -101,6 +113,7 @@ func _on_hit_recovery_timeout():
 	if player in $BodyArea.get_overlapping_bodies():
 		attack_player()
 	else:
+		player_chase = true
 		state = CHASE
 
 func _on_body_area_body_entered(body):
@@ -113,6 +126,3 @@ func _on_body_area_body_exited(body):
 
 func _on_attack_cooldown_timeout():
 	can_hit = true
-
-func _on_wander_timer_timeout():
-	pass

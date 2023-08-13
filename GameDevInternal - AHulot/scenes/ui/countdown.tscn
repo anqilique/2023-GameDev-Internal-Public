@@ -15,6 +15,7 @@ script = ExtResource("1_e4dvu")
 layout_mode = 0
 offset_right = 76.0
 offset_bottom = 17.0
+scale = Vector2(0.6, 0.6)
 text = "Day 01 : Hour 00"
 
 [node name="HourTimer" type="Timer" parent="."]

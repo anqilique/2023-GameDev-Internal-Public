@@ -11,16 +11,17 @@ extends CharacterBody2D
 var health
 var player_chase = false
 var can_hit = true
-
+var state
+var enemy_id
 
 enum { WANDER, CHASE, HIT }
-
-var state
 
 
 func _ready():
 	health = MAX_HEALTH
 	state = WANDER
+	
+	enemy_id = global_position
 	
 	$AnimationPlayer.play("move")
 	

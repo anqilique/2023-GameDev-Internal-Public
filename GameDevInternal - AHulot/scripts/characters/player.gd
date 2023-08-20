@@ -13,13 +13,6 @@ extends CharacterBody2D
 
 enum { WANDER, CLIMB, SHOOT, DEAD }
 
-var collected_parts = {
-	0 : 0,
-	1 : 0,
-	2 : 0
-}
-
-var spawn_point
 var state = WANDER
 var jump_count = 0
 var is_alive = true
@@ -27,7 +20,6 @@ var fast_fall = false
 var is_shooting = false
 var can_jump = true
 var bulletspawn_pos
-var energy
 var on_ladder = false
 
 
@@ -38,8 +30,7 @@ func _ready():
 	var healthbar = get_node("/root/World/UI/Stats/HealthBar")
 	healthbar.max_value = player_vars.max_health
 	
-	global_position = global.positions[global.current_scene]
-	spawn_point = global_position
+	global_position = player_vars.spawn_point
 	
 	$Alert.hide()
 
@@ -63,6 +54,19 @@ func _physics_process(_delta):
 	
 	if !is_alive:
 		state = DEAD
+	
+	var mouse = get_global_mouse_position()
+	
+	# Change which way the player faces:
+	if input.x > 0 and !is_shooting:
+		$Sprite2D.flip_h = false
+	elif input.x < 0 and !is_shooting:
+		$Sprite2D.flip_h = true
+	else:
+		if mouse.x > position.x:
+			$Sprite2D.flip_h = false
+		elif mouse.x < position.x:
+			$Sprite2D.flip_h = true
 	
 	if player_vars.energy < jump_energy:
 		can_jump = false
@@ -99,12 +103,6 @@ func wander_state(input):
 		
 	else:
 		$IdleRegen.stop()
-		
-		# Change which way the player faces:
-		if input.x > 0:
-			$Sprite2D.flip_h = false
-		elif input.x < 0:
-			$Sprite2D.flip_h = true
 			
 		if is_on_floor():
 			if $AnimationPlayer.current_animation != "walk":
@@ -183,8 +181,7 @@ func climb_state(input):
 			
 		if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
 			apply_acceleration(input.x)
-
-
+	
 	move_and_slide()
 	apply_friction()
 
@@ -195,14 +192,6 @@ func shoot_state():
 	
 	velocity.x = 0
 	
-	var mouse = get_global_mouse_position()
-
-	if mouse.x > position.x:
-		$Sprite2D.flip_h = false
-		$Sprite2D.flip_h = false
-	elif mouse.x < position.x:
-		$Sprite2D.flip_h = true
-		
 	$AnimationPlayer.play("shoot")
 	
 	if Input.is_action_just_released("ui_left_click"):
@@ -295,8 +284,7 @@ func dead_state():
 		player_vars.energy = 0.1 * player_vars.max_energy
 		player_vars.health = 0.25 * player_vars.max_health
 	
-		position = spawn_point
-		print(spawn_point)
+		position = player_vars.spawn_point
 		print(position)
 		
 		state = WANDER
@@ -347,12 +335,12 @@ func _on_alert_timer_timeout():
 	$Alert.hide()
 
 
-func _on_ladder_checker_area_entered(area):
+func _on_ladder_checker_area_entered(_area):
 	on_ladder = true
 	print(on_ladder)
 
 
-func _on_ladder_checker_area_exited(area):
+func _on_ladder_checker_area_exited(_area):
 	on_ladder = false
 	print(on_ladder)
 

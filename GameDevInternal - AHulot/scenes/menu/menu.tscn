@@ -1,6 +1,48 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmtuc5ry6m8yb"]
+[gd_scene load_steps=10 format=3 uid="uid://cmtuc5ry6m8yb"]
 
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_re26d"]
+[ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="2_sfgsu"]
+[ext_resource type="TileSet" uid="uid://bi7cc6fq4eeth" path="res://assets/world.tres" id="3_5fx8x"]
+[ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://assets/player.png" id="4_pafwd"]
+[ext_resource type="Texture2D" uid="uid://b2800rn4b4vll" path="res://assets/ship.png" id="5_ypf3q"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="6_pxxd7"]
+
+[sub_resource type="Animation" id="Animation_0xnkj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_epx0q"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5tqur"]
+_data = {
+"RESET": SubResource("Animation_0xnkj"),
+"idle": SubResource("Animation_epx0q")
+}
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -11,36 +53,143 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_re26d")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 503.0
 offset_bottom = 301.0
 scale = Vector2(0.512467, 0.512467)
-color = Color(0.298039, 0.298039, 0.298039, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-offset_left = 56.5557
-offset_top = 43.6136
-offset_right = 281.556
-offset_bottom = 144.614
-scale = Vector2(0.603417, 0.603417)
+offset_left = 150.812
+offset_top = 18.2787
+offset_right = 238.812
+offset_bottom = 110.279
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
 
 [node name="Play" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_sfgsu")
 text = "PLAY"
 
 [node name="Controls" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_sfgsu")
 text = "CONTROLS"
 
 [node name="Exit" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("2_sfgsu")
 text = "EXIT"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+visible = false
+offset_left = 150.812
+offset_top = 18.2787
+offset_right = 238.812
+offset_bottom = 110.279
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfgsu")
+text = "YES"
+
+[node name="No" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfgsu")
+text = "NO"
+
+[node name="Cancel" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfgsu")
+text = "CANCEL"
+
+[node name="Title" type="Label" parent="CanvasLayer"]
+offset_left = 24.0
+offset_top = 17.6537
+offset_right = 89.0
+offset_bottom = 55.6537
+scale = Vector2(1.57679, 1.57679)
+size_flags_vertical = 0
+text = "Game
+Title"
+horizontal_alignment = 1
+
+[node name="Stage" type="Label" parent="CanvasLayer"]
+offset_left = 40.2564
+offset_top = 75.4115
+offset_right = 186.256
+offset_bottom = 94.4115
+scale = Vector2(0.5, 0.5)
+text = "~ Vertical Slice ~"
+horizontal_alignment = 1
+
+[node name="TutorialAsk" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 166.678
+offset_top = 7.61631
+offset_right = 290.678
+offset_bottom = 26.6163
+scale = Vector2(0.5, 0.5)
+text = "Play Tutorial?"
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("3_5fx8x")
+format = 2
+layer_0/name = "background"
+layer_0/modulate = Color(0.54902, 0.54902, 0.54902, 1)
+layer_0/tile_data = PackedInt32Array(393219, 327680, 0, 458755, 327680, 1, 524291, 327680, 1, 589827, 327680, 1, 655363, 327680, 1, 720899, 327680, 1, 786435, 327680, 4, 851971, 327680, 4, 393218, 262144, 0, 393217, 262144, 0, 393216, 262144, 0, 786442, 327680, 0, 786441, 262144, 0, 786440, 262144, 0, 786439, 262144, 0, 786438, 262144, 0, 786437, 262144, 3, 786436, 262144, 3, 851978, 327680, 4, 327680, 131072, 2, 327683, 131072, 2, 720905, 196608, 2, 720904, 196608, 2, 720902, 196608, 2, 458756, 786432, 6, 524292, 917504, 6, 589828, 917504, 6, 655364, 917504, 6, 720900, 983040, 7, 917526, 524288, 1, 917527, 262144, 4, 655374, 589824, 1, 720910, 589824, 2, 786446, 589824, 2, 851982, 589824, 2, 655375, 589824, 0, 655376, 589824, 0, 655377, 458752, 3, 655378, 589824, 0, 655379, 589824, 0, 655380, 589824, 0, 655381, 589824, 0, 655382, 589824, 0, 655383, 589824, 0, 655384, 589824, 0, 655385, 393216, 1, 720921, 393216, 2, 786457, 393216, 2, 851993, 393216, 2, 917529, 393216, 2, 720913, 458752, 3, 786449, 458752, 3, 851985, 458752, 3, 589841, 458752, 2, 589839, 786432, 0, 589838, 786432, 1, 524303, 983040, 2, 589840, 983040, 1, 524304, 720896, 2, 524305, 720896, 2, 524306, 655360, 1, 589842, 655360, 2)
+layer_1/name = "foreground"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array(1179648, 917504, 9, 1179649, 917504, 9, 1179650, 917504, 9, 1179651, 917504, 9, 1179652, 917504, 9, 1179653, 917504, 9, 1179654, 917504, 9, 1179655, 917504, 9, 1179656, 917504, 9, 1179657, 917504, 9, 1179658, 917504, 9, 1179659, 917504, 9, 1179660, 917504, 9, 1179661, 917504, 9, 1179662, 917504, 9, 1179663, 917504, 9, 1179664, 917504, 9, 1179665, 917504, 9, 1179666, 917504, 9, 1179667, 917504, 9, 1179668, 917504, 9, 1179669, 917504, 9, 1179670, 917504, 9, 1179671, 917504, 9, 1179672, 917504, 9, 1179673, 917504, 9, 1179674, 917504, 9, 1179675, 917504, 9, 1179676, 917504, 9, 1179677, 917504, 9, 1179678, 917504, 9, 1179679, 917504, 9, 1048595, 0, 4, 1048605, 327680, 4, 983069, 327680, 0, 983059, 0, 0, 983060, 262144, 0, 983061, 262144, 0, 983062, 262144, 0, 983063, 262144, 0, 983064, 262144, 0, 983065, 262144, 0, 983066, 262144, 0, 983067, 262144, 0, 983068, 262144, 0, 1048591, 327680, 4, 983055, 327680, 1, 1048578, 0, 4, 983042, 0, 1, 917506, 0, 0, 917519, 327680, 0, 917518, 262144, 0, 917517, 262144, 0, 917516, 262144, 0, 917515, 262144, 0, 917514, 262144, 0, 917513, 262144, 0, 917512, 262144, 0, 917511, 262144, 0, 917510, 262144, 0, 917509, 262144, 0, 917508, 262144, 0, 917507, 262144, 0, 983056, 524288, 0, 983057, 589824, 0, 983058, 458752, 0, 1048576, 589824, 0, 1048577, 393216, 1, 1048606, 589824, 1, 851971, 131072, 2, 851982, 131072, 2, 851983, 131072, 2, 917533, 196608, 2, 917527, 196608, 2, 1114112, 917504, 8, 1114113, 786432, 8, 1114114, 917504, 8, 1114115, 786432, 8, 1114116, 851968, 8, 1114117, 851968, 8, 1114118, 917504, 9, 1114119, 786432, 8, 1114120, 917504, 8, 1114121, 851968, 8, 1114122, 917504, 8, 1114123, 786432, 8, 1114124, 851968, 8, 1114125, 917504, 8, 1114126, 851968, 8, 1114127, 851968, 8, 1114128, 851968, 8, 1114129, 917504, 9, 1114130, 917504, 9, 1114131, 786432, 8, 1114132, 917504, 8, 1114133, 851968, 8, 1114134, 851968, 8, 1114135, 786432, 8, 1114136, 917504, 9, 1114137, 917504, 8, 1114138, 917504, 8, 1114139, 786432, 8, 1114140, 786432, 8, 1114141, 917504, 8, 1114142, 851968, 8, 1114143, 917504, 8)
+
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(101.705, 108.632)
+texture = ExtResource("4_pafwd")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+"": SubResource("AnimationLibrary_5tqur")
+}
+
+[node name="Ship" type="Sprite2D" parent="."]
+position = Vector2(62.2847, 104.502)
+scale = Vector2(2, 2)
+texture = ExtResource("5_ypf3q")
+hframes = 2
+
+[node name="Part1" type="Sprite2D" parent="."]
+position = Vector2(43.1936, 99.4547)
+texture = ExtResource("6_pxxd7")
+hframes = 3
+frame = 1
+
+[node name="Part2" type="Sprite2D" parent="."]
+position = Vector2(62.4028, 91.9653)
+texture = ExtResource("6_pxxd7")
+hframes = 3
+
+[node name="Part3" type="Sprite2D" parent="."]
+position = Vector2(81.1778, 99.1627)
+texture = ExtResource("6_pxxd7")
+hframes = 3
+frame = 2
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

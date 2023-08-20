@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://oggdo1hx5g53"]
+[gd_scene load_steps=5 format=3 uid="uid://cukq3v32rnbx6"]
 
 [ext_resource type="Script" path="res://scripts/objects/parts.gd" id="1_vt1b5"]
-[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/Parts.png" id="2_pg28x"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="2_odeqa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wvq51"]
 radius = 4.1727
@@ -14,10 +14,11 @@ collision_mask = 2
 script = ExtResource("1_vt1b5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_pg28x")
+texture = ExtResource("2_odeqa")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_wvq51")
 
 [node name="CollectRange" type="Area2D" parent="."]
@@ -29,11 +30,11 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_yjqwb")
 
 [node name="HoverText" type="Label" parent="."]
-offset_left = -4.06734
-offset_top = -10.8812
-offset_right = 35.9326
-offset_bottom = 15.1188
-scale = Vector2(0.4, 0.4)
+offset_left = -5.42188
+offset_top = -9.05543
+offset_right = 28.5781
+offset_bottom = 9.94457
+scale = Vector2(0.321424, 0.280948)
 text = "[ E ]"
 
 [connection signal="body_entered" from="CollectRange" to="." method="_on_collect_range_body_entered"]

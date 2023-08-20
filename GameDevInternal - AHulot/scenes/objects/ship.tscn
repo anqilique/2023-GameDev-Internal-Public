@@ -1,25 +1,72 @@
-[gd_scene load_steps=6 format=3 uid="uid://ifne2wvwvdes"]
+[gd_scene load_steps=11 format=3 uid="uid://c7k12jwa5fcw5"]
 
-[ext_resource type="Texture2D" uid="uid://ba78hmxvq2pqk" path="res://assets/icon.svg" id="1_hvqwp"]
 [ext_resource type="Script" path="res://scripts/objects/ship.gd" id="1_mpbij"]
-[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/Parts.png" id="3_1wk7y"]
+[ext_resource type="Texture2D" uid="uid://b2800rn4b4vll" path="res://assets/ship.png" id="2_xf55d"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="3_1wk7y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6emf2"]
 size = Vector2(229.699, 220.985)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k2m65"]
-radius = 78.8013
-height = 240.227
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0igpx"]
+radius = 0.78564
+height = 12.6004
+
+[sub_resource type="Animation" id="Animation_0vibj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_17i40"]
+resource_name = "flicker"
+length = 2.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fu22s"]
+_data = {
+"RESET": SubResource("Animation_0vibj"),
+"flicker": SubResource("Animation_17i40")
+}
+
+[sub_resource type="Gradient" id="Gradient_fpci1"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qw5u"]
+gradient = SubResource("Gradient_fpci1")
+fill = 1
+fill_from = Vector2(0.482906, 0.529915)
+fill_to = Vector2(0, 0)
 
 [node name="Ship" type="CharacterBody2D"]
-scale = Vector2(0.551272, 0.551272)
+scale = Vector2(2, 2)
+collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_mpbij")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.1268, 1.3931)
-scale = Vector2(0.278731, 0.278731)
-texture = ExtResource("1_hvqwp")
+texture = ExtResource("2_xf55d")
+hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -27,59 +74,74 @@ position = Vector2(2.24826, 12.7173)
 shape = SubResource("RectangleShape2D_6emf2")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -106.424
-offset_top = -148.088
-offset_right = 114.576
-offset_bottom = -134.088
+modulate = Color(0, 0.835294, 1, 1)
+offset_left = -14.8698
+offset_top = -21.6846
+offset_right = 206.13
+offset_bottom = -7.68456
+scale = Vector2(0.143125, 0.143125)
 show_percentage = false
 
-[node name="Icon 0" type="Sprite2D" parent="."]
-position = Vector2(-230.829, -68.9538)
-scale = Vector2(2.50521, 2.5052)
-texture = ExtResource("3_1wk7y")
-hframes = 3
-
-[node name="Icon 1" type="Sprite2D" parent="."]
-position = Vector2(-232.27, -43.4893)
-scale = Vector2(2.50521, 2.5052)
-texture = ExtResource("3_1wk7y")
-hframes = 3
-frame = 1
-
-[node name="Icon 2" type="Sprite2D" parent="."]
-position = Vector2(-231.309, -15.6224)
-scale = Vector2(2.50521, 2.5052)
-texture = ExtResource("3_1wk7y")
-hframes = 3
-frame = 2
-
 [node name="Resources" type="Label" parent="."]
-offset_left = -207.838
-offset_top = -93.7175
-offset_right = -167.838
-offset_bottom = -15.7175
-scale = Vector2(2, 2)
+offset_left = -4.11136
+offset_top = -17.6102
+offset_right = 35.8886
+offset_bottom = 39.3898
+scale = Vector2(0.240961, 0.18326)
 text = "0 / 0
 0 / 0
 0 / 0"
 
+[node name="Icon 0" type="Sprite2D" parent="Resources"]
+position = Vector2(-9.21025, 6.21759)
+scale = Vector2(1, 1.25)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+
+[node name="Icon 1" type="Sprite2D" parent="Resources"]
+position = Vector2(-10.435, 25.5783)
+scale = Vector2(1, 1.25)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+frame = 1
+
+[node name="Icon 2" type="Sprite2D" parent="Resources"]
+position = Vector2(-9.79614, 44.7449)
+scale = Vector2(1, 1.25)
+texture = ExtResource("3_1wk7y")
+hframes = 3
+frame = 2
+
 [node name="Label" type="Label" parent="."]
-offset_left = -255.435
-offset_top = 11.5896
-offset_right = -162.435
-offset_bottom = 37.5896
-scale = Vector2(2, 2)
-text = "[E] to Interact"
+offset_left = -18.0225
+offset_top = -7.15824
+offset_right = 133.978
+offset_bottom = 13.8418
+scale = Vector2(0.239333, 0.120958)
+text = "[E]"
+horizontal_alignment = 1
 
 [node name="Range" type="Area2D" parent="."]
-visible = false
 scale = Vector2(1.14879, 0.881229)
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+visible = false
+position = Vector2(0.159097, 3.25884)
 rotation = -1.57078
 scale = Vector2(1.90655, 1.5749)
-shape = SubResource("CapsuleShape2D_k2m65")
+shape = SubResource("CapsuleShape2D_0igpx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fu22s")
+}
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-0.0568914, 0.794305)
+scale = Vector2(0.408255, 0.0931708)
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_5qw5u")
 
 [connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
 [connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]

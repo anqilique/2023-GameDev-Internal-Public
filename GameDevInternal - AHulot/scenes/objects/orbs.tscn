@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/objects/orbs.gd" id="1_jq5em"]
-[ext_resource type="Texture2D" uid="uid://ca8o45w2x4gx5" path="res://assets/Orbs.png" id="2_kojbw"]
+[ext_resource type="Texture2D" uid="uid://ca8o45w2x4gx5" path="res://assets/orbs.png" id="2_kojbw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b3uqj"]
 radius = 5.02843

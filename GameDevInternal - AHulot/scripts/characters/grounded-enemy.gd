@@ -13,10 +13,13 @@ var can_hit = false
 enum { WANDER, CHASE, HIT }
 
 var state = WANDER
+var enemy_id
 
 
 func _ready():
 	health = MAX_HEALTH
+	enemy_id = global_position
+	
 	set_meta("Enemy", 1)
 	set_meta("Grounded", 2)
 

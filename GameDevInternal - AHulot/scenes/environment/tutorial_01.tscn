@@ -1,11 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://b4t81qdedbx31"]
+[gd_scene load_steps=16 format=3 uid="uid://b4t81qdedbx31"]
 
 [ext_resource type="Script" path="res://scripts/environment/tutorial_01.gd" id="1_g3cj3"]
-[ext_resource type="PackedScene" uid="uid://882gsf2ii4i2" path="res://scenes/characters/grounded-enemy.tscn" id="2_k6hay"]
-[ext_resource type="PackedScene" uid="uid://ctphwtvylth0w" path="res://scenes/characters/flying-enemy.tscn" id="3_dh3ch"]
-[ext_resource type="PackedScene" uid="uid://buv45ibk1363j" path="res://scenes/objects/item.tscn" id="4_ftc7q"]
-[ext_resource type="PackedScene" uid="uid://boehhvcfaynfs" path="res://scenes/objects/camp.tscn" id="5_ot5qo"]
-[ext_resource type="PackedScene" uid="uid://oggdo1hx5g53" path="res://scenes/objects/parts.tscn" id="6_aiymt"]
 [ext_resource type="PackedScene" uid="uid://cp7bgpmhe3im" path="res://scenes/characters/player.tscn" id="8_rkju2"]
 [ext_resource type="PackedScene" uid="uid://cb48vf2yl0m72" path="res://scenes/environment/false_block.tscn" id="8_yg83d"]
 [ext_resource type="Script" path="res://scripts/misc/camera2D.gd" id="9_4prlr"]
@@ -14,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://daotjsq48bt2u" path="res://scenes/ui/countdown.tscn" id="14_ptah6"]
 [ext_resource type="PackedScene" uid="uid://7yth7o8h2odp" path="res://scenes/objects/ladder.tscn" id="15_ngpt8"]
 [ext_resource type="PackedScene" uid="uid://dnyp3od2byjj8" path="res://scenes/ui/stats.tscn" id="15_t07v2"]
-[ext_resource type="PackedScene" uid="uid://w21knbrcklr6" path="res://scenes/ui/inventory.tscn" id="16_gdki7"]
+[ext_resource type="PackedScene" uid="uid://w200r7nw7wt5" path="res://scenes/ui/inventory.tscn" id="16_gdki7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0pwa"]
 size = Vector2(31.2464, 20)
@@ -33,11 +28,6 @@ size = Vector2(6.41905, 43.7703)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_g3cj3")
-grounded_scene = ExtResource("2_k6hay")
-flying_scene = ExtResource("3_dh3ch")
-item_scene = ExtResource("4_ftc7q")
-camp_scene = ExtResource("5_ot5qo")
-part_scene = ExtResource("6_aiymt")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -25.0
@@ -45,7 +35,7 @@ offset_top = -46.0
 offset_right = 632.0
 offset_bottom = 558.0
 scale = Vector2(1.14428, 0.790205)
-color = Color(0.129412, 0.133333, 0.0941176, 1)
+color = Color(0.0941176, 0.0941176, 0.0627451, 1)
 
 [node name="Player" parent="." instance=ExtResource("8_rkju2")]
 z_index = 1
@@ -95,9 +85,9 @@ scale = Vector2(0.6, 0.6)
 
 [node name="Inventory" parent="UI" instance=ExtResource("16_gdki7")]
 visible = false
-offset_left = 73.8927
+offset_left = 81.3173
 offset_top = 44.9013
-offset_right = 73.8926
+offset_right = 81.3172
 offset_bottom = 44.9013
 scale = Vector2(0.50261, 0.50261)
 
@@ -175,7 +165,7 @@ offset_top = 19.6071
 offset_right = 475.377
 offset_bottom = 87.6071
 scale = Vector2(0.8, 0.8)
-text = "Running out of Energy means you can not shoot or jump"
+text = "Running out of Energy means you won't be able to shoot!"
 horizontal_alignment = 1
 
 [node name="OrbsTextTrig" type="Area2D" parent="."]

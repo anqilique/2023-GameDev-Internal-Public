@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://h3mxokjpuqu3"]
-
-[ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_103ex"]
+[gd_scene format=3 uid="uid://h3mxokjpuqu3"]
 
 [node name="Complete" type="Control"]
 layout_mode = 3
@@ -16,22 +14,12 @@ grow_vertical = 2
 offset_right = 503.0
 offset_bottom = 301.0
 scale = Vector2(0.520201, 0.520201)
-color = Color(0.298039, 0.298039, 0.298039, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_left = 45.9614
-offset_top = 55.8797
+offset_top = 63.7542
 offset_right = 205.961
-offset_bottom = 81.8799
-text = "Prototype Complete!"
+offset_bottom = 89.7544
+text = "Game Complete! :D"
 horizontal_alignment = 1
-
-[node name="Back" type="Button" parent="CanvasLayer"]
-offset_left = 67.3952
-offset_top = 77.0679
-offset_right = 181.395
-offset_bottom = 108.068
-text = "Back to Menu"
-script = ExtResource("1_103ex")
-
-[connection signal="pressed" from="CanvasLayer/Back" to="CanvasLayer/Back" method="_on_pressed"]

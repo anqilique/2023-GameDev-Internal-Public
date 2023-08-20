@@ -71,7 +71,7 @@ func _on_range_body_entered(body):
 	
 	# Set the player's spawn point to the fire's location.
 	if body == player:
-		player.spawn_point = player.global_position
+		player_vars.spawn_point = player.global_position
 		
 		if flame_state < 1:
 			$HoverText.show()
@@ -86,5 +86,4 @@ func _on_range_body_exited(body):
 
 func _on_safe_zone_body_entered(body):
 	if body.has_meta("Enemy"):
-		# body.player_chase = false
 		print(">> !")

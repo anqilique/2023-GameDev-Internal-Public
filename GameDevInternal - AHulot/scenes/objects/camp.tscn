@@ -196,10 +196,9 @@ texture = SubResource("GradientTexture2D_wremc")
 wait_time = 10.0
 
 [node name="Regen" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.0
 
 [node name="Range" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
@@ -215,6 +214,7 @@ scale = Vector2(0.18, 0.2)
 text = "[ E ]"
 
 [node name="SafeZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 32
 collision_mask = 4
 

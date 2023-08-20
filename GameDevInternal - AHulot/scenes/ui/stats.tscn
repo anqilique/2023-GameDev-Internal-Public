@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dnyp3od2byjj8"]
+[gd_scene load_steps=2 format=3 uid="uid://dnyp3od2byjj8"]
+
+[ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="1_0gmwc"]
 
 [node name="Stats" type="Control"]
 layout_mode = 3
@@ -14,9 +16,12 @@ top_level = true
 layout_mode = 0
 offset_left = 3.0
 offset_top = 2.5
-offset_right = 209.0
-offset_bottom = 29.5
+offset_right = 211.0
+offset_bottom = 30.5
 scale = Vector2(0.216967, 0.216967)
+theme = ExtResource("1_0gmwc")
+value = 100.0
+rounded = true
 show_percentage = false
 
 [node name="HealthText" type="Label" parent="HealthBar"]
@@ -44,9 +49,11 @@ top_level = true
 layout_mode = 0
 offset_left = 3.25
 offset_top = 9.65032
-offset_right = 209.25
-offset_bottom = 36.6503
+offset_right = 211.25
+offset_bottom = 37.6503
 scale = Vector2(0.217, 0.217)
+value = 100.0
+rounded = true
 show_percentage = false
 
 [node name="EnergyText" type="Label" parent="EnergyBar"]

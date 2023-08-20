@@ -111,7 +111,7 @@ radius = 3.67647
 height = 9.80392
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_awkmx"]
-size = Vector2(6.3675, 10.2005)
+size = Vector2(9.24302, 12.6251)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -167,7 +167,7 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LadderChecker"]
-position = Vector2(0.0112264, 1.14903)
+position = Vector2(0.114588, 1.09735)
 scale = Vector2(0.562281, 0.562281)
 shape = SubResource("RectangleShape2D_awkmx")
 
@@ -190,6 +190,7 @@ scale = Vector2(0.324808, 0.363113)
 text = "Double Jump Unlocked!"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
 
 [connection signal="timeout" from="BulletSpawn/CanShoot" to="BulletSpawn" method="_on_can_shoot_timeout"]
 [connection signal="area_entered" from="LadderChecker" to="." method="_on_ladder_checker_area_entered"]

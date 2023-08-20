@@ -30,6 +30,11 @@ func damage(attack: Attack):
 				var orbs = get_node("/root/World/Orbs")
 				orbs.wait_spawn(parent.global_position)
 				
+				var enemy_id = parent.enemy_id
+				
+				if enemy_id in global.scene_spawn[global.current_scene]["enemies"]:
+					global.scene_spawn[global.current_scene]["enemies"].erase(enemy_id)
+				
 			parent.queue_free()
 			
 		if parent == player:

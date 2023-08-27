@@ -23,6 +23,7 @@ func _ready():
 	for type in global.required_parts.keys():
 		parts_progress += str(global.ship_parts[type]) + " / " + str(global.required_parts[type]) + "\n"
 	
+	global.required_spawn = []
 	for required_type in global.required_parts.keys():
 		for r in range(global.required_parts[required_type]):
 			global.required_spawn.append(required_type)

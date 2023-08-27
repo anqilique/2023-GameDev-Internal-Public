@@ -2,42 +2,28 @@ extends Control
 
 
 func _ready():
-	$TimeText.text = "Day " + global.display_day + " : " + "Hour " +  global.display_hour
+#	$TimeText.text = "Day " + global.display_day + " : " + "Hour " +  global.display_hour
+	$TimeText.text = str(global.time_left)
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	$TimeText.text = "Day " + global.display_day + " : " + "Hour " +  global.display_hour
+#	$TimeText.text = "Day " + global.display_day + " : " + "Hour " +  global.display_hour
+	$TimeText.text = str(global.time_left)
 	
 
-func _on_hour_timer_timeout():
+func _on_timer_timeout():
 	if global.current_scene != "TutorialOne":
 		
-		if global.hours_left == 1:
-			global.current_hour = 0
-			global.hours_left = 24
+		if global.time_left == 0:
+			$Timer.stop()
 			
-			global.current_day += 1
-			global.days_left -= 1
+			var cam = get_node("/root/World/Player/Camera2D")
+			cam.apply_shake()
 			
-			# Collision kills player.
-			if global.days_left <= 0:
-				var player = get_node("/root/World/Player")
-				player.dead_state()
-				
-				$HourTimer.stop()
-				
-		else:
-			global.hours_left -= 1
-			global.current_hour += 1
-		
-		if len(str(global.current_day)) == 1:
-			global.display_day = "0" + str(global.current_day)
-		else:
-			global.display_day = str(global.current_day)
+			var player = get_node("/root/World/Player")
+			player.dead_state()
 			
-		if len(str(global.current_hour)) == 1:
-			global.display_hour = "0" + str(global.current_hour)
 		else:
-			global.display_hour = str(global.current_hour)
-	
+			global.time_left -= 1
+			

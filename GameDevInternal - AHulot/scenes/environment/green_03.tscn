@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://daotjsq48bt2u" path="res://scenes/ui/countdown.tscn" id="6_jtija"]
 [ext_resource type="PackedScene" uid="uid://dnyp3od2byjj8" path="res://scenes/ui/stats.tscn" id="7_cgwrk"]
 [ext_resource type="PackedScene" uid="uid://w200r7nw7wt5" path="res://scenes/ui/inventory.tscn" id="8_hslxg"]
-[ext_resource type="PackedScene" path="res://scenes/objects/orbs.tscn" id="9_b25x1"]
+[ext_resource type="PackedScene" uid="uid://bva065eirjae3" path="res://scenes/objects/orbs.tscn" id="9_b25x1"]
 [ext_resource type="PackedScene" uid="uid://7yth7o8h2odp" path="res://scenes/objects/ladder.tscn" id="9_mb88y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6qct5"]
@@ -82,7 +82,7 @@ scale = Vector2(0.50261, 0.50261)
 color = Color(0.945098, 0.960784, 0.964706, 1)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(426.564, 67.9848)
+position = Vector2(455.781, 373.639)
 
 [node name="Orbs" parent="." instance=ExtResource("9_b25x1")]
 position = Vector2(-12.3838, -26.4169)

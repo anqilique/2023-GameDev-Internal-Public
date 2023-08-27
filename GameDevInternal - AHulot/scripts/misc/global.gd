@@ -97,8 +97,7 @@ var scene_spawn = {
 			Vector2(426, 67)
 		],
 		"parts" : [
-			Vector2(696, 188),
-			Vector2(468, 374)
+			Vector2(696, 188)
 		],
 		"camps" : [],
 		"items" : []
@@ -121,7 +120,8 @@ var scene_spawn = {
 			Vector2(484, 314)
 		],
 		"parts" : [
-			Vector2(611, 324)
+			Vector2(611, 324),
+			Vector2(692, 102)
 		],
 		"camps" : [],
 		"items" : []
@@ -150,12 +150,7 @@ var scene_spawn = {
 
 }
 
-var current_hour = 0
-var hours_left = 24
-var current_day = 1
-var days_left = 10
-var display_hour = "00"
-var display_day = "01"
+var time_left = 120
 
 
 func change_scene():

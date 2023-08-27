@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnyp3od2byjj8"]
+[gd_scene load_steps=5 format=3 uid="uid://dnyp3od2byjj8"]
 
 [ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="1_0gmwc"]
+[ext_resource type="Texture2D" uid="uid://lpxkj5noogbu" path="res://assets/ui_icons.png" id="2_pc7h7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otw3j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tmh45"]
 
 [node name="Stats" type="Control"]
 layout_mode = 3
@@ -15,11 +20,13 @@ modulate = Color(0.890196, 0, 0.207843, 1)
 top_level = true
 layout_mode = 0
 offset_left = 3.0
-offset_top = 2.5
+offset_top = 2.61799
 offset_right = 211.0
-offset_bottom = 30.5
+offset_bottom = 30.618
 scale = Vector2(0.216967, 0.216967)
 theme = ExtResource("1_0gmwc")
+theme_override_styles/background = SubResource("StyleBoxFlat_otw3j")
+step = 1.0
 value = 100.0
 rounded = true
 show_percentage = false
@@ -34,24 +41,23 @@ text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon" type="Label" parent="HealthBar"]
-layout_mode = 0
-offset_left = 2.45539
-offset_top = 3.50769
-offset_right = 24.4554
-offset_bottom = 26.5077
-text = "♥"
-vertical_alignment = 1
+[node name="Icon" type="Sprite2D" parent="HealthBar"]
+position = Vector2(13.5698, 14.8498)
+scale = Vector2(2.42206, 2.63835)
+texture = ExtResource("2_pc7h7")
+hframes = 2
 
 [node name="EnergyBar" type="ProgressBar" parent="."]
 modulate = Color(0.0784314, 0.627451, 1, 1)
 top_level = true
 layout_mode = 0
 offset_left = 3.25
-offset_top = 9.65032
+offset_top = 12.8342
 offset_right = 211.25
-offset_bottom = 37.6503
+offset_bottom = 40.8342
 scale = Vector2(0.217, 0.217)
+theme_override_styles/background = SubResource("StyleBoxFlat_tmh45")
+step = 1.0
 value = 100.0
 rounded = true
 show_percentage = false
@@ -66,12 +72,25 @@ text = "100 / 100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Icon" type="Label" parent="EnergyBar"]
-modulate = Color(0.4, 0.439216, 1, 1)
+[node name="Icon" type="Sprite2D" parent="EnergyBar"]
+position = Vector2(13.5698, 14.8498)
+scale = Vector2(2.42206, 2.63835)
+texture = ExtResource("2_pc7h7")
+hframes = 2
+frame = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 3.39531
-offset_top = 3.84781
-offset_right = 25.3954
-offset_bottom = 26.8478
-text = "⚡"
-vertical_alignment = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 49.0
+offset_bottom = 10.0
+color = Color(0.847059, 0.211765, 0.32549, 0.980392)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 2.08117
+offset_top = 12.0925
+offset_right = 49.0812
+offset_bottom = 20.0925
+color = Color(0.141176, 0.635294, 1, 0.886275)

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://assets/player.png" id="2_kmgt5"]
 [ext_resource type="Script" path="res://scripts/misc/bullet_spawn.gd" id="3_63doj"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://scenes/ui/battle_health_bar.tscn" id="3_fkq4n"]
-[ext_resource type="PackedScene" path="res://scenes/objects/bullet.tscn" id="4_qexcd"]
+[ext_resource type="PackedScene" uid="uid://cxn7kj3jiu6g2" path="res://scenes/objects/bullet.tscn" id="4_qexcd"]
 [ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="5_16twl"]
 [ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="6_3xwnc"]
 

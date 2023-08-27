@@ -280,7 +280,7 @@ func dead_state():
 		
 	self.hide()
 	
-	if Input.is_action_just_pressed("ui_interact"):
+	if global.time_left != 0 and Input.is_action_just_pressed("ui_interact"):
 		player_vars.energy = 0.1 * player_vars.max_energy
 		player_vars.health = 0.25 * player_vars.max_health
 	
@@ -323,12 +323,13 @@ func _on_can_jump_timeout():
 
 
 func _on_idle_regen_timeout():
-	if player_vars.energy < player_vars.max_energy:
-			var add_energy = 1
-			if (player_vars.energy + add_energy) > player_vars.max_energy:
-				player_vars.energy = player_vars.max_energy
-			else:
-				player_vars.energy += add_energy
+	if state != DEAD:
+		if player_vars.energy < player_vars.max_energy:
+				var add_energy = 1
+				if (player_vars.energy + add_energy) > player_vars.max_energy:
+					player_vars.energy = player_vars.max_energy
+				else:
+					player_vars.energy += add_energy
 
 
 func _on_alert_timer_timeout():

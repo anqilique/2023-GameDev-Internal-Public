@@ -30,14 +30,14 @@ func _ready():
 	
 	$ProgressBar.hide()
 	$Resources.hide()
-	
-	$AnimationPlayer.play("flicker")
 
 
 func _physics_process(_delta):
 	$Resources.text = parts_progress
 	
 	if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
+		$Burst.emitting = true
+		
 		global.ship_parts = player_vars.collected_parts
 		
 		global.total_parts = 0

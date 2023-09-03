@@ -20,137 +20,173 @@ Scene List
 @export var camp_scene = preload("res://scenes/objects/camp.tscn")
 @export var part_scene = preload("res://scenes/objects/parts.tscn")
 
-var current_scene = "TutorialOne"
+var current_scene = ""
 var transition_scene = false
 var total_parts = 0
+var time_left = 0
+var ship_parts = {}
+var required_parts = {}
+var scene_spawn = {}
+var required_spawn = []
+var pause_scenes = [
+	"res://scenes/menu/menu.tscn",
+	"res://scenes/menu/controls.tscn"
+]
 
-var ship_parts = {
-	0 : 0,
-	1 : 0,
-	2 : 0
-}
-
-var required_parts = {
-	0 : 2,
-	1 : 2,
-	2 : 2
-}
-
-var required_spawn = [0, 0, 1, 1, 2, 2]
-
-var scene_spawn = {
-
-	"TutorialOne" : {
-		"enemies" : [
-			Vector2(278, 234), 
-			Vector2(214, 234),
-			Vector2(54, 333),
-			Vector2(122, 340),
-			Vector2(192, 319)
-			],
-		"parts" : [],
-		"camps" : [
-			Vector2(580, 217)
-		],
-		"items" : []
-	},
+func load():  # Restart/reset everything, including PlayerVars
 	
-	"GreenOne" : {
-		"enemies" : [
-			Vector2(447, 378),
-			Vector2(442, 271),
-			Vector2(628, 305),
-			Vector2(94, 160),
-			Vector2(556, 50),
-			Vector2(556, 50)
-			],
-		"parts" : [
-			Vector2(648, 281),
-			Vector2(684, 95)
-		],
-		"camps" : [],
-		"items" : []
-	},
+	for enemy in get_tree().get_nodes_in_group("Enemies"):
+			enemy.queue_free()
 	
-	"GreenTwo" : {
-		"enemies" : [
-			Vector2(485, 8),
-			Vector2(281, 199)
-		],
-		"parts" : [
-			Vector2(55, 250)
-		],
-		"camps" : [
-			Vector2(479, 240)
-		],
-		"items" : []
-	},
+	for part in get_tree().get_nodes_in_group("Parts"):
+		part.queue_free()
 	
-	"GreenThree" : {
-		"enemies" : [
-			Vector2(264, 374),
-			Vector2(213, 246),
-			Vector2(447, 342),
-			Vector2(652, 207),
-			Vector2(188, 138),
-			Vector2(314, 41),
-			Vector2(426, 67)
-		],
-		"parts" : [
-			Vector2(696, 188)
-		],
-		"camps" : [],
-		"items" : []
-	},
+	for camp in get_tree().get_nodes_in_group("Camps"):
+		camp.queue_free()
 	
-	"GreenFour" : {
-		"enemies" : [
-			Vector2(248, 71),
-			Vector2(320, 71),
-			Vector2(411, 71),
-			Vector2(470, 71),
-			Vector2(564, 71),
-			Vector2(576, 175),
-			Vector2(490, 175),
-			Vector2(391, 175),
-			Vector2(297, 175),
-			Vector2(53, 213),
-			Vector2(94, 284),
-			Vector2(363, 301),
-			Vector2(484, 314)
-		],
-		"parts" : [
-			Vector2(611, 324),
-			Vector2(692, 102)
-		],
-		"camps" : [],
-		"items" : []
-	},
+	for item in get_tree().get_nodes_in_group("Items"):
+		item.queue_free()
 	
-	"GreenFive" : {
-		"enemies" : [],
-		"parts" : [],
-		"camps" : [],
-		"items" : []
-	},
-	
-	"GreenSix" : {
-		"enemies" : [],
-		"parts" : [],
-		"camps" : [],
-		"items" : []
-	},
-	
-	"GreenSeven" : {
-		"enemies" : [],
-		"parts" : [],
-		"camps" : [],
-		"items" : []
+	player_vars.collected_parts = {
+		0 : 0,
+		1 : 0,
+		2 : 0
 	}
 
-}
+	player_vars.health = 100
+	player_vars.energy = 100
 
-var time_left = 120
+	player_vars.spawn_point = Vector2(15, 75)
+	
+	current_scene = "TutorialOne"
+	transition_scene = false
+	total_parts = 0
+	time_left = 600
+
+	ship_parts = {
+		0 : 0,
+		1 : 0,
+		2 : 0
+	}
+
+	required_parts = {
+		0 : 2,
+		1 : 2,
+		2 : 2
+	}
+
+	required_spawn = [0, 0, 1, 1, 2, 2]
+
+	scene_spawn = {
+
+		"TutorialOne" : {
+			"enemies" : [
+				Vector2(278, 234), 
+				Vector2(214, 234),
+				Vector2(54, 333),
+				Vector2(122, 340),
+				Vector2(192, 319)
+				],
+			"parts" : [],
+			"camps" : [
+				Vector2(580, 217)
+			],
+			"items" : []
+		},
+		
+		"GreenOne" : {
+			"enemies" : [
+				Vector2(447, 378),
+				Vector2(442, 271),
+				Vector2(628, 305),
+				Vector2(94, 160),
+				Vector2(556, 50),
+				Vector2(556, 50)
+				],
+			"parts" : [
+				Vector2(648, 281),
+				Vector2(684, 95)
+			],
+			"camps" : [],
+			"items" : []
+		},
+		
+		"GreenTwo" : {
+			"enemies" : [
+				Vector2(485, 8),
+				Vector2(281, 199)
+			],
+			"parts" : [
+				Vector2(55, 250)
+			],
+			"camps" : [
+				Vector2(479, 240)
+			],
+			"items" : []
+		},
+		
+		"GreenThree" : {
+			"enemies" : [
+				Vector2(264, 374),
+				Vector2(213, 246),
+				Vector2(447, 342),
+				Vector2(652, 207),
+				Vector2(188, 138),
+				Vector2(314, 41),
+				Vector2(426, 67)
+			],
+			"parts" : [
+				Vector2(696, 188)
+			],
+			"camps" : [],
+			"items" : []
+		},
+		
+		"GreenFour" : {
+			"enemies" : [
+				Vector2(248, 71),
+				Vector2(320, 71),
+				Vector2(411, 71),
+				Vector2(470, 71),
+				Vector2(564, 71),
+				Vector2(576, 175),
+				Vector2(490, 175),
+				Vector2(391, 175),
+				Vector2(297, 175),
+				Vector2(53, 213),
+				Vector2(94, 284),
+				Vector2(363, 301),
+				Vector2(484, 314)
+			],
+			"parts" : [
+				Vector2(611, 324),
+				Vector2(692, 102)
+			],
+			"camps" : [],
+			"items" : []
+		},
+		
+		"GreenFive" : {
+			"enemies" : [],
+			"parts" : [],
+			"camps" : [],
+			"items" : []
+		},
+		
+		"GreenSix" : {
+			"enemies" : [],
+			"parts" : [],
+			"camps" : [],
+			"items" : []
+		},
+		
+		"GreenSeven" : {
+			"enemies" : [],
+			"parts" : [],
+			"camps" : [],
+			"items" : []
+		}
+	}
 
 
 func change_scene():
@@ -177,7 +213,7 @@ func change_scene():
 			"GreenFive" : get_tree().change_scene_to_file("res://scenes/environment/green_05.tscn")
 			"GreenSix" : get_tree().change_scene_to_file("res://scenes/environment/green_06.tscn")
 			"GreenSeven" : get_tree().change_scene_to_file("res://scenes/environment/green_07.tscn")
-			
+		
 		end_transition()
 
 func spawn():

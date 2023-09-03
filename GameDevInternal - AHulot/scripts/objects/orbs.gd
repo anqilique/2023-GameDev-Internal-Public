@@ -42,6 +42,7 @@ func spawn():
 		new_orb.velocity.x += randi_range(25, 50) * direction
 		
 		new_orb.show()
+		new_orb.get_node("Burst").emitting = true
 
 func _on_timer_timeout():
 	print(">> Enemy drops Orbs.")

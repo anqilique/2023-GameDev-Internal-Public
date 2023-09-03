@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmtuc5ry6m8yb"]
+[gd_scene load_steps=11 format=3 uid="uid://cmtuc5ry6m8yb"]
 
 [ext_resource type="Script" path="res://scripts/menu/menu.gd" id="1_re26d"]
 [ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="2_sfgsu"]
@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://cl1vscey1b1h6" path="res://assets/player.png" id="4_pafwd"]
 [ext_resource type="Texture2D" uid="uid://b2800rn4b4vll" path="res://assets/ship.png" id="5_ypf3q"]
 [ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="6_pxxd7"]
+
+[sub_resource type="Curve" id="Curve_gnnbp"]
+min_value = -1.0
+_data = [Vector2(0, -0.0545454), 0.0, 0.0, 0, 0, Vector2(0.0386266, 0.0909091), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Animation" id="Animation_0xnkj"]
 length = 0.001
@@ -128,7 +133,7 @@ offset_top = 75.4115
 offset_right = 186.256
 offset_bottom = 94.4115
 scale = Vector2(0.5, 0.5)
-text = "~ Vertical Slice ~"
+text = "~ Alpha ~"
 horizontal_alignment = 1
 
 [node name="TutorialAsk" type="Label" parent="CanvasLayer"]
@@ -139,6 +144,22 @@ offset_right = 290.678
 offset_bottom = 26.6163
 scale = Vector2(0.5, 0.5)
 text = "Play Tutorial?"
+
+[node name="ShipParticles" type="CPUParticles2D" parent="."]
+position = Vector2(61.9768, 104.527)
+amount = 5
+emission_shape = 3
+emission_rect_extents = Vector2(24, 5)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_max = 2.0
+color = Color(0, 0.407843, 0.952941, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_gnnbp")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("3_5fx8x")

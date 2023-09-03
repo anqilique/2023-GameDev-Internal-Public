@@ -26,11 +26,15 @@ func _on_back_pressed():  # Main Menu
 	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")
 
 
-func _on_yes_pressed():
+func _on_yes_pressed():  # Tutorial
+	global.load()
+	
 	get_tree().change_scene_to_file("res://scenes/environment/tutorial_01.tscn")
 
 
-func _on_no_pressed():
+func _on_no_pressed():  # Game
+	global.load()
+	
 	player_vars.spawn_point = Vector2(668, -12)
 	global.current_scene = "GreenTwo"
 	

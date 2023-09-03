@@ -84,71 +84,73 @@ func _physics_process(_delta):
 	if $Alert.is_visible():
 		if $AlertTimer.is_stopped():
 			$AlertTimer.start()
-			
+	
 	update_stats("health")
 	update_stats("energy")
 
 
 func wander_state(input):
-	apply_gravity()
-	
-	if input.x == 0:
-		if is_on_floor() and not is_shooting:
-			$AnimationPlayer.play("idle")
+	if player_vars.health > 0:
 		
-		if $IdleRegen.is_stopped():
-			$IdleRegen.start()
-
-		apply_friction()
+		apply_gravity()
 		
-	else:
-		$IdleRegen.stop()
+		if input.x == 0:
+			if is_on_floor() and not is_shooting:
+				$AnimationPlayer.play("idle")
 			
-		if is_on_floor():
-			if $AnimationPlayer.current_animation != "walk":
-				$AnimationPlayer.play("walk")
-		apply_acceleration(input.x)
-	
-	# If player has enough energy to jump
-	if can_jump:
-		fast_fall = false
-		
-		$CanJump.start()
-		
-		if (jump_count < jump_max):
-			if Input.is_action_just_pressed("ui_up"):
-				$AnimationPlayer.play("jump")
-				jump_count += 1
-				
-				if is_on_floor():
-					velocity.y = JUMP_PRESSED
-				else:  # Double jump
-					velocity.y = JUMP_PRESSED + 40
-					player_vars.energy -= jump_energy
-				
-				if is_on_wall_only():  # Wall jump
-					var wall_norm = get_wall_normal()
-					velocity.x = wall_norm.x * JUMP_PRESSED
-					
-					
-				player_vars.energy -= jump_energy
+			if $IdleRegen.is_stopped():
+				$IdleRegen.start()
 
-	else:
-		# Allows player jump height to change:
-		if Input.is_action_just_released("ui_up") and velocity.y < JUMP_RELEASED:
-			velocity.y = JUMP_RELEASED
+			apply_friction()
+			
+		else:
+			$IdleRegen.stop()
+				
+			if is_on_floor():
+				if $AnimationPlayer.current_animation != "walk":
+					$AnimationPlayer.play("walk")
+			apply_acceleration(input.x)
 		
-		# Make character fall faster after jumping:
-		if velocity.y > 0 and not fast_fall:
-			velocity.y += ADD_FALL_GRAVITY
-			fast_fall = true
-	
-	if Input.is_action_just_pressed("ui_left_click"):
-		if player_vars.energy >= shoot_energy:
-			is_shooting = true
-			state = SHOOT
-	
-	move_and_slide()
+		# If player has enough energy to jump
+		if can_jump:
+			fast_fall = false
+			
+			$CanJump.start()
+			
+			if (jump_count < jump_max):
+				if Input.is_action_just_pressed("ui_up"):
+					$AnimationPlayer.play("jump")
+					jump_count += 1
+					
+					if is_on_floor():
+						velocity.y = JUMP_PRESSED
+					else:  # Double jump
+						velocity.y = JUMP_PRESSED + 40
+						player_vars.energy -= jump_energy
+					
+					if is_on_wall_only():  # Wall jump
+						var wall_norm = get_wall_normal()
+						velocity.x = wall_norm.x * JUMP_PRESSED
+						
+						
+					player_vars.energy -= jump_energy
+
+		else:
+			# Allows player jump height to change:
+			if Input.is_action_just_released("ui_up") and velocity.y < JUMP_RELEASED:
+				velocity.y = JUMP_RELEASED
+			
+			# Make character fall faster after jumping:
+			if velocity.y > 0 and not fast_fall:
+				velocity.y += ADD_FALL_GRAVITY
+				fast_fall = true
+		
+		if Input.is_action_just_pressed("ui_left_click"):
+			if player_vars.energy >= shoot_energy:
+				is_shooting = true
+				state = SHOOT
+		
+		move_and_slide()
 
 
 func climb_state(input):
@@ -201,7 +203,6 @@ func shoot_state():
 
 func update_stats(stat):
 	if stat == "health":
-	
 		var healthbar = get_node("/root/World/UI/Stats/HealthBar")
 		var healthtext = get_node("/root/World/UI/Stats/HealthBar/HealthText")
 		
@@ -210,7 +211,7 @@ func update_stats(stat):
 			healthtext.text = str(player_vars.health) + " / " + str(player_vars.max_health)
 		else:
 			healthbar.value = 0
-			healthtext.text = str(player_vars.health) + " / " + str(player_vars.max_health)
+			healthtext.text = "0 / " + str(player_vars.max_health)
 		
 		$HealthComponent.update_battlehealth()
 
@@ -218,8 +219,12 @@ func update_stats(stat):
 		var energybar = get_node("/root/World/UI/Stats/EnergyBar")
 		var energytext = get_node("/root/World/UI/Stats/EnergyBar/EnergyText")
 		
-		energybar.value = player_vars.energy
-		energytext.text = str(player_vars.energy) + " / " + str(player_vars.max_energy)
+		if state != DEAD:
+			energybar.value = player_vars.energy
+			energytext.text = str(player_vars.energy) + " / " + str(player_vars.max_energy)
+		else:
+			energybar.value = 0
+			energytext.text = "0 / " + str(player_vars.max_energy)
 		
 		if player_vars.energy > player_vars.max_energy:
 			player_vars.energy = player_vars.max_energy
@@ -277,20 +282,32 @@ func collect_orb(type):
 func dead_state():
 	player_vars.energy = 0
 	player_vars.health = 0
-		
+	
 	self.hide()
 	
-	if global.time_left != 0 and Input.is_action_just_pressed("ui_interact"):
-		player_vars.energy = 0.1 * player_vars.max_energy
-		player_vars.health = 0.25 * player_vars.max_health
+	var death_ui = get_node("/root/World/UI/Death/")
+	var energytext = get_node("/root/World/UI/Stats/EnergyBar/EnergyText")
+	var energybar = get_node("/root/World/UI/Stats/EnergyBar")
+	var healthtext = get_node("/root/World/UI/Stats/HealthBar/HealthText")
+	var healthbar = get_node("/root/World/UI/Stats/HealthBar")
 	
-		position = player_vars.spawn_point
-		print(position)
-		
-		state = WANDER
-		is_alive = true
+	healthtext.text = "0 / " + str(player_vars.max_health)
+	energytext.text = "0 / " + str(player_vars.max_energy)
 	
-		self.show()
+	healthbar.value = 0
+	energybar.value = 0
+	
+	
+	if not death_ui.get_node("DeathMenu").is_visible():
+		death_ui.deathscreen_show()
+
+	position = player_vars.spawn_point
+	print(position)
+	
+	state = WANDER
+	is_alive = true
+
+	self.show()
 
 
 

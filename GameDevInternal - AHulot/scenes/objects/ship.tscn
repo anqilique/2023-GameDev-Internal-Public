@@ -4,6 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://b2800rn4b4vll" path="res://assets/ship.png" id="2_xf55d"]
 [ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="3_1wk7y"]
 
+[sub_resource type="Curve" id="Curve_8fi7g"]
+min_value = -1.0
+_data = [Vector2(0, -0.0545454), 0.0, 0.0, 0, 0, Vector2(0.0386266, 0.0909091), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6emf2"]
 size = Vector2(229.699, 220.985)
 
@@ -26,27 +31,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_17i40"]
-resource_name = "flicker"
-length = 2.5
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.7, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fu22s"]
 _data = {
-"RESET": SubResource("Animation_0vibj"),
-"flicker": SubResource("Animation_17i40")
+"RESET": SubResource("Animation_0vibj")
 }
 
 [sub_resource type="Gradient" id="Gradient_fpci1"]
@@ -63,6 +50,40 @@ scale = Vector2(2, 2)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_mpbij")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 0.0525799)
+amount = 5
+emission_shape = 3
+emission_rect_extents = Vector2(12, 5)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 20.0
+scale_amount_max = 2.0
+color = Color(0, 0.407843, 0.952941, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_8fi7g")
+
+[node name="Burst" type="CPUParticles2D" parent="."]
+position = Vector2(0, 0.0525799)
+emitting = false
+amount = 20
+one_shot = true
+emission_shape = 3
+emission_rect_extents = Vector2(12, 5)
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 40.0
+initial_velocity_max = 45.0
+scale_amount_max = 2.0
+color = Color(0, 0.407843, 0.952941, 1)
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_8fi7g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_xf55d")

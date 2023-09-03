@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dn5yh4ul23jgg" path="res://assets/bullet.png" id="2_agh12"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m7ht5"]
-size = Vector2(3.77931, 3.75167)
+size = Vector2(13.8769, 15.749)
 
 [node name="Bullet" type="Area2D"]
 z_index = -1
@@ -17,14 +17,23 @@ position = Vector2(0.0286527, 0.0259876)
 texture = ExtResource("2_agh12")
 
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0.0237648, 0.00801849)
+position = Vector2(-1.78796, 0.0468125)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_m7ht5")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-visible = false
-position = Vector2(15.8679, 0.149031)
-scale = Vector2(1.38458, 0.248005)
+position = Vector2(-2.20972, 0.0883865)
+scale = Vector2(0.4, 0.4)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+lifetime = 0.1
+direction = Vector2(-1, 0)
+spread = 5.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+color = Color(0.207843, 0.509804, 1, 0.768627)
 
 [connection signal="area_entered" from="." to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

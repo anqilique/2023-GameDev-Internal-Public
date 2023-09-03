@@ -1,15 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4t81qdedbx31"]
+[gd_scene load_steps=14 format=3 uid="uid://b4t81qdedbx31"]
 
 [ext_resource type="Script" path="res://scripts/environment/tutorial_01.gd" id="1_g3cj3"]
+[ext_resource type="PackedScene" uid="uid://d380s81nxg0sl" path="res://scenes/ui/ui.tscn" id="5_lavj3"]
 [ext_resource type="PackedScene" uid="uid://cp7bgpmhe3im" path="res://scenes/characters/player.tscn" id="8_rkju2"]
 [ext_resource type="PackedScene" uid="uid://cb48vf2yl0m72" path="res://scenes/environment/false_block.tscn" id="8_yg83d"]
 [ext_resource type="Script" path="res://scripts/misc/camera2D.gd" id="9_4prlr"]
 [ext_resource type="PackedScene" path="res://scenes/environment/tile_map.tscn" id="12_eu1nu"]
-[ext_resource type="PackedScene" path="res://scenes/objects/orbs.tscn" id="14_n22sv"]
-[ext_resource type="PackedScene" uid="uid://daotjsq48bt2u" path="res://scenes/ui/countdown.tscn" id="14_ptah6"]
+[ext_resource type="PackedScene" uid="uid://bva065eirjae3" path="res://scenes/objects/orbs.tscn" id="14_n22sv"]
 [ext_resource type="PackedScene" uid="uid://7yth7o8h2odp" path="res://scenes/objects/ladder.tscn" id="15_ngpt8"]
-[ext_resource type="PackedScene" uid="uid://dnyp3od2byjj8" path="res://scenes/ui/stats.tscn" id="15_t07v2"]
-[ext_resource type="PackedScene" uid="uid://w200r7nw7wt5" path="res://scenes/ui/inventory.tscn" id="16_gdki7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s0pwa"]
 size = Vector2(31.2464, 20)
@@ -72,24 +70,7 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array()
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Countdown" parent="UI" instance=ExtResource("14_ptah6")]
-offset_left = 1.5264
-offset_top = 142.145
-offset_right = 41.5264
-offset_bottom = 182.145
-scale = Vector2(0.6, 0.6)
-
-[node name="Stats" parent="UI" instance=ExtResource("15_t07v2")]
-
-[node name="Inventory" parent="UI" instance=ExtResource("16_gdki7")]
-visible = false
-offset_left = 81.3173
-offset_top = 44.9013
-offset_right = 81.3172
-offset_bottom = 44.9013
-scale = Vector2(0.50261, 0.50261)
+[node name="UI" parent="." instance=ExtResource("5_lavj3")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.945098, 0.960784, 0.964706, 1)

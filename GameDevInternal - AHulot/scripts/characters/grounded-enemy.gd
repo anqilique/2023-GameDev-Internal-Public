@@ -54,6 +54,8 @@ func attack_player():
 		var hitbox = get_node("/root/World/Player/HitboxComponent")
 		var attack = Attack.new()
 		
+		$AnimationPlayer.play("attack")
+		
 		attack.attack_damage = 50
 		hitbox.damage(attack)
 		

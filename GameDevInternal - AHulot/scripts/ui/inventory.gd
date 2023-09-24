@@ -10,7 +10,8 @@ func _ready():
 func _process(_delta):
 	
 	parts_progress = ""
-		
+	
+	# Display in format: #Collected / #Total Parts.
 	for type in global.required_parts.keys():
 		parts_progress += str(player_vars.collected_parts[type]) + " / " + str(global.required_parts[type]) + "\n"
 	

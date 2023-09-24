@@ -28,15 +28,18 @@ var ship_parts = {}
 var required_parts = {}
 var scene_spawn = {}
 var required_spawn = []
+
 var pause_scenes = [
 	"res://scenes/menu/menu.tscn",
-	"res://scenes/menu/controls.tscn"
+	"res://scenes/menu/controls.tscn",
 ]
 
 func load():  # Restart/reset everything, including PlayerVars
 	
+	# 41-51, delete all existing nodes in game world.
+	
 	for enemy in get_tree().get_nodes_in_group("Enemies"):
-			enemy.queue_free()
+		enemy.queue_free()
 	
 	for part in get_tree().get_nodes_in_group("Parts"):
 		part.queue_free()
@@ -47,16 +50,20 @@ func load():  # Restart/reset everything, including PlayerVars
 	for item in get_tree().get_nodes_in_group("Items"):
 		item.queue_free()
 	
+	# 55-64, reset player variables.
+	
 	player_vars.collected_parts = {
 		0 : 0,
 		1 : 0,
-		2 : 0
+		2 : 0,
 	}
 
 	player_vars.health = 100
 	player_vars.energy = 100
 
 	player_vars.spawn_point = Vector2(15, 75)
+	
+	# 68-85, reset global variables.
 	
 	current_scene = "TutorialOne"
 	transition_scene = false
@@ -76,6 +83,8 @@ func load():  # Restart/reset everything, including PlayerVars
 	}
 
 	required_spawn = [0, 0, 1, 1, 2, 2]
+	
+	# 89-198, reset collection of things to spawn in each scene.
 
 	scene_spawn = {
 
@@ -185,12 +194,15 @@ func load():  # Restart/reset everything, including PlayerVars
 			"parts" : [],
 			"camps" : [],
 			"items" : []
-		}
+		},
 	}
+	
 
 
 func change_scene():
 	if transition_scene:
+		
+		# 207-217, delete everything in current scene before transitioning.
 		
 		for enemy in get_tree().get_nodes_in_group("Enemies"):
 			enemy.queue_free()
@@ -204,7 +216,8 @@ func change_scene():
 		for item in get_tree().get_nodes_in_group("Items"):
 			item.queue_free()
 		
-		match current_scene:
+		
+		match current_scene:  # Change to next scene.
 			"TutorialOne" : get_tree().change_scene_to_file("res://scenes/environment/tutorial_01.tscn")
 			"GreenOne" : get_tree().change_scene_to_file("res://scenes/environment/green_01.tscn")
 			"GreenTwo" : get_tree().change_scene_to_file("res://scenes/environment/green_02.tscn")
@@ -217,6 +230,8 @@ func change_scene():
 		end_transition()
 
 func spawn():
+	# Spawn enemies, items, camps, parts for current scene.
+	
 	var type
 	var new_enemy
 	var new_item
@@ -272,6 +287,9 @@ func spawn():
 
 
 func end_transition():
+	
+	# Move player to new spawn point when entering new location.
+	
 	var player = get_node("/root/World/Player")
 	player.global_position = player_vars.spawn_point
 	

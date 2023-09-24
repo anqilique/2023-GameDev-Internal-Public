@@ -4,6 +4,7 @@ var light_cost
 var can_regen
 var flame_state
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Flame.hide()
@@ -27,6 +28,8 @@ func _process(_delta):
 		if flame_state > 0:
 			
 			$Flame.show()
+			
+			# Increase size of light based on the size of the fire.
 			$Flame/PointLight2D.scale.x = flame_state * 0.03
 			$Flame/PointLight2D.scale.y = flame_state * 0.03
 			
@@ -45,20 +48,22 @@ func _process(_delta):
 		if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
 			$HoverText.hide()
 			
+			# Player loses energy.
 			if player_vars.energy > light_cost:
 				if flame_state < 8:
 					player_vars.energy -= light_cost
 					
-					if $Flame.is_visible():
+					if $Flame.is_visible():  # Fire grows larger.
 						flame_state += 1
 						$Regen.start()
 						$Shrink.start()
 						
 					else:
-						flame_state = 1
+						flame_state = 1  # Fire is lit.
 						$Regen.start()
 						$Shrink.start()
 			
+			# Particle animation.
 			$Particles.hide()
 			$Burst.amount = flame_state + 1
 			$Burst.emitting = true
@@ -73,9 +78,12 @@ func _process(_delta):
 			if can_regen:
 				var nearest = player.find_nearest_camp()
 				
+				# Regenerate using the nearest lit camp.
+				# (In case a scene has two campfires.)
 				player.regenerate(nearest)
 				can_regen = false
 				$Regen.start()
+
 
 func _on_shrink_timeout():
 	# Fire grows smaller as time passes.
@@ -91,9 +99,10 @@ func _on_shrink_timeout():
 	if (flame_state - 1) >= 0:
 		$Flame/AnimationPlayer.play(str(flame_state - 1))
 
+
 func _on_regen_timeout():
 	can_regen = true
-	
+
 
 func _on_range_body_entered(body):
 	var player = get_node("/root/World/Player")
@@ -105,12 +114,12 @@ func _on_range_body_entered(body):
 		if flame_state < 1:
 			$HoverText.show()
 
+
 func _on_range_body_exited(body):
 	var player = get_node("/root/World/Player")
 	
 	if body == player:
 		$HoverText.hide()
-	
 
 
 func _on_safe_zone_body_entered(body):

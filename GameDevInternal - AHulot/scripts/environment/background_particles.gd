@@ -8,6 +8,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	# Particles in the background become faster as time runs out.
+	
 	if global.time_left <= 100:
 		$CPUParticles2D.speed_scale = 6
 	elif global.time_left <= 200:

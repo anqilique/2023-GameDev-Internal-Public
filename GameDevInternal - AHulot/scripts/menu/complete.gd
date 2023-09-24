@@ -11,5 +11,5 @@ func _process(delta):
 	pass
 
 
-func _on_return_pressed():
+func _on_return_pressed():  # Go to main menu.
 	get_tree().change_scene_to_file("res://scenes/menu/menu.tscn")

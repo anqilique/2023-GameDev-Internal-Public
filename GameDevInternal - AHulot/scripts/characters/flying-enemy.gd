@@ -28,6 +28,7 @@ func _ready():
 	set_meta("Enemy", 1)
 	set_meta("Flying", 2)
 
+
 func _physics_process(_delta):
 	match state:
 		WANDER : wander_state()
@@ -35,17 +36,18 @@ func _physics_process(_delta):
 		HIT : hit_state()
 	
 	if is_instance_valid(player) and player.is_alive:
+		# If player is in range, attack or chase them.
 		if player in $BodyArea.get_overlapping_bodies():
 			attack_player()
 		elif player in $DetectRange.get_overlapping_bodies():
 			state = CHASE
 	else:
+		# Otherwise stay in normal state.
 		state = WANDER
 	
 	var health_comp = $HealthComponent
 	health_comp.update_battlehealth()
-	
-	
+
 
 func wander_state():
 	$AnimationPlayer.play("move")
@@ -64,13 +66,14 @@ func wander_state():
 
 func chase_state():
 	
+	# Follow the player while true.
 	if player_chase:
 		$Sprite2D.flip_v = false
 		$AnimationPlayer.play("move")
 		
 		position += (player.position - position) / speed_div
 	
-	else:
+	else:  # Return to normal state.
 		state = WANDER
 
 
@@ -84,8 +87,9 @@ func hit_state():
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("hit")
 
+
 func attack_player():
-	if can_hit:
+	if can_hit:  # Attack the player, start cooldown.
 		var hitbox = get_node("/root/World/Player/HitboxComponent")
 		var attack = Attack.new()
 		
@@ -96,16 +100,19 @@ func attack_player():
 
 		$AttackCooldown.start()
 
+
 func _on_detect_range_body_entered(body):
 	if body == player:
 		state = CHASE
 		
 		player_chase = true
 
+
 func _on_detect_range_body_exited(body):
 	if body == player:
 		state = WANDER
 		player_chase = false
+
 
 func _on_hit_recovery_timeout():
 	$Sprite2D.flip_v = false
@@ -117,13 +124,16 @@ func _on_hit_recovery_timeout():
 		player_chase = true
 		state = CHASE
 
-func _on_body_area_body_entered(body):
+
+func _on_body_area_body_entered(body):  # Slow down when moving through objects.
 	if body != player:
 		speed_div += 100
 
-func _on_body_area_body_exited(body):
+
+func _on_body_area_body_exited(body):  # Speed up when exiting objects.
 	if body != player:
 		speed_div -= 100
+
 
 func _on_attack_cooldown_timeout():
 	can_hit = true

@@ -6,9 +6,11 @@ var spawn_pos = Vector2.ZERO
 var orb_energy = 10
 var orb_health = 10
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.hide()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -19,9 +21,11 @@ func _process(_delta):
 			apply_friction()
 		move_and_slide()
 
+
 func wait_spawn(pos):
 	spawn_pos = pos
 	timer.start()
+
 
 func spawn():
 	print(spawn_pos)
@@ -29,7 +33,7 @@ func spawn():
 	
 	var orbs = [0, 1]
 	
-	for i in range(2):
+	for i in range(2):  #  Create Health + Energy Orb
 		var new_orb = duplicate()
 		self.add_sibling(new_orb)
 		
@@ -44,12 +48,15 @@ func spawn():
 		new_orb.show()
 		new_orb.get_node("Burst").emitting = true
 
+
 func _on_timer_timeout():
 	print(">> Enemy drops Orbs.")
 	spawn()
 
+
 func apply_gravity():
 	velocity.y += 10
+
 
 func apply_friction():
 	velocity.x = move_toward(velocity.x, 0, 10)

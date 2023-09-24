@@ -30,6 +30,9 @@ func _physics_process(_delta):
 		HIT : hit_state()
 		CHASE : chase_state()
 	
+	if player in $DetectRange.get_overlapping_bodies():
+		state = CHASE
+	
 	apply_gravity()
 	
 	var health_comp = $HealthComponent
@@ -40,6 +43,7 @@ func wander_state():
 	apply_gravity()
 	$AnimationPlayer.play("move")
 	
+	# Move back and forth, turn if colliding with walls.
 	if moving_right:
 		velocity.x = SPEED
 	else:
@@ -50,7 +54,7 @@ func wander_state():
 	
 	
 func attack_player():
-	if can_hit:
+	if can_hit:  # Attack player, start cooldown.
 		var hitbox = get_node("/root/World/Player/HitboxComponent")
 		var attack = Attack.new()
 		
@@ -60,38 +64,45 @@ func attack_player():
 		hitbox.damage(attack)
 		
 		can_hit = false
-
-		$AttackCooldown.start()
-
-func chase_state():
-	if is_instance_valid(player) and player.is_alive:
-		apply_gravity()
-		$AnimationPlayer.play("move")
 		
-		if can_hit:
-			if player in $DetectRange.get_overlapping_bodies():
-				attack_player()
+		if $AttackCooldown.is_stopped():
+			$AttackCooldown.start()
+
+
+func chase_state():  # If player still in range --> Attack.
+	if is_instance_valid(player) and player.is_alive:
+		if player in $DetectRange.get_overlapping_bodies():
+			apply_gravity()
+			$AnimationPlayer.play("move")
+			
+			attack_player()
+			
+		else:
+			state = WANDER
+		
 	else:
 		state = WANDER
 
+
 func hit_state():
+	state = HIT
 	
-	if state != HIT:
-		state = HIT
+	if $HitRecovery.is_stopped():
 		$HitRecovery.start()
 	
 	$AnimationPlayer.play("hit")
 
-	
+
 func apply_gravity():
 	velocity.y += GRAVITY
-	
+
 
 func _on_hit_recovery_timeout():
 	state = WANDER
 
 
 func detect_should_turn():
+	# If there is a wall in front --> Turn around.
 	if not $Ray_V.is_colliding() or $Ray_H.is_colliding() and is_on_floor():
 		moving_right = !moving_right
 		scale.x = -scale.x

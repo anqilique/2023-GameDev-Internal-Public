@@ -27,18 +27,18 @@ color = Color(0, 0, 0, 0.415686)
 
 [node name="Respawn" type="Button" parent="DeathMenu"]
 layout_mode = 0
-offset_left = 86.0222
-offset_top = 64.7913
-offset_right = 168.022
-offset_bottom = 92.7913
+offset_left = 86.0
+offset_top = 65.0
+offset_right = 170.0
+offset_bottom = 93.0
 theme = ExtResource("3_3bkcm")
 text = "RESPAWN"
 
 [node name="Quit" type="Button" parent="DeathMenu"]
 layout_mode = 0
-offset_left = 90.779
+offset_left = 92.779
 offset_top = 104.639
-offset_right = 162.779
+offset_right = 164.779
 offset_bottom = 132.639
 theme = ExtResource("3_3bkcm")
 text = "QUIT"
@@ -50,6 +50,16 @@ offset_top = 30.5408
 offset_right = 192.216
 offset_bottom = 49.5408
 text = "You Died"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="DeathMenu/Label"]
+layout_mode = 0
+offset_left = 24.676
+offset_top = 15.4597
+offset_right = 120.676
+offset_bottom = 34.4597
+scale = Vector2(0.8, 0.8)
+text = "Out of Time"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="DeathMenu/Respawn" to="." method="_on_respawn_pressed"]

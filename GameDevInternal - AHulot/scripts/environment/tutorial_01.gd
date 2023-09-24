@@ -32,13 +32,13 @@ func _on_portal_to_world_body_entered(body):
 
 func _on_enemies_body_entered(body):
 	if body == player and not $AbtEnemies.is_visible():
-		$AbtEnemies.show()
+		$AbtEnemies.show()  # Floating text.
 
 
 func _on_orbs_text_trig_body_entered(body):
 	if body == player and not $AbtOrbs.is_visible():
-		$AbtOrbs.show()
+		$AbtOrbs.show()  # Floating text.
 
 
-func _on_camp_text_trig_area_entered(area):
+func _on_camp_text_trig_area_entered(area):  # Spawnpoint = Camp.
 	player_vars.spawn_point = player.global_position

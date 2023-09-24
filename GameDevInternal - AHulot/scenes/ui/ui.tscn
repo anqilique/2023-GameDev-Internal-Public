@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d380s81nxg0sl"]
+[gd_scene load_steps=7 format=3 uid="uid://d380s81nxg0sl"]
 
 [ext_resource type="PackedScene" uid="uid://daotjsq48bt2u" path="res://scenes/ui/countdown.tscn" id="1_cmdq4"]
 [ext_resource type="PackedScene" uid="uid://dnyp3od2byjj8" path="res://scenes/ui/stats.tscn" id="2_r0v2h"]
 [ext_resource type="PackedScene" uid="uid://w200r7nw7wt5" path="res://scenes/ui/inventory.tscn" id="3_564do"]
+[ext_resource type="PackedScene" uid="uid://c1d1c5h1smm40" path="res://scenes/ui/map.tscn" id="4_7w0w4"]
 [ext_resource type="PackedScene" uid="uid://cie6bchbc6626" path="res://scenes/ui/pause.tscn" id="4_nb7ll"]
 [ext_resource type="PackedScene" uid="uid://lmfhnm6q14t2" path="res://scenes/ui/death.tscn" id="5_fgnwj"]
 
@@ -24,6 +25,13 @@ offset_top = 44.9013
 offset_right = 81.3172
 offset_bottom = 44.9013
 scale = Vector2(0.50261, 0.50261)
+
+[node name="Map" parent="." instance=ExtResource("4_7w0w4")]
+visible = false
+offset_left = 77.4852
+offset_top = 50.7119
+offset_right = 77.4852
+offset_bottom = 50.7119
 
 [node name="Death" parent="." instance=ExtResource("5_fgnwj")]
 mouse_filter = 2

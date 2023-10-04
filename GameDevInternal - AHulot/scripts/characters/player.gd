@@ -307,11 +307,12 @@ func dead_state():
 	energybar.value = 0
 	
 	
+	# If the player is not already dead (screen not displayed)...
 	if not death_ui.get_node("DeathMenu").is_visible():
-		death_ui.deathscreen_show()  # Pauses the tree.
+		death_ui.deathscreen_show()  # Show Death Screen. Pauses the tree.
 	
 	
-	# The rest of the code happens when tree is unpaused.
+	# The rest of the code happens once the tree is unpaused.
 
 	position = player_vars.spawn_point
 	print(position)
@@ -329,6 +330,7 @@ func hit_state():
 	else:
 		force = 25
 	
+	# Player gets pushed upwards slightly.
 	velocity.y -= (GRAVITY + force)
 	move_and_slide()
 

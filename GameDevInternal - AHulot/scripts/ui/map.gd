@@ -28,7 +28,7 @@ func _get_marker_pos():
 			"GreenThree" : locmarker_pos = Vector2(map_x, map_y - 6)
 			"GreenFour" : locmarker_pos = Vector2(map_x + 10, map_y - 6)
 			"GreenFive" : locmarker_pos = Vector2(map_x + 20, map_y - 6)
-			"GreenSix" : locmarker_pos = Vector2(map_x, map_y - 12)
-			"GreenSeven" : locmarker_pos = Vector2(map_x + 10, map_y - 12)
+			"GreenSix" : locmarker_pos = Vector2(map_x, map_y + 4)
+			"GreenSeven" : locmarker_pos = Vector2(map_x + 10, map_y + 4)
 	
 	return locmarker_pos

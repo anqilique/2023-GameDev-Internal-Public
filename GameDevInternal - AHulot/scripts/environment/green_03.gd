@@ -33,3 +33,10 @@ func _on_portal_to_green_four_body_entered(body):
 		player_vars.spawn_point = Vector2(28, 75)
 		global.current_scene = "GreenFour"
 		global.transition_scene = true
+
+
+func _on_portal_to_green_six_body_entered(body):
+	if body == player:
+		player_vars.spawn_point = Vector2(283, 118)
+		global.current_scene = "GreenSix"
+		global.transition_scene = true

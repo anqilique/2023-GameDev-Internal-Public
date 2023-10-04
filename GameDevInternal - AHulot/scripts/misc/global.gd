@@ -34,7 +34,7 @@ var pause_scenes = [
 	"res://scenes/menu/controls.tscn",
 ]
 
-func load():  # Restart/reset everything, including PlayerVars
+func load():  # Restart/reset scene and player vars.
 	
 	# 41-51, delete all existing nodes in game world.
 	
@@ -136,7 +136,7 @@ func load():  # Restart/reset everything, including PlayerVars
 		
 		"GreenThree" : {
 			"enemies" : [
-				Vector2(264, 374),
+				Vector2(201, 374),
 				Vector2(213, 246),
 				Vector2(447, 342),
 				Vector2(652, 207),
@@ -168,17 +168,33 @@ func load():  # Restart/reset everything, including PlayerVars
 				Vector2(484, 314)
 			],
 			"parts" : [
-				Vector2(611, 324),
-				Vector2(692, 102)
+				Vector2(611, 324)
 			],
 			"camps" : [],
 			"items" : []
 		},
 		
 		"GreenFive" : {
-			"enemies" : [],
-			"parts" : [],
-			"camps" : [],
+			"enemies" : [
+				Vector2(183, 54),
+				Vector2(306, 54),
+				Vector2(428, 106),
+				Vector2(486, 106),
+				Vector2(561, 106),
+				Vector2(653, 106),
+				Vector2(567, 57),
+				Vector2(172, 337),
+				Vector2(467, 208),
+				Vector2(688, 286),
+				Vector2(499, 378),
+				Vector2(422, 378)
+			],
+			"parts" : [
+				Vector2(352, 362)
+			],
+			"camps" : [
+				Vector2(241, 360)
+			],
 			"items" : []
 		},
 		
@@ -196,10 +212,9 @@ func load():  # Restart/reset everything, including PlayerVars
 			"items" : []
 		},
 	}
-	
 
 
-func change_scene():
+func change_scene():  # Clear current scene, transition to next one.
 	if transition_scene:
 		
 		# 207-217, delete everything in current scene before transitioning.
@@ -229,8 +244,8 @@ func change_scene():
 		
 		end_transition()
 
-func spawn():
-	# Spawn enemies, items, camps, parts for current scene.
+
+func spawn():  # Spawn everything in current scene.
 	
 	var type
 	var new_enemy

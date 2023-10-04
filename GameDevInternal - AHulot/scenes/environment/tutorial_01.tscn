@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7bgpmhe3im" path="res://scenes/characters/player.tscn" id="8_rkju2"]
 [ext_resource type="PackedScene" uid="uid://cb48vf2yl0m72" path="res://scenes/environment/false_block.tscn" id="8_yg83d"]
 [ext_resource type="Script" path="res://scripts/misc/camera2D.gd" id="9_4prlr"]
-[ext_resource type="PackedScene" path="res://scenes/environment/tile_map.tscn" id="12_eu1nu"]
+[ext_resource type="PackedScene" uid="uid://pffpnluyn882" path="res://scenes/environment/tile_map.tscn" id="12_eu1nu"]
 [ext_resource type="PackedScene" uid="uid://bva065eirjae3" path="res://scenes/objects/orbs.tscn" id="14_n22sv"]
 [ext_resource type="PackedScene" uid="uid://7yth7o8h2odp" path="res://scenes/objects/ladder.tscn" id="15_ngpt8"]
 

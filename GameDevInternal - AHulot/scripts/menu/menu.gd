@@ -6,13 +6,13 @@ extends Control
 func _ready():
 	if get_tree().current_scene.scene_file_path == "res://scenes/menu/menu.tscn":
 		$Player/AnimationPlayer.play("idle")
-		$CanvasLayer/MarginContainer2.hide()
+		$CanvasLayer/PlayOptions.hide()
 		$CanvasLayer/TutorialAsk.hide()
 
 
 func _on_play_pressed():  # Tutorial: Yes / No / Cancel
-	$CanvasLayer/MarginContainer.hide()
-	$CanvasLayer/MarginContainer2.show()
+	$CanvasLayer/MainOptions.hide()
+	$CanvasLayer/PlayOptions.show()
 	$CanvasLayer/TutorialAsk.show()
 
 
@@ -44,13 +44,13 @@ func _on_no_pressed():  # Play Game
 		get_tree().change_scene_to_file("res://scenes/environment/green_02.tscn")
 
 	else:  # For quick testing in certain scenes.
-		player_vars.spawn_point = Vector2(160, 302)
-		global.current_scene = "GreenFour"
-		
-		get_tree().change_scene_to_file("res://scenes/environment/green_04.tscn")
+		player_vars.spawn_point = Vector2(31, 235)
+		global.current_scene = "GreenSeven"
+
+		get_tree().change_scene_to_file("res://scenes/environment/green_07.tscn")
 
 
 func _on_cancel_pressed():  # Play / Controls / Exit
-	$CanvasLayer/MarginContainer.show()
-	$CanvasLayer/MarginContainer2.hide()
+	$CanvasLayer/MainOptions.show()
+	$CanvasLayer/PlayOptions.hide()
 	$CanvasLayer/TutorialAsk.hide()

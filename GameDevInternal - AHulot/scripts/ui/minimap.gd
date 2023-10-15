@@ -3,12 +3,15 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$LocMarker.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):	
 	$LocMarker.position = _get_marker_pos()
+	
+	if global.current_scene != "TutorialOne":
+		$LocMarker.show()
 
 
 func _get_marker_pos():

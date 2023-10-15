@@ -6,11 +6,14 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	# Hide hidden text.
+	
 	$Camp.hide()
 	$AbtEnemies.hide()
 	$AbtOrbs.hide()
 	$UI/Countdown.hide()
-
+	
+	# Fill scene with things.
 	global.spawn()
 	
 
@@ -20,11 +23,11 @@ func _process(delta):
 	
 	if Input.is_action_just_released("ui_interact"):
 		if not $Camp.is_visible() and player in $CampTextTrig.get_overlapping_bodies():
-			$Camp.show()
+			$Camp.show()  # Show more floating text.
 
 
 func _on_portal_to_world_body_entered(body):
-	if body == player:
+	if body == player:  # Go to the start of the game.
 		player_vars.spawn_point = Vector2(668, -12)
 		global.current_scene = "GreenTwo"
 		global.transition_scene = true

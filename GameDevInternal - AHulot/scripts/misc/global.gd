@@ -68,7 +68,7 @@ func load():  # Restart/reset scene and player vars.
 	current_scene = "TutorialOne"
 	transition_scene = false
 	total_parts = 0
-	time_left = 600
+	time_left = 1000
 
 	ship_parts = {
 		0 : 0,
@@ -77,12 +77,16 @@ func load():  # Restart/reset scene and player vars.
 	}
 
 	required_parts = {
-		0 : 2,
-		1 : 2,
-		2 : 2
+		0 : 5,
+		1 : 5,
+		2 : 5
 	}
 
-	required_spawn = [0, 0, 1, 1, 2, 2]
+	required_spawn = [
+		0, 0, 0, 0, 0,
+		1, 1, 1, 1, 1,
+		2, 2, 2, 2, 2,
+	]
 	
 	# 89-198, reset collection of things to spawn in each scene.
 
@@ -126,7 +130,8 @@ func load():  # Restart/reset scene and player vars.
 				Vector2(281, 199)
 			],
 			"parts" : [
-				Vector2(55, 250)
+				Vector2(55, 250),
+				Vector2(592, 222)
 			],
 			"camps" : [
 				Vector2(479, 240)
@@ -145,7 +150,8 @@ func load():  # Restart/reset scene and player vars.
 				Vector2(426, 67)
 			],
 			"parts" : [
-				Vector2(696, 188)
+				Vector2(690, 186),
+				Vector2(467, 376)
 			],
 			"camps" : [],
 			"items" : []
@@ -168,7 +174,8 @@ func load():  # Restart/reset scene and player vars.
 				Vector2(484, 314)
 			],
 			"parts" : [
-				Vector2(611, 324)
+				Vector2(611, 324),
+				Vector2(54, 215)
 			],
 			"camps" : [],
 			"items" : []
@@ -190,7 +197,9 @@ func load():  # Restart/reset scene and player vars.
 				Vector2(422, 378)
 			],
 			"parts" : [
-				Vector2(352, 362)
+				Vector2(352, 362),
+				Vector2(246, 123),
+				Vector2(572, 102)
 			],
 			"camps" : [
 				Vector2(241, 360)
@@ -199,15 +208,30 @@ func load():  # Restart/reset scene and player vars.
 		},
 		
 		"GreenSix" : {
-			"enemies" : [],
-			"parts" : [],
-			"camps" : [],
+			"enemies" : [
+				Vector2(400, 190)
+			],
+			"parts" : [
+				Vector2(340, 160),
+				Vector2(510, 166)
+			],
+			"camps" : [
+				Vector2(408, 257)
+			],
 			"items" : []
 		},
 		
 		"GreenSeven" : {
-			"enemies" : [],
-			"parts" : [],
+			"enemies" : [
+				Vector2(544, 151),
+				Vector2(232, 166),
+				Vector2(366, 230),
+				Vector2(430, 230)
+			],
+			"parts" : [
+				Vector2(364, 160),
+				Vector2(692, 210)
+			],
 			"camps" : [],
 			"items" : []
 		},
@@ -301,9 +325,7 @@ func spawn():  # Spawn everything in current scene.
 		new_item.add_to_group("Items")
 
 
-func end_transition():
-	
-	# Move player to new spawn point when entering new location.
+func end_transition(): # Move player to new spawnpoint.
 	
 	var player = get_node("/root/World/Player")
 	player.global_position = player_vars.spawn_point

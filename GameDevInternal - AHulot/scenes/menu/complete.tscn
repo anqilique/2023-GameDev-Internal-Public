@@ -20,12 +20,20 @@ offset_bottom = 301.0
 scale = Vector2(0.520201, 0.520201)
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Text" type="Label" parent="CanvasLayer"]
 offset_left = 45.9614
 offset_top = 63.7542
 offset_right = 205.961
 offset_bottom = 89.7544
 text = "Game Complete! :D"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 45.9614
+offset_top = 31.2125
+offset_right = 205.961
+offset_bottom = 57.2127
+text = "000"
 horizontal_alignment = 1
 
 [node name="Return" type="Button" parent="CanvasLayer"]

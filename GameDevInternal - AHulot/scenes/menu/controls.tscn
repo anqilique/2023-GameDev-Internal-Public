@@ -22,9 +22,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 18.0
-offset_top = 15.0
-offset_right = 367.0
-offset_bottom = 180.0
+offset_top = 8.0
+offset_right = 386.0
+offset_bottom = 190.0
 scale = Vector2(0.612869, 0.662638)
 theme = ExtResource("2_e0rc5")
 text = "~ Controls and Instructions ~
@@ -33,6 +33,7 @@ text = "~ Controls and Instructions ~
 - Left Mouse Button --> Shoot
 - E Key --> Interact / Pick Up
 - I Key --> Open/Close Inventory
+- M Key --> Open/Close Map
 - P Key --> Pause/Resume Game
 
 Lit fires regenerate Health and Energy."

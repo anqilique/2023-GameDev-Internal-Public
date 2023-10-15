@@ -67,51 +67,51 @@ color = Color(0, 0, 0, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MainOptions" type="MarginContainer" parent="CanvasLayer"]
 offset_left = 150.812
 offset_top = 18.2787
 offset_right = 238.812
 offset_bottom = 110.279
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainOptions"]
 layout_mode = 2
 
-[node name="Play" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="CanvasLayer/MainOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "PLAY"
 
-[node name="Controls" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Controls" type="Button" parent="CanvasLayer/MainOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "CONTROLS"
 
-[node name="Exit" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="CanvasLayer/MainOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "EXIT"
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer"]
+[node name="PlayOptions" type="MarginContainer" parent="CanvasLayer"]
 visible = false
 offset_left = 150.812
 offset_top = 18.2787
 offset_right = 238.812
 offset_bottom = 110.279
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayOptions"]
 layout_mode = 2
 
-[node name="Yes" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+[node name="Yes" type="Button" parent="CanvasLayer/PlayOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "YES"
 
-[node name="No" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+[node name="No" type="Button" parent="CanvasLayer/PlayOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "NO"
 
-[node name="Cancel" type="Button" parent="CanvasLayer/MarginContainer2/VBoxContainer"]
+[node name="Cancel" type="Button" parent="CanvasLayer/PlayOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "CANCEL"
@@ -241,9 +241,9 @@ texture = ExtResource("6_pxxd7")
 hframes = 3
 frame = 2
 
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/Yes" to="." method="_on_yes_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/No" to="." method="_on_no_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer2/VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayOptions/VBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayOptions/VBoxContainer/No" to="." method="_on_no_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayOptions/VBoxContainer/Cancel" to="." method="_on_cancel_pressed"]

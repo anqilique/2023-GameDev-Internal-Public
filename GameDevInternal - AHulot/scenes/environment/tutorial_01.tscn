@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b4t81qdedbx31"]
+[gd_scene load_steps=16 format=3 uid="uid://b4t81qdedbx31"]
 
 [ext_resource type="Script" path="res://scripts/environment/tutorial_01.gd" id="1_g3cj3"]
+[ext_resource type="Texture2D" uid="uid://b2800rn4b4vll" path="res://assets/ship.png" id="4_ork3a"]
 [ext_resource type="PackedScene" uid="uid://d380s81nxg0sl" path="res://scenes/ui/ui.tscn" id="5_lavj3"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="7_lagnh"]
 [ext_resource type="PackedScene" uid="uid://cp7bgpmhe3im" path="res://scenes/characters/player.tscn" id="8_rkju2"]
 [ext_resource type="PackedScene" uid="uid://cb48vf2yl0m72" path="res://scenes/environment/false_block.tscn" id="8_yg83d"]
 [ext_resource type="Script" path="res://scripts/misc/camera2D.gd" id="9_4prlr"]
@@ -95,11 +97,11 @@ scale = Vector2(0.3, 0.3)
 text = "Click to Shoot"
 
 [node name="Interact" type="Label" parent="."]
-offset_left = 544.972
-offset_top = 230.57
-offset_right = 790.972
-offset_bottom = 249.57
-scale = Vector2(0.3, 0.3)
+offset_left = 536.0
+offset_top = 231.0
+offset_right = 864.0
+offset_bottom = 260.0
+scale = Vector2(0.35, 0.35)
 text = "Use [E] to interact with items"
 
 [node name="CampTextTrig" type="Area2D" parent="."]
@@ -185,6 +187,37 @@ offset_right = 876.099
 offset_bottom = 443.352
 scale = Vector2(0.3, 0.3)
 text = "Jump"
+horizontal_alignment = 1
+
+[node name="Ship" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.443137)
+position = Vector2(424.695, 360.783)
+scale = Vector2(2, 2)
+texture = ExtResource("4_ork3a")
+hframes = 2
+
+[node name="FindShip" type="Label" parent="."]
+offset_left = 403.0
+offset_top = 345.0
+offset_right = 547.0
+offset_bottom = 374.0
+scale = Vector2(0.3, 0.3)
+text = "Find the Ship"
+horizontal_alignment = 1
+
+[node name="Parts" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.537255)
+position = Vector2(496.705, 330.276)
+texture = ExtResource("7_lagnh")
+
+[node name="FindParts" type="Label" parent="."]
+offset_left = 470.127
+offset_top = 336.538
+offset_right = 654.127
+offset_bottom = 374.538
+scale = Vector2(0.3, 0.3)
+text = "And the parts needed
+to repair it."
 horizontal_alignment = 1
 
 [node name="PortalToWorld" type="Area2D" parent="."]

@@ -139,7 +139,7 @@ libraries = {
 }
 
 [node name="BulletSpawn" type="Node2D" parent="."]
-position = Vector2(4, 0)
+position = Vector2(4.07874, 0.0393734)
 script = ExtResource("3_63doj")
 bullet_scene = ExtResource("4_qexcd")
 

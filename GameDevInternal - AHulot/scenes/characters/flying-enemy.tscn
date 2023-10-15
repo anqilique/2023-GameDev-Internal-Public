@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/characters/flying-enemy.gd" id="1_4fqci"]
 [ext_resource type="Texture2D" uid="uid://fmphc6mdqykc" path="res://assets/enemy-flying.png" id="2_754yh"]
-[ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="2_pitb2"]
-[ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="3_lkhfq"]
+[ext_resource type="PackedScene" uid="uid://cfu5ypumdcbpi" path="res://scenes/misc/health_component.tscn" id="2_pitb2"]
+[ext_resource type="PackedScene" uid="uid://8lbtdmy4bdta" path="res://scenes/misc/hitbox_component.tscn" id="3_lkhfq"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://scenes/ui/battle_health_bar.tscn" id="3_xrugj"]
 
 [sub_resource type="Animation" id="Animation_vnte5"]

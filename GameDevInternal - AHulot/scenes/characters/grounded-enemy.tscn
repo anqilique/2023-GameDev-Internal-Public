@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/characters/grounded-enemy.gd" id="1_fel0p"]
 [ext_resource type="Texture2D" uid="uid://clh8ay726g6d7" path="res://assets/enemy-grounded.png" id="2_abyun"]
-[ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="3_l5elk"]
+[ext_resource type="PackedScene" uid="uid://cfu5ypumdcbpi" path="res://scenes/misc/health_component.tscn" id="3_l5elk"]
 [ext_resource type="PackedScene" uid="uid://50r4ukcihb57" path="res://scenes/ui/battle_health_bar.tscn" id="3_m54r4"]
-[ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="4_0fp8c"]
+[ext_resource type="PackedScene" uid="uid://8lbtdmy4bdta" path="res://scenes/misc/hitbox_component.tscn" id="4_0fp8c"]
 
 [sub_resource type="Animation" id="Animation_dj0gu"]
 length = 0.001
@@ -19,6 +19,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_03n0e"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
 }
 
 [sub_resource type="Animation" id="Animation_lco0w"]
@@ -53,22 +69,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [0, 1]
-}
-
-[sub_resource type="Animation" id="Animation_03n0e"]
-resource_name = "attack"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_38cao"]

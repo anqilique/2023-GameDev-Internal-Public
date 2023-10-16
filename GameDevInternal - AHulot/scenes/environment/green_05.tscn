@@ -60,7 +60,7 @@ layer_0/tile_data = PackedInt32Array(3145771, 262144, 3, 3145772, 786432, 3, 314
 color = Color(0.945098, 0.960784, 0.964706, 1)
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(572.36, 102.349)
+position = Vector2(243.997, 168.113)
 
 [node name="Orbs" parent="." instance=ExtResource("8_ql32f")]
 position = Vector2(-12.3838, -26.4169)

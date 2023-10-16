@@ -36,18 +36,19 @@ func _on_yes_pressed():  # Play Tutorial
 
 func _on_no_pressed():  # Play Game
 	global.load()
+
+	# For quick testing in certain scenes.
+	if debugging and Input.is_action_pressed("ui_interact"):
+		player_vars.spawn_point = Vector2(32, 108)
+		global.current_scene = "GreenFive"
+
+		get_tree().change_scene_to_file("res://scenes/environment/green_05.tscn")
 	
-	if not debugging:
+	else:  # If not debugging, play normally.
 		player_vars.spawn_point = Vector2(668, -12)
 		global.current_scene = "GreenTwo"
 
 		get_tree().change_scene_to_file("res://scenes/environment/green_02.tscn")
-
-	else:  # For quick testing in certain scenes.
-		player_vars.spawn_point = Vector2(31, 235)
-		global.current_scene = "GreenSeven"
-
-		get_tree().change_scene_to_file("res://scenes/environment/green_07.tscn")
 
 
 func _on_cancel_pressed():  # Play / Controls / Exit

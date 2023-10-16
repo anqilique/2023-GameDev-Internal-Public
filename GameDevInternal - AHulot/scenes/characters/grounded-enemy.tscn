@@ -80,7 +80,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_072ns"]
-size = Vector2(8.03704, 3.54334)
+size = Vector2(8.03704, 3.34393)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xmtqv"]
 size = Vector2(7.52706, 4.5576)
@@ -110,8 +110,7 @@ libraries = {
 }
 
 [node name="SolidCollision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1.14815, 1.18111)
+position = Vector2(1.14815, 1.08141)
 shape = SubResource("RectangleShape2D_072ns")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_l5elk")]

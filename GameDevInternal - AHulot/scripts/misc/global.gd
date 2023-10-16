@@ -198,7 +198,7 @@ func load():  # Restart/reset scene and player vars.
 			],
 			"parts" : [
 				Vector2(352, 362),
-				Vector2(246, 123),
+				Vector2(246, 168),
 				Vector2(572, 102)
 			],
 			"camps" : [

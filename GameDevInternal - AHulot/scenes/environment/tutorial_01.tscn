@@ -177,7 +177,7 @@ offset_right = 465.0
 offset_bottom = 323.0
 scale = Vector2(0.3, 0.3)
 text = "Running out of Health means you die
-If you die, you will respawn at the last fire you lit"
+But you will respawn"
 horizontal_alignment = 1
 
 [node name="Jump" type="Label" parent="."]

@@ -70,7 +70,8 @@ func _process(_delta):
 			$Particles.amount = flame_state + 1
 			$Particles.show()
 			
-			$Flame/AnimationPlayer.play(str(flame_state - 1))
+			if flame_state >= 1:
+				$Flame/AnimationPlayer.play(str(flame_state - 1))
 			
 		
 		# Allow player to regenerate energy/health if close to fire.

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GameDevInternal - AHulot"
+config/name="GameDevInternal02 - AHulot"
 run/main_scene="res://scenes/menu/menu.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://assets/icon.svg"
@@ -19,6 +19,7 @@ config/icon="res://assets/icon.svg"
 
 global="*res://scripts/misc/global.gd"
 player_vars="*res://scripts/misc/player_vars.gd"
+audio="*res://scenes/misc/audio.tscn"
 
 [display]
 

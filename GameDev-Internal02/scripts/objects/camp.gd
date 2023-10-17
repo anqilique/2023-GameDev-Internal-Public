@@ -47,6 +47,7 @@ func _process(_delta):
 		# When [E] pressed, light/stoke the fire.
 		if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
 			$HoverText.hide()
+			audio.play_sound("camp_int")
 			
 			# Player loses energy.
 			if player_vars.energy > light_cost:

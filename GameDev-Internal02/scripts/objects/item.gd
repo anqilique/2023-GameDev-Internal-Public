@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+"""
+Code here is unused as 'item' is not spawned in game.
+"""
+
 
 func _ready():
 	$HoverText.hide()

@@ -46,6 +46,7 @@ func _physics_process(_delta):
 			$HoverText.hide()
 			queue_free()
 			
+			audio.play_sound("part_collect")
 			print(">> Player picked up Part")
 			
 			# Add to player variables, remove from spawn list.

@@ -38,6 +38,24 @@ text = "~ Controls and Instructions ~
 
 Lit fires regenerate Health and Energy."
 
+[node name="Fullscreen" type="Button" parent="CanvasLayer"]
+offset_left = 131.0
+offset_top = 129.0
+offset_right = 199.0
+offset_bottom = 160.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_e0rc5")
+text = "FULLSCREEN"
+
+[node name="Sound" type="Button" parent="CanvasLayer"]
+offset_left = 192.449
+offset_top = 129.0
+offset_right = 260.449
+offset_bottom = 160.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_e0rc5")
+text = "SOUND"
+
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 offset_left = 18.3196
 offset_top = 128.672
@@ -53,4 +71,6 @@ layout_mode = 2
 theme = ExtResource("2_e0rc5")
 text = "BACK"
 
+[connection signal="pressed" from="CanvasLayer/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sound" to="." method="_on_sound_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

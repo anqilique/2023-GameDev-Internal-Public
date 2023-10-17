@@ -34,6 +34,7 @@ func _physics_process(_delta):
 	$Resources.text = parts_progress
 	
 	if Input.is_action_just_pressed("ui_interact") and player in $Range.get_overlapping_bodies():
+		audio.play_sound("ship_int")
 		$Burst.emitting = true
 		
 		# 'Return' player's parts to ship.

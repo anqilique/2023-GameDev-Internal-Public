@@ -18,6 +18,7 @@ func _process(_delta):
 	$Resources.text = parts_progress
 	
 	if Input.is_action_just_pressed("ui_inventory"):
+		audio.play_sound("button_press")
 		if is_visible():
 			hide()
 		else:

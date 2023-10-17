@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://70lf7moix3mv"]
+
+[ext_resource type="Script" path="res://scripts/misc/audio.gd" id="1_3bf1r"]
+[ext_resource type="AudioStream" uid="uid://pxdubabf6huv" path="res://assets/player-jump.wav" id="1_s2d55"]
+[ext_resource type="AudioStream" uid="uid://cxxeoajy25ry8" path="res://assets/player-death.wav" id="2_gkv20"]
+[ext_resource type="AudioStream" uid="uid://bh5qytdps10s6" path="res://assets/player-shoot.wav" id="3_gk8rd"]
+[ext_resource type="AudioStream" uid="uid://chfi8qkxwvfqg" path="res://assets/enemy-death.wav" id="4_tkigo"]
+[ext_resource type="AudioStream" uid="uid://bj0e3y0cbaf8" path="res://assets/camp.wav" id="5_fkfgv"]
+[ext_resource type="AudioStream" uid="uid://dhoag1eslia11" path="res://assets/ship.wav" id="6_d1h5r"]
+[ext_resource type="AudioStream" uid="uid://difib0e8i2sc3" path="res://assets/collect-part.wav" id="7_6xoig"]
+[ext_resource type="AudioStream" uid="uid://cl8h5xhsbckot" path="res://assets/collect-orb.wav" id="8_fsbde"]
+[ext_resource type="AudioStream" uid="uid://cvgejb2guxsgv" path="res://assets/ui-select.wav" id="9_ukw7f"]
+[ext_resource type="AudioStream" uid="uid://dff3mmkudcyr8" path="res://assets/music.mp3" id="11_mlsil"]
+
+[node name="Audio" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3bf1r")
+
+[node name="player_jump" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("1_s2d55")
+
+[node name="player_death" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("2_gkv20")
+volume_db = 2.0
+
+[node name="player_shoot" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("3_gk8rd")
+volume_db = -15.0
+pitch_scale = 0.5
+
+[node name="enemy_death" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("4_tkigo")
+volume_db = 10.0
+
+[node name="camp_int" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("5_fkfgv")
+
+[node name="ship_int" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("6_d1h5r")
+
+[node name="part_collect" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("7_6xoig")
+
+[node name="orb_collect" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("8_fsbde")
+volume_db = 10.0
+
+[node name="button_press" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("9_ukw7f")
+volume_db = 5.0
+
+[node name="music" type="AudioStreamPlayer2D" parent="." groups=["Audio"]]
+stream = ExtResource("11_mlsil")
+volume_db = -5.0

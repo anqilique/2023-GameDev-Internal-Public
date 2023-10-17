@@ -68,10 +68,11 @@ color = Color(0, 0, 0, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainOptions" type="MarginContainer" parent="CanvasLayer"]
-offset_left = 150.812
-offset_top = 18.2787
-offset_right = 238.812
-offset_bottom = 110.279
+offset_left = 155.876
+offset_top = 18.2109
+offset_right = 243.876
+offset_bottom = 142.211
+scale = Vector2(0.9, 0.9)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainOptions"]
 layout_mode = 2
@@ -86,6 +87,11 @@ layout_mode = 2
 theme = ExtResource("2_sfgsu")
 text = "CONTROLS"
 
+[node name="Credits" type="Button" parent="CanvasLayer/MainOptions/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_sfgsu")
+text = "CREDITS"
+
 [node name="Exit" type="Button" parent="CanvasLayer/MainOptions/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_sfgsu")
@@ -93,10 +99,11 @@ text = "EXIT"
 
 [node name="PlayOptions" type="MarginContainer" parent="CanvasLayer"]
 visible = false
-offset_left = 150.812
+offset_left = 155.773
 offset_top = 18.2787
-offset_right = 238.812
+offset_right = 243.773
 offset_bottom = 110.279
+scale = Vector2(0.9, 0.9)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayOptions"]
 layout_mode = 2
@@ -136,39 +143,6 @@ scale = Vector2(0.5, 0.5)
 text = "~ Alpha ~"
 horizontal_alignment = 1
 
-[node name="Credits" type="Label" parent="CanvasLayer"]
-offset_left = 27.0
-offset_top = 122.0
-offset_right = 153.0
-offset_bottom = 160.0
-scale = Vector2(0.25, 0.25)
-theme = ExtResource("2_sfgsu")
-text = " FONT BY                      
-& TILEMAP BY"
-vertical_alignment = 1
-
-[node name="Font" type="LinkButton" parent="CanvasLayer/Credits"]
-modulate = Color(0.333333, 0.627451, 0.819608, 1)
-layout_mode = 0
-offset_left = 79.2222
-offset_top = -1.25345
-offset_right = 203.222
-offset_bottom = 38.7466
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-text = "NATHAN SCOTT"
-uri = "https://caffinate.itch.io/quaver"
-
-[node name="Tilemap" type="LinkButton" parent="CanvasLayer/Credits"]
-modulate = Color(0.333333, 0.627451, 0.819608, 1)
-layout_mode = 0
-offset_left = 124.933
-offset_top = 19.491
-offset_right = 254.933
-offset_bottom = 59.491
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-text = "ADAM SALTSMAN"
-uri = "https://adamatomic.itch.io/cavernas"
-
 [node name="TutorialAsk" type="Label" parent="CanvasLayer"]
 visible = false
 offset_left = 166.678
@@ -177,6 +151,17 @@ offset_right = 290.678
 offset_bottom = 26.6163
 scale = Vector2(0.5, 0.5)
 text = "Play Tutorial?"
+
+[node name="Self" type="Label" parent="CanvasLayer"]
+modulate = Color(0.290196, 0.54902, 0.717647, 1)
+offset_left = 36.1772
+offset_top = 125.994
+offset_right = 282.177
+offset_bottom = 163.994
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("2_sfgsu")
+text = "CREATED BY ANGELIQUE HULOT"
+vertical_alignment = 1
 
 [node name="ShipParticles" type="CPUParticles2D" parent="."]
 position = Vector2(61.9768, 104.527)
@@ -206,7 +191,7 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(1179648, 917504, 9, 1179649, 917504, 9, 1179650, 917504, 9, 1179651, 917504, 9, 1179652, 917504, 9, 1179653, 917504, 9, 1179654, 917504, 9, 1179655, 917504, 9, 1179656, 917504, 9, 1179657, 917504, 9, 1179658, 917504, 9, 1179659, 917504, 9, 1179660, 917504, 9, 1179661, 917504, 9, 1179662, 917504, 9, 1179663, 917504, 9, 1179664, 917504, 9, 1179665, 917504, 9, 1179666, 917504, 9, 1179667, 917504, 9, 1179668, 917504, 9, 1179669, 917504, 9, 1179670, 917504, 9, 1179671, 917504, 9, 1179672, 917504, 9, 1179673, 917504, 9, 1179674, 917504, 9, 1179675, 917504, 9, 1179676, 917504, 9, 1179677, 917504, 9, 1179678, 917504, 9, 1179679, 917504, 9, 1048595, 0, 4, 1048605, 327680, 4, 983069, 327680, 0, 983059, 0, 0, 983060, 262144, 0, 983061, 262144, 0, 983062, 262144, 0, 983063, 262144, 0, 983064, 262144, 0, 983065, 262144, 0, 983066, 262144, 0, 983067, 262144, 0, 983068, 262144, 0, 1048591, 327680, 4, 983055, 327680, 1, 1048578, 0, 4, 983042, 0, 1, 917506, 0, 0, 917519, 327680, 0, 917518, 262144, 0, 917517, 262144, 0, 917516, 262144, 0, 917515, 262144, 0, 917514, 262144, 0, 917513, 262144, 0, 917512, 262144, 0, 917511, 262144, 0, 917510, 262144, 0, 917509, 262144, 0, 917508, 262144, 0, 917507, 262144, 0, 983056, 524288, 0, 983057, 589824, 0, 983058, 458752, 0, 1048576, 589824, 0, 1048577, 393216, 1, 1048606, 589824, 1, 851971, 131072, 2, 851982, 131072, 2, 851983, 131072, 2, 917533, 196608, 2, 917527, 196608, 2, 1114112, 917504, 8, 1114113, 786432, 8, 1114114, 917504, 8, 1114115, 786432, 8, 1114116, 851968, 8, 1114117, 851968, 8, 1114118, 917504, 9, 1114119, 786432, 8, 1114120, 917504, 8, 1114121, 851968, 8, 1114122, 917504, 8, 1114123, 786432, 8, 1114124, 851968, 8, 1114125, 917504, 8, 1114126, 851968, 8, 1114127, 851968, 8, 1114128, 851968, 8, 1114129, 917504, 9, 1114130, 917504, 9, 1114131, 786432, 8, 1114132, 917504, 8, 1114133, 851968, 8, 1114134, 851968, 8, 1114135, 786432, 8, 1114136, 917504, 9, 1114137, 917504, 8, 1114138, 917504, 8, 1114139, 786432, 8, 1114140, 786432, 8, 1114141, 917504, 8, 1114142, 851968, 8, 1114143, 917504, 8)
+layer_1/tile_data = PackedInt32Array(1179648, 917504, 8, 1179649, 786432, 8, 1179650, 917504, 8, 1179651, 786432, 8, 1179652, 851968, 8, 1179653, 851968, 8, 1179654, 917504, 9, 1179655, 786432, 8, 1179656, 917504, 8, 1179657, 851968, 8, 1179658, 917504, 8, 1179659, 786432, 8, 1179660, 851968, 8, 1179661, 917504, 8, 1179662, 851968, 8, 1179663, 851968, 8, 1179664, 851968, 8, 1179665, 917504, 9, 1179666, 917504, 9, 1179667, 786432, 8, 1179668, 917504, 8, 1179669, 851968, 8, 1179670, 851968, 8, 1179671, 786432, 8, 1179672, 917504, 9, 1179673, 917504, 8, 1179674, 917504, 8, 1179675, 786432, 8, 1179676, 786432, 8, 1179677, 917504, 8, 1179678, 851968, 8, 1179679, 917504, 8, 1048595, 0, 4, 1048605, 327680, 4, 983069, 327680, 0, 983059, 0, 0, 983060, 262144, 0, 983061, 262144, 0, 983062, 262144, 0, 983063, 262144, 0, 983064, 262144, 0, 983065, 262144, 0, 983066, 262144, 0, 983067, 262144, 0, 983068, 262144, 0, 1048591, 327680, 4, 983055, 327680, 1, 1048578, 0, 4, 983042, 0, 1, 917506, 0, 0, 917519, 327680, 0, 917518, 262144, 0, 917517, 262144, 0, 917516, 262144, 0, 917515, 262144, 0, 917514, 262144, 0, 917513, 262144, 0, 917512, 262144, 0, 917511, 262144, 0, 917510, 262144, 0, 917509, 262144, 0, 917508, 262144, 0, 917507, 262144, 0, 983056, 524288, 0, 983057, 589824, 0, 983058, 458752, 0, 1048576, 589824, 0, 1048577, 393216, 1, 1048606, 589824, 1, 851971, 131072, 2, 851982, 131072, 2, 851983, 131072, 2, 917533, 196608, 2, 917527, 196608, 2, 1114114, 0, 4, 1114113, 393216, 2, 1114127, 327680, 4, 1114131, 0, 4, 1114141, 327680, 4, 1114142, 589824, 2)
 
 [node name="Player" type="Sprite2D" parent="."]
 position = Vector2(101.705, 108.632)
@@ -243,6 +228,7 @@ frame = 2
 
 [connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainOptions/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayOptions/VBoxContainer/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayOptions/VBoxContainer/No" to="." method="_on_no_pressed"]

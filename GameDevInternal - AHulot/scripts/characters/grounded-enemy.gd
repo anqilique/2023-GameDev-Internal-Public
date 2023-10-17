@@ -39,7 +39,7 @@ func _physics_process(_delta):
 	health_comp.update_battlehealth()
 	
 	
-func wander_state():
+func wander_state():  # Move Around
 	apply_gravity()
 	$AnimationPlayer.play("move")
 	
@@ -53,8 +53,8 @@ func wander_state():
 	move_and_slide()
 	
 	
-func attack_player():
-	if can_hit:  # Attack player, start cooldown.
+func attack_player():  # Attack Player
+	if can_hit:  # Start cooldown and attack if can hit.
 		var hitbox = get_node("/root/World/Player/HitboxComponent")
 		var attack = Attack.new()
 		
@@ -84,7 +84,7 @@ func chase_state():  # If player still in range --> Attack.
 		state = WANDER
 
 
-func hit_state():
+func hit_state():  # Hit
 	state = HIT
 	
 	if $HitRecovery.is_stopped():

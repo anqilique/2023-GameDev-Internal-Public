@@ -42,11 +42,14 @@ func damage(attack: Attack):
 					global.scene_spawn[global.current_scene]["enemies"].erase(enemy_id)
 			
 			# Delete enemy.
+			audio.play_sound("enemy_death")
 			parent.queue_free()
 			
 		if parent == player:
 			var cam = get_node("/root/World/Player/Camera2D")
 			cam.apply_shake()
+			
+			audio.play_sound("player_death")
 			
 			player.is_alive = false
 			health = 0

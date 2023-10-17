@@ -21,6 +21,7 @@ func _process(_delta):
 	if player.is_alive:
 		if player_vars.energy >= player.shoot_energy:
 			if Input.is_action_pressed("ui_left_click") and can_shoot:
+				audio.play_sound("player_shoot")
 				can_shoot = false
 				_shoot()
 				$CanShoot.start()

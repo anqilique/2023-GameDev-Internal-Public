@@ -7,7 +7,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	# If dead and 'E' pressed, respawn.
 	if Input.is_action_pressed("ui_interact"):
 		if $DeathMenu.is_visible():  
@@ -46,7 +46,7 @@ func _on_respawn_pressed():
 		player_vars.health = 0.25 * player_vars.max_health
 	
 	else:  # Restart with the player's progress reset.
-		global.load()  # Player ran out of time --> Start new game.
+		global.reload()  # Player ran out of time --> Start new game.
 	
 		player_vars.spawn_point = Vector2(668, -12)
 		global.current_scene = "GreenTwo"

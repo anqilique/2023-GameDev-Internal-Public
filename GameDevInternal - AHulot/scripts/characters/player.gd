@@ -124,6 +124,7 @@ func wander_state(input):
 			if (jump_count < jump_max):
 				if Input.is_action_just_pressed("ui_up"):
 					$AnimationPlayer.play("jump")
+					audio.play_sound("player_jump")
 					jump_count += 1
 					
 					if is_on_floor():
@@ -305,6 +306,8 @@ func dead_state():
 	
 	healthbar.value = 0
 	energybar.value = 0
+	
+	audio.play_sound("player_death")
 	
 	
 	# If the player is not already dead (screen not displayed)...

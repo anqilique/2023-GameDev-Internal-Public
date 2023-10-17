@@ -7,8 +7,10 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("ui_map") and global.current_scene != "TutorialOne":
+		audio.play_sound("button_press")
+		
 		if is_visible():
 			hide()
 		else:

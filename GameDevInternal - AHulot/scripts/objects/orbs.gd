@@ -65,6 +65,8 @@ func apply_friction():
 func _on_collect_range_body_entered(_body):
 	var player = get_node("/root/World/Player")
 	
+	audio.play_sound("orb_collect")
+	
 	if $Orb.frame == 0:
 		print(">> Player Collects Health Orb")
 		player.collect_orb("Health")

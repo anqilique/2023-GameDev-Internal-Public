@@ -49,7 +49,7 @@ func _physics_process(_delta):
 	health_comp.update_battlehealth()
 
 
-func wander_state():
+func wander_state():  # Idle / Waiting
 	$AnimationPlayer.play("move")
 	
 	if $Ray_V.is_colliding():  # "Rest" upside down. 
@@ -64,7 +64,7 @@ func wander_state():
 		$AnimationPlayer.play("move")
 	
 
-func chase_state():
+func chase_state():  # Chase Player
 	
 	# Follow the player while true.
 	if player_chase:
@@ -77,7 +77,7 @@ func chase_state():
 		state = WANDER
 
 
-func hit_state():
+func hit_state():  # Hit
 	if state != HIT:
 		state = HIT
 	
@@ -88,8 +88,8 @@ func hit_state():
 	$AnimationPlayer.play("hit")
 
 
-func attack_player():
-	if can_hit:  # Attack the player, start cooldown.
+func attack_player():  # Attack Player
+	if can_hit:  # Start cooldown and attack if can hit.
 		var hitbox = get_node("/root/World/Player/HitboxComponent")
 		var attack = Attack.new()
 		

@@ -22,6 +22,7 @@ Scene List
 
 var current_scene = ""
 var transition_scene = false
+var sound_enabled = true
 var total_parts = 0
 var time_left = 0
 var ship_parts = {}
@@ -34,7 +35,7 @@ var pause_scenes = [
 	"res://scenes/menu/controls.tscn",
 ]
 
-func load():  # Restart/reset scene and player vars.
+func reload():  # Restart/reset scene and player vars.
 	
 	# 41-51, delete all existing nodes in game world.
 	

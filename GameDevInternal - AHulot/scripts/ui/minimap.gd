@@ -7,7 +7,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):	
+func _process(_delta):
 	$LocMarker.position = _get_marker_pos()
 	
 	if global.current_scene != "TutorialOne":

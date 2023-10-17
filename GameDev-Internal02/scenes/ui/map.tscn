@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1d1c5h1smm40"]
+
+[ext_resource type="Script" path="res://scripts/ui/map.gd" id="1_6jty7"]
+[ext_resource type="Texture2D" uid="uid://vai0jyix6vi6" path="res://assets/ui.png" id="1_c0gsk"]
+[ext_resource type="Texture2D" uid="uid://66nyanrtkfbh" path="res://assets/map.png" id="2_pa2cs"]
+[ext_resource type="Texture2D" uid="uid://b6xd6bcxcyup0" path="res://assets/map_marker.png" id="3_aihk7"]
+
+[node name="Map" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_6jty7")
+
+[node name="BG" type="Sprite2D" parent="."]
+position = Vector2(45.53, 26.3183)
+scale = Vector2(2.81556, 1.59465)
+texture = ExtResource("1_c0gsk")
+
+[node name="Minimap" type="Sprite2D" parent="."]
+position = Vector2(45.202, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("2_pa2cs")
+
+[node name="LocMarker" type="Sprite2D" parent="."]
+position = Vector2(35, 14)
+scale = Vector2(2, 2)
+texture = ExtResource("3_aihk7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.8141
+offset_top = 37.2287
+offset_right = 108.814
+offset_bottom = 56.2287
+scale = Vector2(0.4, 0.4)
+text = "Location = "
+
+[node name="LocMarker2" type="Sprite2D" parent="Label"]
+position = Vector2(95.6105, 7.10088)
+scale = Vector2(8, 8)
+texture = ExtResource("3_aihk7")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb48vf2yl0m72"]
+
+[ext_resource type="Script" path="res://scripts/environment/false_block.gd" id="1_f70xf"]
+[ext_resource type="PackedScene" path="res://scenes/misc/health_component.tscn" id="2_qgoe1"]
+[ext_resource type="Texture2D" uid="uid://djcrheie8g4ob" path="res://assets/tilemap_01.png" id="2_u08o0"]
+[ext_resource type="PackedScene" path="res://scenes/misc/hitbox_component.tscn" id="3_e8igu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8idow"]
+size = Vector2(9.0107, 8.85399)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvftw"]
+size = Vector2(7.61489, 7.41624)
+
+[node name="FalseBlock" type="CharacterBody2D"]
+modulate = Color(0.639216, 0.639216, 0.639216, 1)
+script = ExtResource("1_f70xf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u08o0")
+hframes = 16
+vframes = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.259207, 0.0855935)
+scale = Vector2(0.845094, 0.845094)
+shape = SubResource("RectangleShape2D_8idow")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_qgoe1")]
+MAX_HEALTH = 20
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_e8igu")]
+visible = false
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0.126774, 0.0524845)
+shape = SubResource("RectangleShape2D_rvftw")

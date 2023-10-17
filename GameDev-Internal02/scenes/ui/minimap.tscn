@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://mafhxg3ghydi"]
+
+[ext_resource type="Script" path="res://scripts/ui/minimap.gd" id="1_koh1r"]
+[ext_resource type="Texture2D" uid="uid://66nyanrtkfbh" path="res://assets/map.png" id="1_vp85c"]
+[ext_resource type="Texture2D" uid="uid://b6xd6bcxcyup0" path="res://assets/map_marker.png" id="2_nh5qe"]
+
+[node name="Minimap" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 211.8
+offset_top = 132.992
+offset_right = 251.8
+offset_bottom = 172.992
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_koh1r")
+
+[node name="Minimap" type="Sprite2D" parent="."]
+position = Vector2(45.202, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("1_vp85c")
+
+[node name="LocMarker" type="Sprite2D" parent="."]
+position = Vector2(35, 14)
+scale = Vector2(2, 2)
+texture = ExtResource("2_nh5qe")

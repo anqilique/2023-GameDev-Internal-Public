@@ -118,8 +118,8 @@ visible = false
 MAX_HEALTH = 50
 health = 50
 
-[node name="HitboxComponent" parent="." instance=ExtResource("4_0fp8c")]
-collision_layer = 4
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_0fp8c")]
+health_component = NodePath("../HealthComponent")
 
 [node name="Hitbox" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false

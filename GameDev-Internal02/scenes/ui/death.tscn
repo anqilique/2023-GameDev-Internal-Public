@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://lmfhnm6q14t2"]
+
+[ext_resource type="Script" path="res://scripts/ui/death.gd" id="1_cgkkx"]
+[ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="3_3bkcm"]
+
+[node name="Death" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cgkkx")
+
+[node name="DeathMenu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="ColorRect" parent="DeathMenu"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 251.0
+offset_bottom = 151.0
+color = Color(0, 0, 0, 0.415686)
+
+[node name="Respawn" type="Button" parent="DeathMenu"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 65.0
+offset_right = 170.0
+offset_bottom = 93.0
+theme = ExtResource("3_3bkcm")
+text = "RESPAWN"
+
+[node name="Quit" type="Button" parent="DeathMenu"]
+layout_mode = 0
+offset_left = 92.779
+offset_top = 104.639
+offset_right = 164.779
+offset_bottom = 132.639
+theme = ExtResource("3_3bkcm")
+text = "QUIT"
+
+[node name="Label" type="Label" parent="DeathMenu"]
+layout_mode = 0
+offset_left = 65.2157
+offset_top = 30.5408
+offset_right = 192.216
+offset_bottom = 49.5408
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="DeathMenu/Label"]
+layout_mode = 0
+offset_left = 24.676
+offset_top = 15.4597
+offset_right = 120.676
+offset_bottom = 34.4597
+scale = Vector2(0.8, 0.8)
+text = "Out of Time"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="DeathMenu/Respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="DeathMenu/Quit" to="." method="_on_quit_pressed"]

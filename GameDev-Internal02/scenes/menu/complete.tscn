@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://h3mxokjpuqu3"]
+
+[ext_resource type="Script" path="res://scripts/menu/complete.gd" id="1_h01h8"]
+[ext_resource type="Theme" uid="uid://c2f6p6bex2d8r" path="res://other/theme.tres" id="2_p3c4j"]
+
+[node name="Complete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h01h8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 503.0
+offset_bottom = 301.0
+scale = Vector2(0.520201, 0.520201)
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="Label" parent="CanvasLayer"]
+offset_left = 45.9614
+offset_top = 63.7542
+offset_right = 205.961
+offset_bottom = 89.7544
+text = "Game Complete! :D"
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 45.9614
+offset_top = 31.2125
+offset_right = 205.961
+offset_bottom = 57.2127
+text = "000"
+horizontal_alignment = 1
+
+[node name="Return" type="Button" parent="CanvasLayer"]
+offset_left = 88.8245
+offset_top = 95.1241
+offset_right = 160.824
+offset_bottom = 123.124
+theme = ExtResource("2_p3c4j")
+text = "RETURN"
+
+[connection signal="pressed" from="CanvasLayer/Return" to="." method="_on_return_pressed"]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://cukq3v32rnbx6"]
+
+[ext_resource type="Script" path="res://scripts/objects/parts.gd" id="1_vt1b5"]
+[ext_resource type="Texture2D" uid="uid://dr3st2ruh3rtk" path="res://assets/parts.png" id="2_odeqa"]
+
+[sub_resource type="Curve" id="Curve_un0re"]
+_data = [Vector2(0, 0.518182), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_k06nk"]
+min_value = -1.0
+_data = [Vector2(0, -0.490909), 0.0, 0.0, 0, 0, Vector2(1, 0.545455), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvq51"]
+radius = 4.1727
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yjqwb"]
+
+[node name="Part" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_vt1b5")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 2.89869)
+amount = 10
+lifetime_randomness = 0.5
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_un0re")
+color = Color(0, 0.74902, 0.839216, 0.247059)
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+hue_variation_curve = SubResource("Curve_k06nk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_odeqa")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_wvq51")
+
+[node name="CollectRange" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectRange"]
+shape = SubResource("CircleShape2D_yjqwb")
+
+[node name="HoverText" type="Label" parent="."]
+offset_left = -5.42188
+offset_top = -9.05543
+offset_right = 28.5781
+offset_bottom = 9.94457
+scale = Vector2(0.321424, 0.280948)
+text = "[ E ]"
+
+[connection signal="body_entered" from="CollectRange" to="." method="_on_collect_range_body_entered"]
+[connection signal="body_exited" from="CollectRange" to="." method="_on_collect_range_body_exited"]

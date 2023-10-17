@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://7yth7o8h2odp"]
+
+[ext_resource type="Texture2D" uid="uid://djcrheie8g4ob" path="res://assets/tilemap_01.png" id="1_0ulai"]
+
+[node name="Ladder" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0ulai")
+hframes = 16
+vframes = 8
+frame = 23

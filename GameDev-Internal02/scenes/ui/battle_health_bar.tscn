@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://50r4ukcihb57"]
+
+[node name="BattleHealthBar" type="ProgressBar"]
+modulate = Color(0.192157, 1, 0.223529, 1)
+offset_left = -6.1715
+offset_top = -18.7614
+offset_right = 97.8285
+offset_bottom = 8.23858
+scale = Vector2(0.1, 0.1)
+show_percentage = false

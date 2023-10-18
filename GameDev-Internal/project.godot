@@ -21,10 +21,6 @@ global="*res://scripts/misc/global.gd"
 player_vars="*res://scripts/misc/player_vars.gd"
 audio="*res://scenes/misc/audio.tscn"
 
-[debug]
-
-gdscript/warnings/integer_division=0
-
 [display]
 
 window/size/viewport_width=250

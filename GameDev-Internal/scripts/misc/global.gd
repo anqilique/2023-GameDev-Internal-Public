@@ -33,6 +33,8 @@ var required_spawn = []
 var pause_scenes = [
 	"res://scenes/menu/menu.tscn",
 	"res://scenes/menu/controls.tscn",
+	"res://scenes/menu/credits.tscn",
+	"res://scenes/menu/complete.tscn"
 ]
 
 func reload():  # Restart/reset scene and player vars.

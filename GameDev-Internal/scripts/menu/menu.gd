@@ -1,6 +1,6 @@
 extends Control
 
-@export var debugging = true
+@export var debugging = false
 
 
 func _ready():

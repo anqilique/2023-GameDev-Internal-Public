@@ -80,7 +80,7 @@ func _physics_process(_delta):
 	elif jump_count == 0:
 		jump_count += 1
 	
-	if on_ladder and not is_on_floor():
+	if on_ladder and not is_on_floor() and player_vars.health > 0:
 		state = CLIMB
 	
 	# Floating text shows for certain time.
@@ -306,6 +306,8 @@ func dead_state():
 	
 	healthbar.value = 0
 	energybar.value = 0
+	
+	global.transition_scene = false
 	
 	audio.play_sound("player_death")
 	
